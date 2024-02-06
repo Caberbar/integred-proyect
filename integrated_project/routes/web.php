@@ -54,15 +54,37 @@ Route::get('/create', function() {
     return "Se han creado los registros";
 });
 
+Route::get('/rolear2', function() {
+    $admin = Role::whereName('Admin')->first();
+    $usuario = User::whereName('Mario')->first();
+    $admin->users()->attach($usuario);
+});
+
 Route::get('/rolear', function() {
     $admin = Role::whereName('Admin')->first();
     $regis = Role::whereName('Registrado')->first();
     $inv = Role::whereName('Invitado')->first();
 
-    $roles = [1, 2, 3];
+    $usuarios = [];
+    $usuarios[0] = User::whereName('Mario')->first();
+    $usuarios[0]->roles()->attach($regis);
+    
+    $usuarios[1] = User::whereName('Admin')->first();
+    $usuarios[1]->roles()->attach($admin);
+    $usuarios[1]->roles()->attach($regis);
+    
+    $usuarios[2] = User::whereName('Inv')->first();
+    $usuarios[2]->roles()->attach($inv);
 
-    $usuario = User::whereName('Mario')->first();
-    $usuario->roles()->attach($roles);
+    return $usuarios;
+});
 
-    return $usuario;
+Route::get('/show', function() {
+    $usuarios = User::all();
+    return $usuarios[0]->roles;
+});
+
+Route::get('/showRole', function() {
+    $regis = Role::whereName('Registrado')->first();
+    return $regis->users;
 });

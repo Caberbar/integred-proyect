@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
@@ -43,7 +44,16 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    /**
+     * Asignar un rol a un usuario:
+     * 1. Obtienes el rol:
+     *      $admin = Role::whereName('Admin')->first();
+     * 2. Obtienes el usuario:
+     *      $usuario = User::whereName('Mario')->first();
+     * 3. Usas attach() para asignarle el rol:
+     *      $usuario->roles()->attach($admin);
+     */
     public function roles() :BelongsToMany {
-        return $this->belongsToMany(Role::class, 'user_id', 'role_user', 'role_id');
+        return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_id');
     }
 }
