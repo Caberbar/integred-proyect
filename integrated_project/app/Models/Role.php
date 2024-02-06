@@ -20,6 +20,9 @@ class Role extends Model
      *      $usuario = User::whereName('Mario')->first();
      * 3. Usas attach() para asignarle el rol:
      *      $usuario->roles()->attach($admin);
+     * 
+     * Al usarlo deberías tener en cuenta que no debes asignarle a un usuario un rol que ya tenga.
+     * No le metas 10 veces el rol admin al mismo usuario.
      */
     public function users(): BelongsToMany {
         return $this->belongsToMany(User::class, 'role_user', 'role_id', 'user_id');

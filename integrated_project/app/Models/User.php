@@ -52,6 +52,9 @@ class User extends Authenticatable
      *      $usuario = User::whereName('Mario')->first();
      * 3. Usas attach() para asignarle el rol:
      *      $usuario->roles()->attach($admin);
+     * 
+     * Al usarlo deberías tener en cuenta que no debes asignarle a un usuario un rol que ya tenga.
+     * No le metas 10 veces el rol admin al mismo usuario.
      */
     public function roles() :BelongsToMany {
         return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_id');
