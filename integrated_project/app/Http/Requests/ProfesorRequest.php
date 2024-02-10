@@ -11,7 +11,7 @@ class ProfesorRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false; // We leave this field false, because you are not authorized to perform any operation
+        return true; //We change this value to true, to be able to use validation in the forms
     }
 
     /**
