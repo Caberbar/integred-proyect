@@ -11,7 +11,7 @@ class ProfesorRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true; //We change this value to true, to be able to use validation in the forms
+        return true; //Valor TRUE para poder usarlo en los forms.
     }
 
     /**
@@ -22,29 +22,29 @@ class ProfesorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>[
+            'nombre'=>[
                 'required',
                 'max:30',
                 'min:3',
                 'alpha:ascii',
             ],
-            'first_name' => [
+            'apellido1' => [
                 'required',
                 'max:50',
                 'min:3',
                 'alpha:ascii',
             ],
-            'second_last_name'=>[
+            'apellido2'=>[
                 'required',
                 'max:50',
                 'min:3',
                 'alpha:ascii',
             ],
-            'specialty'=>[
+            'especialidad'=>[
                 'required',
                 'regex:/^(secundaria|formacion profesional)$/i',
             ],
-            'user_seneca'=>[
+            'usu_seneca'=>[
                 'regex:/^[A-Za-z]{7}\d{3}$/'
             ]
         ];
