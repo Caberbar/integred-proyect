@@ -19,7 +19,14 @@
         <input type="text" name="apellido2">
 
         <label for="">Speciality</label>
+<<<<<<< HEAD
         <input type="text" name="especialidad">
+=======
+        <select name="especialidad">
+            <option value="secundaria">Secundaria</option>
+            <option value="formacion profesional">Formacion profesional</option>
+        </select>
+>>>>>>> logicaApp
 
         <input type="submit" value="Insert">
     </form>

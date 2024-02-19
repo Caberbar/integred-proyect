@@ -22,11 +22,13 @@ class LeccionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'hours'=>[
+            'horas'=>[
                 'required',
-                'date',
-                'before:2024-01-01'
-            ]
+                'integer',
+            ],
+            'modulo_id' => 'required',
+            'profesor_id' => 'required',
+            'grupo_id' => 'required',
         ];
     }
 }

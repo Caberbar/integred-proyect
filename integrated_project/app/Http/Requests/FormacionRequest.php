@@ -22,11 +22,10 @@ class FormacionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'acronym'=>[
+            'siglas'=>[
                 'required',
-                'regex:/^(A-Z){3}$/i',
             ],
-            'denomination'=>[
+            'denominacion'=>[
                 'required',
                 'max:255',
                 'min:3'
