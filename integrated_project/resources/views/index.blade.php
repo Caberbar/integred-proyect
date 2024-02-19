@@ -1,24 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
-    <title>Dashboard - SB Admin Pro</title>
-    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/litepicker/dist/css/litepicker.css" rel="stylesheet" />
-    <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
-    <script data-search-pseudo-elements="" defer="" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
-</head>
+@extends('layout.app')
 
 <body class="nav-fixed">
 
     <!-- Incluir el navbar -->
     @include('nav_bar')
 
-    <!-- Contenido de la página de inicio -->
     <!-- Contenido de la página de inicio -->
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
@@ -28,12 +14,12 @@
                         <!-- Sidenav Heading (Addons)-->
                         <div class="sidenav-menu-heading"></div>
                         <!-- Sidenav Link (Charts)-->
-                        <a class="nav-link active" href="charts.html">
+                        <a class="nav-link" href="{{ route('home') }}">
                             <div class="nav-link-icon"><i data-feather="bar-chart"></i></div>
                             Dashboard
                         </a>
                         <!-- Sidenav Link (Tables)-->
-                        <a class="nav-link" href="tables.html">
+                        <a class="nav-link" href="">
                             <div class="nav-link-icon"><i data-feather="filter"></i></div>
                             Tables
                         </a>
@@ -47,14 +33,14 @@
                         </a>
                         <div class="collapse" id="collapseDashboards" data-bs-parent="#accordionSidenav">
                             <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                                <a class="nav-link" href="dashboard-1.html">
+                                <a class="nav-link" href="{{ route('profesor') }}">
                                     Teachers
                                     <span class="badge bg-primary-soft text-primary ms-auto">Updated</span>
                                 </a>
-                                <a class="nav-link" href="dashboard-2.html">Education / Formation</a>
-                                <a class="nav-link" href="dashboard-3.html">Module</a>
-                                <a class="nav-link" href="dashboard-3.html">Group</a>
-                                <a class="nav-link" href="dashboard-3.html">Leson</a>
+                                <a class="nav-link" href="{{ route('formaciones') }}">Education / Formation</a>
+                                <a class="nav-link" href="{{ route('modulos') }}">Module</a>
+                                <a class="nav-link" href="{{ route('grupos') }}">Group</a>
+                                <a class="nav-link" href="{{ route('lecciones') }}">Leson</a>
                             </nav>
                         </div>
 
