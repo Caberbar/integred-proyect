@@ -22,27 +22,24 @@ class GrupoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'denomination'=>[
+            'denominacion'=>[
                 'required',
                 'max:255',
                 'min:3'
             ],
-            'academic_year'=>[
+            'curso_escolar'=>[
                 'required',
-                'integer',
-                'min:1',
+                'regex:/^\d{4}\/\d{4}$/i',
             ],
-            'school_year'=>[
+            'curso'=>[
                 'required',
-                'date',
-                'before:2024-01-01'
             ],
-            'shift'=>[
+            'turno'=>[
                 'required',
                 'max:255',
-                'min:3',
-                'regex:/^[a-zA-Z]$/i'
-            ]
+                'regex:/^(Mañana|Tarde)$/i'
+            ],
+            'formacion_id' => 'required',
         ];
     }
 }

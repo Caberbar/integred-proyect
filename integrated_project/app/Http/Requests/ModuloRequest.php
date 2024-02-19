@@ -13,7 +13,15 @@ class ModuloRequest extends FormRequest
     {
         return true; //We change this value to true, to be able to use validation in the forms
     }
-
+    protected function prepareForValidation()
+    {
+        // Convertir valores de cadena a números
+        $this->merge([
+            'horas' => intval($this->horas),
+            'curso' => intval($this->curso),
+            'formacion_id' => intval($this->formacion_id),
+        ]);
+    }
     /**
      * Get the validation rules that apply to the request.
      *
@@ -22,28 +30,24 @@ class ModuloRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'hours'=>[
+            'horas'=>[
                 'required',
-                'date',
-                'before:2024-01-01'
             ],
-            'denomination'=>[
+            'denominacion'=>[
                 'required',
                 'max:255',
-                'min:3'
+                'min:2'
             ],
-            'specialty'=>[
+            'especialidad'=>[
                 'required',
                 'regex:/^(secundaria|formacion profesional)$/i',
             ],
-            'acronym'=>[
+            'siglas'=>[
                 'required',
-                'regex:/^(A-Z){3}$/i',
             ],
-            'academic_year_year'=>[
+            'curso'=>[
                 'required',
-                'integer',
-                'min:1',
+                'numeric',
             ]
         ];
     }
