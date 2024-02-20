@@ -57,25 +57,17 @@
                     The last name formad isn´t valid
                 </p>
             @enderror
-<<<<<<< HEAD
-            <label for="">Speciality</label>
-            <input type="text" required wire:model="especialidad">
-=======
->>>>>>> logicaApp
             @error('especialidad')
                 <p>
                     The speciality formad isn´t valid
                 </p>
             @enderror
-<<<<<<< HEAD
-=======
             <label for="">Speciality</label>
             <select wire:model="especialidad">
                 <option value="secundaria">Secundaria</option>
                 <option value="formacion profesional">Formacion Profesional</option>
             </select>
 
->>>>>>> logicaApp
 
             <button type="submit">Update</button>
         </form>
