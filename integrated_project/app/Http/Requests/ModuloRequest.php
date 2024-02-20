@@ -32,11 +32,13 @@ class ModuloRequest extends FormRequest
         return [
             'horas'=>[
                 'required',
+                'min:0',
+                'integer',
             ],
             'denominacion'=>[
                 'required',
                 'max:255',
-                'min:2'
+                'min:5',
             ],
             'especialidad'=>[
                 'required',
@@ -44,11 +46,17 @@ class ModuloRequest extends FormRequest
             ],
             'siglas'=>[
                 'required',
+                'min:2',
             ],
             'curso'=>[
                 'required',
                 'numeric',
-            ]
+            ],
+            'formacion_id' => [
+                'required',
+                'min:0',
+                'integer',
+            ],
         ];
     }
 }

@@ -16,16 +16,18 @@ class ModuloController extends Controller
 
     public function insert(ModuloRequest $request){
 
-        $modulo = new Modulo;
-
-        $modulo->horas = $request->horas;
-        $modulo->denominacion = $request->denominacion;
-        $modulo->especialidad = $request->especialidad;
-        $modulo->siglas = $request->siglas;
-        $modulo->curso = $request->curso;
-        $modulo->formacion_id = $request->formacion_id;
-        $modulo->save();
-
-        return redirect()->route('modulos');
+        if($request->formacion_id != null){
+            $modulo = new Modulo;
+            $modulo->horas = $request->horas;
+            $modulo->denominacion = $request->denominacion;
+            $modulo->especialidad = $request->especialidad;
+            $modulo->siglas = $request->siglas;
+            $modulo->curso = $request->curso;
+            $modulo->formacion_id = $request->formacion_id;
+            $modulo->save();
+            return redirect()->route('modulos');
+        }else{
+            return redirect()->back()->withErrors(['formacion_id']);
+        }
     }
 }

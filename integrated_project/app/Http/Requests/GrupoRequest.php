@@ -39,7 +39,11 @@ class GrupoRequest extends FormRequest
                 'max:255',
                 'regex:/^(Mañana|Tarde)$/i'
             ],
-            'formacion_id' => 'required',
+            'formacion_id' => [
+                'required',
+                'min:0',
+                'integer'
+            ],
         ];
     }
 }

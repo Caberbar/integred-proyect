@@ -24,6 +24,7 @@ class FormacionRequest extends FormRequest
         return [
             'siglas'=>[
                 'required',
+                'min:2',
             ],
             'denominacion'=>[
                 'required',

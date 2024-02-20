@@ -25,10 +25,23 @@ class LeccionRequest extends FormRequest
             'horas'=>[
                 'required',
                 'integer',
+                'min:0'
             ],
-            'modulo_id' => 'required',
-            'profesor_id' => 'required',
-            'grupo_id' => 'required',
+            'modulo_id' => [
+                'required',
+                'integer',
+                'min:0'
+            ],
+            'profesor_id' => [
+                'required',
+                'integer',
+                'min:0'
+            ],
+            'grupo_id' => [
+                'required',
+                'integer',
+                'min:0'
+            ],
         ];
     }
 }
