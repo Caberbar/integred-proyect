@@ -35,30 +35,36 @@
         <form wire:submit.prevent="update">
             @csrf
             <input type="hidden" wire:model="profesor_id">
+            @if ($error != null)
+                <p class="alert alert-danger">{{$error}}</p>
+            @endif
 
+            @error('name')
+                <p class="alert alert-danger">
+                    The named formad isn´t valid
+                </p>
+            @enderror
             <label for="">Name</label>
             <input type="text" required wire:model="nombre">
-            @error('name')
-                <p>
-                    The named formad isn´t valid
+
+            @error('apellido1')
+                <p class="alert alert-danger">
+                    The first name formad isn´t valid
                 </p>
             @enderror
             <label for="">First Name</label>
             <input type="text" required wire:model="apellido1">
-            @error('apellido1')
-                <p>
-                    The first name formad isn´t valid
+
+            @error('apellido2')
+                <p class="alert alert-danger">
+                    The last name formad isn´t valid
                 </p>
             @enderror
             <label for="">Last Name</label>
             <input type="text" required wire:model="apellido2">
-            @error('apellido2')
-                <p>
-                    The last name formad isn´t valid
-                </p>
-            @enderror
+
             @error('especialidad')
-                <p>
+                <p class="alert alert-danger">
                     The speciality formad isn´t valid
                 </p>
             @enderror

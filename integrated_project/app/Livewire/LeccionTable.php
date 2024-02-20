@@ -12,7 +12,6 @@ class LeccionTable extends Component
 {
 
     public $horas, $leccion_id, $grupo_id, $modulo_id, $profesor_id;
-    public $error;
 
     /**
      * Es un hook de iniciación de la página web con todos los atributos a null, para evitar problemas de iniciación.
@@ -57,13 +56,14 @@ class LeccionTable extends Component
      */
     public function update(){
         $leccion = Leccion::find($this->leccion_id);
+
         $this->validate();
+
         $leccion->horas = $this->horas;
         $leccion->modulo_id = $this->modulo_id;
         $leccion->profesor_id = $this->profesor_id;
         $leccion->grupo_id = $this->grupo_id;
         $leccion->save();
-
         $this->resetInputs();
     }
     /**
@@ -97,9 +97,21 @@ class LeccionTable extends Component
                 'required',
                 'integer',
             ],
-            'modulo_id' => 'required',
-            'profesor_id' => 'required',
-            'grupo_id' => 'required',
+            'modulo_id' => [
+                'required',
+                'integer',
+                'min:0'
+            ],
+            'profesor_id' => [
+                'required',
+                'integer',
+                'min:0'
+            ],
+            'grupo_id' => [
+                'required',
+                'integer',
+                'min:0'
+            ],
         ];
     }
 }

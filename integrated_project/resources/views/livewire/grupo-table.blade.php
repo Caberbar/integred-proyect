@@ -42,6 +42,10 @@
         <form wire:submit.prevent="update">
             <input type="hidden" wire:model="grupo_id">
 
+            @if ($error != null)
+                <p class="alert alert-danger">{{$error}}</p>
+            @endif
+
             <label for="">Denominacion</label>
             <input type="text" required wire:model="denominacion">
 

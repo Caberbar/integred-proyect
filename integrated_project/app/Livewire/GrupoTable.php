@@ -131,7 +131,16 @@ class GrupoTable extends Component
                 'max:255',
                 'regex:/^(Mañana|Tarde)$/i'
             ],
-            'formacion_id' => 'required',
+            'formacion_id' => [
+                'required',
+                'integer',
+                'min:0'
+            ],
+            'grupo_id'=>[
+                'required',
+                'integer',
+                'min:0'
+            ]
         ];
     }
 }

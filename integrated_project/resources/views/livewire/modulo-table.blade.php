@@ -33,22 +33,23 @@
         <form wire:submit.prevent="update">
             @csrf
             <input type="hidden" wire:model="modulo_id">
-
+            @if ($error != null)
+                <p class="alert alert-danger">{{$error}}</p>
+            @endif
             @error('denominacion')
-                <p>La denominacion no es valida</p>
+                <p class="alert alert-danger">La denominacion no es valida</p>
             @enderror
             <label for="">Denominacion</label>
             <input type="text" required wire:model="denominacion">
 
             @error('siglas')
-                <p>La siglas no es valida</p>
+                <p class="alert alert-danger">La siglas no es valida</p>
             @enderror
             <label for="">Siglas</label>
             <input type="text" required wire:model="siglas">
 
-
             @error('curso')
-                <p>El curso no es valida</p>
+                <p class="alert alert-danger">El curso no es valida</p>
             @enderror
             <label for="">Course</label>
             <select wire:model="curso">
@@ -59,13 +60,13 @@
             </select>
 
             @error('horas')
-                <p>Las horas no es valida</p>
+                <p class="alert alert-danger">Las horas no es valida</p>
             @enderror
             <label for="">Hours</label>
             <input type="text" wire:model="horas" required>
 
             @error('formacion')
-                <p>La formacion no es valida</p>
+                <p class="alert alert-danger">La formacion no es valida</p>
             @enderror
             <label for="">Formación</label>
             <select wire:model="formacion">

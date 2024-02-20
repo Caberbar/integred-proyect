@@ -26,6 +26,10 @@
             @csrf
             <input type="hidden" wire:model="formacion_id">
 
+            @if ($error != null)
+                <p class="alert alert-danger">{{$error}}</p>
+            @endif
+
             <label for="">Acronym</label>
             <input type="text" wire:model="siglas" required max="3">
 
