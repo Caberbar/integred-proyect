@@ -15,12 +15,16 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('users')->insert([
-            'name' => 'jgarlop452',
-            'email' => 'jgarlop452@gmail.com',
-            'password' => Hash::make('1234'),
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        $usuarios_seneca = DB::table('profesors')->pluck('usu_seneca')->toArray();
+
+        foreach ($usuarios_seneca as $usu_seneca) {
+            DB::table('users')->insert([
+                'name' => $usu_seneca,
+                'email' => $usu_seneca.'@gmail.com',
+                'password' => Hash::make($usu_seneca),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
     }
 }

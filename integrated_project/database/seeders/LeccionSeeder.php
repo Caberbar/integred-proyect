@@ -22,7 +22,6 @@ class LeccionSeeder extends Seeder
             ]
         ];
 
-        // Insertar datos en la tabla lección
         foreach ($lecciones as $leccion) {
             DB::table('leccions')->insert([
                 'horas' => $leccion['horas'],
