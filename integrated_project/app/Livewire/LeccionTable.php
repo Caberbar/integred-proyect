@@ -7,9 +7,13 @@ use App\Models\Profesor;
 use App\Models\Leccion;
 use App\Models\Grupo;
 use App\Models\Modulo;
+use Livewire\WithPagination;
+
 
 class LeccionTable extends Component
 {
+
+    use WithPagination;
 
     public $horas, $leccion_id, $grupo_id, $modulo_id, $profesor_id;
 
@@ -23,15 +27,47 @@ class LeccionTable extends Component
         $this->modulo_id = null;
         $this->profesor_id = null;
     }
+
+    public $perPage = 10; /*Valor por defecto de numeros de usuarios en una tabla*/
+    public $search = ''; /*Valor por defecto de la busqueda*/
+
+    public  $sortDirection = 'ASC'; /*Valor por defecto de la dirección de la tabla*/
+    public  $sortColumn = 'horas'; /*Valor por defecto de la dirección de la tabla*/
+
+    
+    public function doSort($column){
+        if($this->sortColumn === $column){
+            $this->sortDirection =($this->sortDirection == 'ASC') ? 'DESC' : 'ASC';
+            return;
+        }
+        $this->sortColumn = $column;
+        $this -> sortDirection = 'ASC';
+    }
+
+    // Life cycle hooks
+    public function updatedPerPage(){
+        $this->resetPage();
+    }
+
+    public function updatedSearch(){
+        $this->resetPage();
+    }
+
     /**
      * Renderizamos la página con todos los datos
      */
     public function render()
     {
-        $profesores = Profesor::all();
-        $modulos = Modulo::all();
-        $grupos = Grupo::all();
-        $lecciones = Leccion::all();
+        $profesores = Profesor::all(); /* NO FUNCIONA, ARREGLAR */
+
+        $modulos = Modulo::all(); /* NO FUNCIONA, ARREGLAR */
+
+        $grupos = Grupo::all(); /* NO FUNCIONA, ARREGLAR */
+
+        $lecciones = Leccion::search($this->search)
+        ->orderBy($this->sortColumn, $this->sortDirection)
+        ->paginate($this->perPage);
+
         return view('livewire.leccion-table', compact('lecciones', 'profesores', 'modulos','grupos'));
     }
     /**

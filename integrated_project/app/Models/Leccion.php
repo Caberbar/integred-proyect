@@ -24,4 +24,8 @@ class Leccion extends Model
     {
         return $this->belongsTo(Grupo::class);
     }
+
+    public function scopeSearch($query, $value){
+        $query->where('horas', 'like', '%' . $value . '%');
+    }
 }

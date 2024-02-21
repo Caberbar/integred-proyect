@@ -260,6 +260,16 @@ body {
   justify-content: space-around;
 }
 
+.column-tables{
+  cursor: pointer;
+  transition: all ease 0.3s;
+}
+
+.column-tables:hover{
+  transition: all ease 0.3s;
+  background: RGBA(209, 209, 209, 1)
+}
+
 .icon-arrow-up{
   width: 25px;
   height: 25px;

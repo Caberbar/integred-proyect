@@ -20,4 +20,12 @@ class Modulo extends Model
     {
         return $this->belongsTo(Formacion::class);
     }
+
+    public function scopeSearch($query, $value){
+        $query->where('curso', 'like', '%' . $value . '%')
+            ->orWhere('especialidad', 'like', '%' . $value . '%')
+            ->orWhere('denominacion', 'like', '%' . $value . '%')
+            ->orWhere('siglas', 'like', '%' . $value . '%')
+            ->orWhere('horas', 'like', '%' . $value . '%');
+    }
 }
