@@ -14,4 +14,12 @@ class Profesor extends Model
     {
         return $this->hasMany(Leccion::class);
     }
+
+    public function scopeSearch($query, $value){
+        $query->where('nombre', 'like', '%' . $value . '%')
+            ->orWhere('apellido1', 'like', '%' . $value . '%')
+            ->orWhere('apellido2', 'like', '%' . $value . '%')
+            ->orWhere('usu_seneca', 'like', '%' . $value . '%')
+            ->orWhere('especialidad', 'like', '%' . $value . '%');
+    }
 }
