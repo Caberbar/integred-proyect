@@ -1,32 +1,168 @@
-<footer class="footer-admin mt-auto footer-light">
-                    <div class="container-xl px-4">
-                        <div class="row">
-                            <div class="col-md-6 small">Copyright © Your Website 2021</div>
-                            <div class="col-md-6 text-md-end small">
-                                <a href="tables.html#!">Privacy Policy</a>
-                                ·
-                                <a href="tables.html#!">Terms &amp; Conditions</a>
-                            </div>
-                        </div>
-                    </div>
-                </footer>
-            </div>
-        </div>
-        <script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="{{ asset('js/scripts.js') }}"></script>
-        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-        <script src="{{ asset('js/datatables-simple-demo.js') }}"></script>
+<!-- [Page Specific JS] start -->
+<script src="{{ asset('js/plugins/apexcharts.min.js') }}"></script>
+<script src="{{ asset('js/pages/dashboard-default.js') }}"></script>
+<!-- [Page Specific JS] end -->
+<!-- Required Js -->
+<script src="{{ asset('js/plugins/popper.min.js') }}"></script>
+<script src="{{ asset('js/plugins/simplebar.min.js') }}"></script>
+<script src="{{ asset('js/plugins/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/fonts/custom-font.js') }}"></script>
+<script src="{{ asset('js/config.js') }}"></script>
+<script src="{{ asset('js/pcoded.js') }}"></script>
+<script src="{{ asset('js/plugins/feather.min.js') }}"></script>
 
-        <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js" crossorigin="anonymous"></script>
-        <script src="{{ asset('js/litepicker.js') }}"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="{{ asset('js/chart-area-demo.js') }}"></script>
-        <script src="{{ asset('js/chart-bar-demo.js') }}"></script>
+<!-- [Page Specific JS] start -->
+<!-- datatable Js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="{{ asset('js/plugins/jquery.dataTables.min.js') }}"></script>
+<!-- <script src="{{ asset('plugins/dataTables.bootstrap5.min.js') }}"></script> -->
+<script>
+  // Esta función se ejecuta después de que Livewire carga o actualiza la página
+  document.addEventListener('livewire:load', function() {
+    // Reinicializar DataTables
 
+    // [ DOM/jquery ]
+    var total, pageTotal;
+    var table = $('#dom-jqry').DataTable();
 
-        <script src="https://assets.startbootstrap.com/js/sb-customizer.js"></script>
-        <!-- <sb-customizer project="sb-admin-pro"></sb-customizer> -->
-    <script>(function(){var js = "window['__CF$cv$params']={r:'750b4c0328bd073a',m:'.HiyQhu917PceUTU7o6cB47JuH7V.gSJ51PDRzeeJ38-1664187940-0-AeVWbTj/6lylimTmYFfhoGHbSD0nGiDc7AO1s5qeWgLFLRwMjVgrLlfXI/e2OQkjqtr4uccOiF5srcP183thoI4HZFz9YMc98CY1fovMTGTziOaBCQE8DCoDu6hEjKMfkg==',s:[0xdf5eafb168,0xade158f463],u:'/cdn-cgi/challenge-platform/h/g'};var now=Date.now()/1000,offset=14400,ts=''+(Math.floor(now)-Math.floor(now%offset)),_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='/cdn-cgi/challenge-platform/h/g/scripts/alpha/invisible.js?ts='+ts,document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.nonce = '';_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"750b4c0328bd073a","token":"6e2c2575ac8f44ed824cef7899ba8463","version":"2022.8.1","si":100}' crossorigin="anonymous"></script>
+    // [ column Rendering ]
+    $('#colum-render').DataTable({
+      columnDefs: [{
+          render: function(data, type, row) {
+            return data + ' (' + row[3] + ')';
+          },
+          targets: 0
+        },
+        {
+          visible: false,
+          targets: [3]
+        }
+      ]
+    });
+
+    // [ Multiple Table Control Elements ]
+    $('#multi-table').DataTable({
+      dom: '<"top"iflp<"clear">>rt<"bottom"iflp<"clear">>'
+    });
+
+    // [ Complex Headers With Column Visibility ]
+    $('#complex-header').DataTable({
+      columnDefs: [{
+        visible: false,
+        targets: -1
+      }]
+    });
+
+    // [ Language file ]
+    $('#lang-file').DataTable({
+      language: {
+        url: '//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/German.json'
+      }
+    });
+
+    // [ Setting Defaults ]
+    $('#setting-default').DataTable();
+
+    // [ Row Grouping ]
+    var table1 = $('#row-grouping').DataTable({
+      columnDefs: [{
+        visible: false,
+        targets: 2
+      }],
+      order: [
+        [2, 'asc']
+      ],
+      displayLength: 25,
+      drawCallback: function(settings) {
+        var api = this.api();
+        var rows = api
+          .rows({
+            page: 'current'
+          })
+          .nodes();
+        var last = null;
+
+        api
+          .column(2, {
+            page: 'current'
+          })
+          .data()
+          .each(function(group, i) {
+            if (last !== group) {
+              $(rows)
+                .eq(i)
+                .before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
+
+              last = group;
+            }
+          });
+      }
+    });
+
+    // [ Order by the grouping ]
+    $('#row-grouping tbody').on('click', 'tr.group', function() {
+      var currentOrder = table.order()[0];
+      if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
+        table.order([2, 'desc']).draw();
+      } else {
+        table.order([2, 'asc']).draw();
+      }
+    });
+
+    // [ Footer callback ]
+    $('#footer-callback').DataTable({
+      footerCallback: function(row, data, start, end, display) {
+        var api = this.api(),
+          data;
+
+        // Remove the formatting to get integer data for summation
+        var intVal = function(i) {
+          return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ? i : 0;
+        };
+
+        // Total over all pages
+        total = api
+          .column(4)
+          .data()
+          .reduce(function(a, b) {
+            return intVal(a) + intVal(b);
+          }, 0);
+
+        // Total over this page
+        pageTotal = api
+          .column(4, {
+            page: 'current'
+          })
+          .data()
+          .reduce(function(a, b) {
+            return intVal(a) + intVal(b);
+          }, 0);
+
+        // Update footer
+        $(api.column(4).footer()).html('$' + pageTotal + ' ( $' + total + ' total)');
+      }
+    });
+
+    // [ Custom Toolbar Elements ]
+    $('#c-tool-ele').DataTable({
+      dom: '<"toolbar">frtip'
+    });
+
+    // [ Custom Toolbar Elements ]
+    $('div.toolbar').html('<b>Custom tool bar! Text/images etc.</b>');
+
+    // [ custom callback ]
+    $('#row-callback').DataTable({
+      createdRow: function(row, data, index) {
+        if (data[5].replace(/[\$,]/g, '') * 1 > 150000) {
+          $('td', row).eq(5).addClass('highlight');
+        }
+      }
+    });
+  });
+</script>
+<!-- [Page Specific JS] end -->
 </body>
+<!-- [Body] end -->
+
 </html>
