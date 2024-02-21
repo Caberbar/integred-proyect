@@ -71,3 +71,12 @@ Route::post('/register/save', [UserController::class, 'save'])->name('register.s
 
 Route::view('/login', 'layout.forms.login')->name('login');
 Route::post('/login/confirm', [UserController::class, 'login'])->name('login.confirm');
+
+/**
+ *  --------------------------------
+ *      RUTA DE PERFIL
+ *  --------------------------------
+ */
+Route::view('/profile', 'profile')->name('profile');
+Route::view('/settings', 'settings')->name('settings');
+Route::view('/chgpasswd', 'chgpasswd')->name('chgpasswd');
