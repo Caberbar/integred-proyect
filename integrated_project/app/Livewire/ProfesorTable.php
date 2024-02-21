@@ -8,7 +8,7 @@ class ProfesorTable extends Component
 {
 
     public $profesor_id, $nombre, $apellido1, $apellido2, $especialidad;
-    public $error;
+    public $search, $error;
 
     /**
      * Es un hook de iniciación de la página web con todos los atributos a null, para evitar problemas de iniciación.
@@ -26,7 +26,13 @@ class ProfesorTable extends Component
      */
     public function render()
     {
-        $teachers = Profesor::all();
+        $teachers = Profesor::where('nombre', 'like', '%' . $this->search . '%')
+            ->orWhere('apellido1', 'like', '%' . $this->search . '%')
+            ->orWhere('apellido2', 'like', '%' . $this->search . '%')
+            ->orWhere('usu_seneca', 'like', '%' . $this->search . '%')
+            ->orWhere('especialidad', 'like', '%' . $this->search . '%')
+            ->get();
+        // $teachers = Profesor::all();
         return view('livewire.profesor-table', compact('teachers'));
     }
 

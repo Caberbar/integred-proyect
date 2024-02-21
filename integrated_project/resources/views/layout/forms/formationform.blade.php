@@ -7,13 +7,13 @@
         @csrf
 
         @error('siglas')
-            <p class="alert alert-danger">Las siglas no tienen un formato valido</p>
+            <p>Las siglas no tienen un formato valido</p>
         @enderror
         <label for="">Acronym</label>
         <input type="text" name="siglas" required>
 
         @error('denominacion')
-            <p class="alert alert-danger">La denominacion no tienen un formato valido</p>
+            <p>La denominacion no tienen un formato valido</p>
         @enderror
         <label for="">Denomination</label>
         <input type="text" name="denominacion" required>
