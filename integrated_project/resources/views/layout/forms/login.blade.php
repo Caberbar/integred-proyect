@@ -2,7 +2,7 @@
 
 @section('title', 'Login Form')
 
-@section('body')
+@section('content')
 
     <form action="{{ route('login.confirm') }}" method="POST">
         @csrf

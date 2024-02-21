@@ -2,7 +2,7 @@
 
 @section('title', 'Register Form')
 
-@section('body')
+@section('content')
 
     <form action="{{ route('register.save') }}" method="POST">
         @csrf

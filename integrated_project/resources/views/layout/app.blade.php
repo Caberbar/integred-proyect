@@ -37,9 +37,11 @@
 <body>
     @include('nav_bar') <!-- Incluir la barra de navegación común a todas las páginas -->
 
-    
-        @yield('content') <!-- Aquí se incluirá el contenido específico de cada página -->
-    
+    <div class="pc-container">
+        <div class="pc-content">
+            @yield('content') <!-- Aquí se incluirá el contenido específico de cada página -->
+        </div>
+    </div>
 
     
 
