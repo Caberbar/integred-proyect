@@ -38,9 +38,6 @@
         <form wire:submit.prevent="update">
             <input type="hidden" wire:model="leccion_id">
 
-            @error('profesor_id')
-                <p class="alert alert-danger">El profesor no es valido</p>
-            @enderror
             <label for="">Escoja Profesor</label>
             <select wire:model="profesor_id">
                 @forelse ($profesores as $profesor)
@@ -49,9 +46,7 @@
                     <option value=null>No hay profesores churra</option>
                 @endforelse
             </select>
-            @error('modulo_id')
-                <p class="alert alert-danger">El modulo no es valido</p>
-            @enderror
+
             <label for="">Escoja Modulo</label>
             <select wire:model="modulo_id">
                 @forelse ($modulos as $modulo)
@@ -60,9 +55,7 @@
                     <option value=null>No hay modulos churra</option>
                 @endforelse
             </select>
-            @error('grupo_id')
-                <p class="alert alert-danger">El grupo no es valido</p>
-            @enderror
+
             <label for="">Escoja Grupo</label>
             <select wire:model="grupo_id">
                 @forelse ($grupos as $grupo)

@@ -1,92 +1,217 @@
-<nav class="topnav navbar navbar-expand shadow justify-content-between justify-content-sm-start navbar-light bg-white" id="sidenavAccordion">
-            <!-- Sidenav Toggle Button-->
-            <button class="btn btn-icon btn-transparent-dark order-1 order-lg-0 me-2 ms-lg-2 me-lg-0" id="sidebarToggle"><i data-feather="menu"></i></button>
-            <!-- Navbar Brand-->
-            <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="index.html">Seneca</a>
-            <!-- Navbar Search Input-->
-            <form class="form-inline me-auto d-none d-lg-block me-3">
-                <div class="input-group input-group-joined input-group-solid">
-                    <input class="form-control pe-0" type="search" placeholder="Search" aria-label="Search" />
-                    <div class="input-group-text"><i data-feather="search"></i></div>
+<div class="loader-bg">
+  <div class="loader-track">
+    <div class="loader-fill"></div>
+  </div>
+</div>
+<!-- [ Pre-loader ] End -->
+<!-- [ Sidebar Menu ] start -->
+<nav class="pc-sidebar">
+  <div class="navbar-wrapper">
+    <div class="m-header">
+      <a href="#" class="b-brand text-primary">
+        <!-- ========   Change your logo from here   ============ -->
+        <img src="{{ asset('images/logo-dark.svg') }}" />
+        <span class="badge bg-light-success rounded-pill ms-2 theme-version"></span>
+      </a>
+    </div>
+    <div class="navbar-content">
+      <ul class="pc-navbar">
+        <li class="pc-item pc-caption">
+          <label>Navigation</label>
+          <i class="ti ti-dashboard"></i>
+        </li>
+        <li class="pc-item pc-hasmenu">
+        <li class="pc-item">
+          <a href="{{ route('home') }}" class="pc-link {{ Route::currentRouteName() == 'home' ? 'active' : '' }}">
+            <span class="pc-micon">
+              <svg class="pc-icon">
+                <use xlink:href="#custom-status-up"></use>
+              </svg>
+            </span>
+            <span class="pc-mtext">Dashboard</span>
+          </a>
+        </li>
+        </li>
+
+
+
+        <li class="pc-item pc-caption">
+          <label>Tables</label>
+          <i class="ti ti-chart-arcs"></i>
+        </li>
+        <li class="pc-item">
+          <a href="{{ route('profesor') }}" class="pc-link {{ Route::currentRouteName() == 'profesor' ? 'active' : '' }}">
+            <span class="pc-micon">
+              <svg class="pc-icon">
+                <use xlink:href="#custom-user-square"></use>
+              </svg>
+            </span>
+            <span class="pc-mtext">Teacher</span>
+          </a>
+        </li>
+        <li class="pc-item">
+          <a href="{{ route('formaciones') }}" class="pc-link {{ Route::currentRouteName() == 'formaciones' ? 'active' : '' }}">
+            <span class="pc-micon">
+              <svg class="pc-icon">
+                <use xlink:href="#custom-shopping-bag"></use>
+              </svg>
+            </span>
+            <span class="pc-mtext">Education / Formation</span>
+          </a>
+        </li>
+        <li class="pc-item">
+          <a href="{{ route('modulos') }}" class="pc-link {{ Route::currentRouteName() == 'modulos' ? 'active' : '' }}">
+            <span class="pc-micon">
+              <svg class="pc-icon">
+                <use xlink:href="#custom-sort-outline"></use>
+              </svg>
+            </span>
+            <span class="pc-mtext">Modules</span></a>
+        </li>
+        <li class="pc-item">
+          <a href="{{ route('grupos') }}" class="pc-link {{ Route::currentRouteName() == 'grupos' ? 'active' : '' }}">
+            <span class="pc-micon">
+              <svg class="pc-icon">
+                <use xlink:href="#custom-profile-2user-outline"></use>
+              </svg>
+            </span>
+            <span class="pc-mtext">Groups</span></a>
+        </li>
+        <li class="pc-item">
+          <a href="{{ route('lecciones') }}" class="pc-link {{ Route::currentRouteName() == 'lecciones' ? 'active' : '' }}">
+            <span class="pc-micon">
+              <svg class="pc-icon">
+                <use xlink:href="#custom-presentation-chart"></use>
+              </svg>
+            </span>
+            <span class="pc-mtext">Lessons</span></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- [ Sidebar Menu ] end -->
+<!-- [ Header Topbar ] start -->
+<header class="pc-header">
+  <div class="header-wrapper"> <!-- [Mobile Media Block] start -->
+    <div class="me-auto pc-mob-drp">
+      <ul class="list-unstyled">
+        <!-- ======= Menu collapse Icon ===== -->
+        <li class="pc-h-item pc-sidebar-collapse">
+          <a href="#" class="pc-head-link ms-0" id="sidebar-hide">
+            <i class="ti ti-menu-2"></i>
+          </a>
+        </li>
+        <li class="pc-h-item pc-sidebar-popup">
+          <a href="#" class="pc-head-link ms-0" id="mobile-collapse">
+            <i class="ti ti-menu-2"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- [Mobile Media Block end] -->
+    <div class="ms-auto">
+      <ul class="list-unstyled">
+        <li class="dropdown pc-h-item">
+          <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+            <svg class="pc-icon">
+              <use xlink:href="#custom-sun-1"></use>
+            </svg>
+          </a>
+          <div class="dropdown-menu dropdown-menu-end pc-h-dropdown">
+            <a href="#!" class="dropdown-item" onclick="layout_change('dark')">
+              <svg class="pc-icon">
+                <use xlink:href="#custom-moon"></use>
+              </svg>
+              <span>Dark</span>
+            </a>
+            <a href="#!" class="dropdown-item" onclick="layout_change('light')">
+              <svg class="pc-icon">
+                <use xlink:href="#custom-sun-1"></use>
+              </svg>
+              <span>Light</span>
+            </a>
+            <a href="#!" class="dropdown-item" onclick="layout_change_default()">
+              <svg class="pc-icon">
+                <use xlink:href="#custom-setting-2"></use>
+              </svg>
+              <span>Default</span>
+            </a>
+          </div>
+        </li>
+        <li class="dropdown pc-h-item header-user-profile">
+          <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" data-bs-auto-close="outside" aria-expanded="false">
+            <img src="{{ asset('images/user/avatar-2.jpg') }}" alt="user-image" class="user-avtar" />
+          </a>
+          <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown">
+            <div class="dropdown-header d-flex align-items-center justify-content-between">
+              <h5 class="m-0">Profile</h5>
+            </div>
+            <div class="dropdown-body">
+              <div class="profile-notification-scroll position-relative" style="max-height: calc(100vh - 225px)">
+                <div class="d-flex mb-1">
+                  <div class="flex-shrink-0">
+                    <img src="{{ asset('images/user/avatar-2.jpg') }}" alt="user-image" class="user-avtar wid-35" />
+                  </div>
+                  <div class="flex-grow-1 ms-3">
+                    <h6 class="mb-1">Carson Darrin 🖖</h6>
+                    <span>carson.darrin@company.io</span>
+                  </div>
                 </div>
-            </form>
-            <!-- Navbar Items-->
-            <ul class="navbar-nav align-items-center ms-auto">
-                <!-- Navbar Search Dropdown-->
-
-                <li class="nav-item dropdown no-caret me-3 d-lg-none">
-                    <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="searchDropdown" href="index.html#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="search"></i></a>
-                    <!-- Dropdown - Search-->
-                    <div class="dropdown-menu dropdown-menu-end p-3 shadow animated--fade-in-up" aria-labelledby="searchDropdown">
-                        <form class="form-inline me-auto w-100">
-                            <div class="input-group input-group-joined input-group-solid">
-                                <input class="form-control pe-0" type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
-                                <div class="input-group-text"><i data-feather="search"></i></div>
-                            </div>
-                        </form>
+                <hr class="border-secondary border-opacity-50" />
+                <div class="card">
+                  <div class="card-body py-3">
+                    <div class="d-flex align-items-center justify-content-between">
+                      <h5 class="mb-0 d-inline-flex align-items-center"><svg class="pc-icon text-muted me-2">
+                          <use xlink:href="#custom-notification-outline"></use>
+                        </svg>Notification</h5>
+                      <div class="form-check form-switch form-check-reverse m-0">
+                        <input class="form-check-input f-18" type="checkbox" role="switch" />
+                      </div>
                     </div>
-                </li>
-
-                <!-- Alerts Dropdown-->
-                <li class="nav-item dropdown no-caret d-none d-sm-block me-3 dropdown-notifications">
-                    <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownAlerts" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="bell"></i></a>
-                    <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownAlerts">
-                        <h6 class="dropdown-header dropdown-notifications-header">
-                            <i class="me-2" data-feather="bell"></i>
-                            Alerts Center
-                        </h6>
-                        <!-- Example Alert 1-->
-                        <a class="dropdown-item dropdown-notifications-item" href="index.html#!">
-                            <div class="dropdown-notifications-item-icon bg-warning"><i data-feather="activity"></i></div>
-                            <div class="dropdown-notifications-item-content">
-                                <div class="dropdown-notifications-item-content-details">December 29, 2021</div>
-                                <div class="dropdown-notifications-item-content-text">This is an alert message. It's nothing serious, but it requires your attention.</div>
-                            </div>
-                        </a>
-                        <a class="dropdown-item dropdown-notifications-footer" href="index.html#!">View All Alerts</a>
-                    </div>
-                </li>
-                <!-- Messages Dropdown-->
-                <li class="nav-item dropdown no-caret d-none d-sm-block me-3 dropdown-notifications">
-                    <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownMessages" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="mail"></i></a>
-                    <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownMessages">
-                        <h6 class="dropdown-header dropdown-notifications-header">
-                            <i class="me-2" data-feather="mail"></i>
-                            Message Center
-                        </h6>
-                        <!-- Example Message 1  -->
-                        <a class="dropdown-item dropdown-notifications-item" href="index.html#!">
-                            <img class="dropdown-notifications-item-img" src="assets/img/illustrations/profiles/profile-2.png" />
-                            <div class="dropdown-notifications-item-content">
-                                <div class="dropdown-notifications-item-content-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-                                <div class="dropdown-notifications-item-content-details">Thomas Wilcox · 58m</div>
-                            </div>
-                        </a>
-                        <!-- Footer Link-->
-                        <a class="dropdown-item dropdown-notifications-footer" href="index.html#!">Read All Messages</a>
-                    </div>
-                </li>
-                <!-- User Dropdown-->
-                <li class="nav-item dropdown no-caret dropdown-user me-3 me-lg-4">
-                    <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="img-fluid" src="assets/img/illustrations/profiles/profile-1.png" /></a>
-                    <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">
-                        <h6 class="dropdown-header d-flex align-items-center">
-                            <img class="dropdown-user-img" src="assets/img/illustrations/profiles/profile-1.png" />
-                            <div class="dropdown-user-details">
-                                <div class="dropdown-user-details-name">User</div>
-                                <div class="dropdown-user-details-email"><a href="cdn-cgi/l/email-protection.html" class="__cf_email__" data-cfemail="7d0b1108131c3d1c1211531e1210">[email&#160;protected]</a></div>
-                            </div>
-                        </h6>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="index.html#!">
-                            <div class="dropdown-item-icon"><i data-feather="settings"></i></div>
-                            Account
-                        </a>
-                        <a class="dropdown-item" href="index.html#!">
-                            <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
-                            Logout
-                        </a>
-                    </div>
-                </li>
-            </ul>
-        </nav>
+                  </div>
+                </div>
+                <p class="text-span">Manage</p>
+                <a href="#" class="dropdown-item">
+                  <span>
+                    <svg class="pc-icon text-muted me-2">
+                      <use xlink:href="#custom-user"></use>
+                    </svg>
+                    <span>My Account</span>
+                  </span>
+                </a>
+                <a href="#" class="dropdown-item">
+                  <span>
+                    <svg class="pc-icon text-muted me-2">
+                      <use xlink:href="#custom-setting-2"></use>
+                    </svg>
+                    <span>Settings</span>
+                  </span>
+                </a>
+                <a href="#" class="dropdown-item">
+                  <span>
+                    <svg class="pc-icon text-muted me-2">
+                      <use xlink:href="#custom-security-safe"></use>
+                    </svg>
+                    <span>Change Password</span>
+                  </span>
+                </a>
+                <hr class="border-secondary border-opacity-50" />
+                <div class="d-grid mb-3">
+                  <button class="btn btn-primary">
+                    <svg class="pc-icon me-2">
+                      <use xlink:href="#custom-logout-1-outline"></use>
+                    </svg>Logout
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+    </li>
+    </ul>
+  </div>
+  </div>
+</header>
+</div>
+<!-- [ Header ] end -->
