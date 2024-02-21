@@ -113,6 +113,7 @@
         </li>&nbsp;&nbsp;
         <li class="pc-h-item">
           <span class="pc-mtext"><a href="#">Login</a></span>&nbsp;|&nbsp;
+          <span class="pc-mtext"><a href="#">Logout</a></span>&nbsp;|&nbsp;
           <span class="pc-mtext"><a href="#">Register</a></span>
         </li>
       </ul>
