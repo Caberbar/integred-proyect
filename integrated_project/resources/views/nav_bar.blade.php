@@ -110,6 +110,11 @@
           <a href="#" class="pc-head-link ms-0" id="mobile-collapse">
             <i class="ti ti-menu-2"></i>
           </a>
+        </li>&nbsp;&nbsp;
+        <li class="pc-h-item">
+          <span class="pc-mtext"><a href="#">Login</a></span>&nbsp;|&nbsp;
+          <span class="pc-mtext"><a href="#">Logout</a></span>&nbsp;|&nbsp;
+          <span class="pc-mtext"><a href="#">Register</a></span>
         </li>
       </ul>
     </div>
