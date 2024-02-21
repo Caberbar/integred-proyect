@@ -11,4 +11,7 @@
     <a href="{{route('lecciones')}}">Lecciones</a>
     <a href="{{route('formaciones')}}">Formacion</a>
     <a href="{{route('grupos')}}">Grupos</a>
+
+    <a href="{{route('login')}}">Login</a>
+    <a href="{{route('register')}}">Register</a>
 @endsection

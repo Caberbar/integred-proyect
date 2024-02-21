@@ -10,6 +10,9 @@ use App\Http\Controllers\leccionController;
 use App\Http\Controllers\ModuloController;
 use App\Http\Controllers\FormacionController;
 use App\Http\Controllers\GrupoController;
+use App\Http\Controllers\UserController;
+
+
 /**
  *  ------------------------------------------------------
  *      RUTA INICIAL DE LA APLICACIÓN -> INDEX
@@ -57,3 +60,14 @@ Route::post('/formaciones/insert', [FormacionController::class, 'insert'])->name
 Route::view('/grupos', 'grupos')->name('grupos');
 Route::get('/grupos/create', [GrupoController::class, 'create'])->name('grupos.create');
 Route::post('/grupos/insert', [GrupoController::class, 'insert'])->name('grupos.insert');
+
+/**
+ *  --------------------------------
+ *      RUTAS DEL LOGIN
+ *  --------------------------------
+ */
+Route::view('/register', 'layout.forms.register')->name('register');
+Route::post('/register/save', [UserController::class, 'save'])->name('register.save');
+
+Route::view('/login', 'layout.forms.login')->name('login');
+Route::post('/login/confirm', [UserController::class, 'login'])->name('login.confirm');
