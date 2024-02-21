@@ -19,4 +19,9 @@ class Formacion extends Model
     {
         return $this->hasMany(Grupo::class);
     }
+
+    public function scopeSearch($query, $value){
+        $query->where('siglas', 'like', '%' . $value . '%')
+            ->orWhere('denominacion', 'like', '%' . $value . '%');
+    }
 }
