@@ -4,13 +4,13 @@
     <form action="{{route('grupos.insert')}}" method="POST">
         @csrf
         @error('denominacion')
-            <p class="alert alert-danger">La denominacion no es valida</p>
+            <p>La denominacion no es valida</p>
         @enderror
         <label for="">Denominacion</label>
         <input type="text" required name="denominacion">
 
         @error('turno')
-            <p class="alert alert-danger">El turno no es valido</p>
+            <p>El turno no es valido</p>
         @enderror
         <label for="">Turno</label>
         <select name="turno">
@@ -19,13 +19,13 @@
         </select>
 
         @error('curso_escolar')
-            <p class="alert alert-danger">El curso escolar no es valido</p>
+            <p>El curso escolar no es valido</p>
         @enderror
         <label for="">Curso Escolar</label>
         <input type="text" required name="curso_escolar" placeholder="Ej. 2022/2023 - 2023/2024">
 
         @error('curso')
-            <p class="alert alert-danger">El curso  no es valido</p>
+            <p>El curso  no es valido</p>
         @enderror
         <label for="">Curso</label>
         <select name="curso">
@@ -35,14 +35,14 @@
             <option value="4">4º</option>
         </select>
         @error('formacion_id')
-            <p class="alert alert-danger">La formacion seleccionada no es valida</p>
+            <p>La formacion seleccionada no es valida</p>
         @enderror
         <label for="">Formacion</label>
         <select name="formacion_id">
             @forelse ($formaciones as $formacion)
                 <option value="{{$formacion->id}}">{{$formacion->denominacion}}</option>
             @empty
-                <option>No hay formaciones</option>
+                <option value=null>No hay formaciones</option>
             @endforelse
         </select>
 
