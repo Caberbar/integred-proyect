@@ -3,9 +3,12 @@
 namespace App\Livewire;
 use App\Models\Profesor;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class ProfesorTable extends Component
 {
+
+    use WithPagination;
 
     public $profesor_id, $nombre, $apellido1, $apellido2, $especialidad;
     public $search, $error;
@@ -32,7 +35,8 @@ class ProfesorTable extends Component
             ->orWhere('usu_seneca', 'like', '%' . $this->search . '%')
             ->orWhere('especialidad', 'like', '%' . $this->search . '%')
             ->get();
-        // $teachers = Profesor::all();
+        $teachers = Profesor::paginate(5);
+        
         return view('livewire.profesor-table', compact('teachers'));
     }
 
