@@ -8,17 +8,20 @@
                         <div id="dom-jqry_wrapper" class="dataTables_wrapper dt-bootstrap5">
                             <div class="row">
                                 <div class="col-sm-12 col-md-6">
-                                    <div class="dataTables_length" id="dom-jqry_length"><label>Show <select name="dom-jqry_length" aria-controls="dom-jqry" class="form-select form-select-sm">
+                                    <div class="dataTables_length" id="dom-jqry_length">
+                                        <label>Show
+                                            <select name="dom-jqry_length" aria-controls="dom-jqry" class="form-select form-select-sm" wire:model.live="perPage">
                                                 <option value="10">10</option>
                                                 <option value="25">25</option>
                                                 <option value="50">50</option>
                                                 <option value="100">100</option>
-                                            </select> entries</label>
+                                            </select> entries
+                                        </label>
                                         <a href="{{route('profesor.create')}}">Insert Teacher</a>
                                     </div>
                                 </div>
                                 <div class="col-sm-12 col-md-6">
-                                    <div id="dom-jqry_filter" class="dataTables_filter"><label>Search:<input type="search" wire:model.live="search" class="form-control form-control-sm" placeholder="" aria-controls="dom-jqry"></label></div>
+                                    <div id="dom-jqry_filter" class="dataTables_filter"><label>Search:<input type="search" wire:model.live.debounce.300ms="search" class="form-control form-control-sm" placeholder="" aria-controls="dom-jqry"></label></div>
                                 </div>
                             </div>
                         </div>
@@ -30,11 +33,11 @@
                         <table id="dom-jqry" class="table table-striped table-bordered nowrap">
                             <thead>
                                 <tr>
-                                    <th>User Seneca</th>
-                                    <th>Name</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Speciality</th>
+                                    <th wire:click="doSort('usu_seneca')"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="usu_seneca" columnName="Seneca User"/></th>
+                                    <th wire:click="doSort('nombre')"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="nombre" columnName="Name"/></th>
+                                    <th wire:click="doSort('apellido1')"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="apellido1" columnName="First Name"/></th>
+                                    <th wire:click="doSort('apellido2')"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="apellido2" columnName="Last Name"/></th>
+                                    <th wire:click="doSort('especialidad')"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="especialidad" columnName="Speciality"/></th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
