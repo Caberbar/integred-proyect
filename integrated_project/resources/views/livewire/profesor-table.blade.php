@@ -4,7 +4,7 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
-                    <div><a href="{{route('profesor.create')}}">Insert Teacher</a></div>
+                    <div><a href="{{route('profesor.create')}}">Insert Teacher</a>&nbsp;&nbsp;<input type="text" wire:model.live="search" placeholder="Search..."></div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive dt-responsive">
