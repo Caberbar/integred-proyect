@@ -6,11 +6,7 @@
     </a>
     <div wire:ignore.self class="dropdown-menu pc-h-dropdown drp-search" style="">
         <form class="px-3 py-2">
-            <input type="text" wire:model.live="searchG" class="form-control border-0 shadow-none" placeholder="Search here..."><a class="pc-head-link dropdown-toggle arrow-none m-0 trig-drp-search" data-bs-auto-close="outside" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-    <svg class="pc-icon">
-        <use xlink:href="#custom-search-normal-1"></use>
-    </svg>
-    </a>
+            <input type="text" wire:model.live="searchG" class="form-control border-0 shadow-none" placeholder="Search here..."><br>
             @if(!empty($searchG))
                 @if($searchResults['profesores']->isEmpty() && $searchResults['modulos']->isEmpty() && $searchResults['grupos']->isEmpty())
                     <p>No se encontraron resultados</p>
