@@ -59,29 +59,9 @@
                 <div class="card-header">
                     <div class="table-responsive dt-responsive">
                         <div id="dom-jqry_wrapper" class="dataTables_wrapper dt-bootstrap5">
-                            <div class="row">
-                                <div class="col-sm-12 col-md-6">
-                                    <div class="dataTables_length" id="dom-jqry_length"><label>Show <select name="dom-jqry_length" aria-controls="dom-jqry" class="form-select form-select-sm">
-                                                <option value="10">10</option>
-                                                <option value="25">25</option>
-                                                <option value="50">50</option>
-                                                <option value="100">100</option>
-                                            </select> entries</label>
-                                        <a href="{{route('profesor.create')}}">Insert Teacher</a>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-7">
-                                    <div class="dataTables_paginate paging_simple_numbers" id="dom-jqry_paginate">
-                                        <ul class="pagination">
-                                            <li class="paginate_button page-item previous disabled" id="dom-jqry_previous"><a href="#" aria-controls="dom-jqry" data-dt-idx="previous" tabindex="0" class="page-link">Previous</a></li>
-                                            <li class="paginate_button page-item active"><a href="#" aria-controls="dom-jqry" data-dt-idx="0" tabindex="0" class="page-link">1</a></li>
-                                            <li class="paginate_button page-item "><a href="#" aria-controls="dom-jqry" data-dt-idx="1" tabindex="0" class="page-link">2</a></li>
-                                            <li class="paginate_button page-item next" id="dom-jqry_next"><a href="#" aria-controls="dom-jqry" data-dt-idx="next" tabindex="0" class="page-link">Next</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-6">
-                                    <div id="dom-jqry_filter" class="dataTables_filter">{{$teachers->links()}}</div>
+                            <div class="row pagination-center">
+                                <div class="col-sm-12 col-md-11">
+                                    {{$teachers->links()}}
                                 </div>
                             </div>
                         </div>

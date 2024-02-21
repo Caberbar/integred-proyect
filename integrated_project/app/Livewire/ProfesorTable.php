@@ -35,7 +35,7 @@ class ProfesorTable extends Component
             ->orWhere('usu_seneca', 'like', '%' . $this->search . '%')
             ->orWhere('especialidad', 'like', '%' . $this->search . '%')
             ->get();
-        $teachers = Profesor::paginate(5);
+        $teachers = Profesor::paginate();
         
         return view('livewire.profesor-table', compact('teachers'));
     }

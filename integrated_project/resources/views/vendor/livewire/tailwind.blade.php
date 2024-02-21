@@ -50,7 +50,6 @@ $scrollIntoViewJsSnippet = ($scrollTo !== false)
                 {{-- Array Of Links --}}
                 @if (is_array($element))
                 @foreach ($element as $page => $url)
-                <span wire:key="paginator-{{ $paginator->getPageName() }}-page{{ $page }}">
                     @if ($page == $paginator->currentPage())
                     <li class="paginate_button page-item active" id="dom-jqry_previous" wire:key="paginator-{{ $paginator->getPageName() }}-page{{ $page }}" aria-current="page">
                     <a href="#" class="page-link">{{ $page }}</a>
@@ -60,29 +59,20 @@ $scrollIntoViewJsSnippet = ($scrollTo !== false)
                     <a href="#" wire:click="gotoPage({{ $page }}, '{{ $paginator->getPageName() }}')" x-on:click="{{ $scrollIntoViewJsSnippet }}" class="page-link"{{ __('Go to page :page', ['page' => $page]) }}">{{ $page }}</a>
                 </li>
                     @endif
-                </span>
                 @endforeach
                 @endif
                 @endforeach
 
-                <span>
                     {{-- Next Page Link --}}
                     @if ($paginator->hasMorePages())
-                    <button type="button" wire:click="nextPage('{{ $paginator->getPageName() }}')" x-on:click="{{ $scrollIntoViewJsSnippet }}" dusk="nextPage{{ $paginator->getPageName() == 'page' ? '' : '.' . $paginator->getPageName() }}.after" class="relative inline-flex items-center px-2 py-2 -ml-px text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-r-md leading-5 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150" aria-label="{{ __('pagination.next') }}">
-                        <!-- <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                                    </svg> -->
-                    </button>
+                    <li class="paginate_button page-item previous" id="dom-jqry_previous">
+                    <a href="#" wire:click="nextPage('{{ $paginator->getPageName() }}')" x-on:click="{{ $scrollIntoViewJsSnippet }}" dusk="nextPage{{ $paginator->getPageName() == 'page' ? '' : '.' . $paginator->getPageName() }}.after" class="page-link" aria-label="{{ __('pagination.next') }}">Next</a>
+                </li>
                     @else
-                    <span aria-disabled="true" aria-label="{{ __('pagination.next') }}">
-                        <span class="relative inline-flex items-center px-2 py-2 -ml-px text-sm font-medium text-gray-500 bg-white border border-gray-300 cursor-default rounded-r-md leading-5" aria-hidden="true">
-                            <!-- <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                                        </svg> -->
-                        </span>
-                    </span>
+                    <li class="paginate_button page-item previous disabled" id="dom-jqry_previous">
+                    <a href="#" aria-disabled="true" aria-label="{{ __('pagination.next') }}" aria-hidden="true" class="page-link">Next</a>
+                </li>
                     @endif
-                </span>
             </ul>
         </div>
     </div>
