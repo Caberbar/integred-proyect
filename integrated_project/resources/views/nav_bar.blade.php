@@ -184,7 +184,7 @@
                   </div>
                 </div>
                 <p class="text-span">Manage</p>
-                <a href="#" class="dropdown-item">
+                <a href="{{ route('profile') }}" class="dropdown-item {{ Route::currentRouteName() == 'profile' ? 'active' : '' }}">
                   <span>
                     <svg class="pc-icon text-muted me-2">
                       <use xlink:href="#custom-user"></use>
@@ -192,7 +192,7 @@
                     <span>My Account</span>
                   </span>
                 </a>
-                <a href="#" class="dropdown-item">
+                <a href="{{ route('settings') }}" class="dropdown-item {{ Route::currentRouteName() == 'settings' ? 'active' : '' }}">
                   <span>
                     <svg class="pc-icon text-muted me-2">
                       <use xlink:href="#custom-setting-2"></use>
@@ -200,7 +200,7 @@
                     <span>Settings</span>
                   </span>
                 </a>
-                <a href="#" class="dropdown-item">
+                <a href="{{ route('chgpasswd') }}" class="dropdown-item {{ Route::currentRouteName() == 'chgpasswd' ? 'active' : '' }}">
                   <span>
                     <svg class="pc-icon text-muted me-2">
                       <use xlink:href="#custom-security-safe"></use>
