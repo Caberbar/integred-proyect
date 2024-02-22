@@ -21,14 +21,14 @@ class Grupo extends Model
         return $this->belongsTo(Formacion::class);
     }
 
-    public function scopeSearch($query, $value){
-        $query->where('denominacion', 'like', '%' . $value . '%')
-            ->orWhere('turno', 'like', '%' . $value . '%')
-            ->orWhere('curso_escolar', 'like', '%' . $value . '%')
-            ->orWhere('curso', 'like', '%' . $value . '%');
-    }
-
-    public function scopeSearchFormation($query, $value){
-        $query->where('siglas', 'like', '%' . $value . '%');
+    public function scopeSearch($query, $value)
+    {
+        return $query->where('grupos.denominacion', 'like', '%' . $value . '%')
+            ->orWhere('grupos.turno', 'like', '%' . $value . '%')
+            ->orWhere('grupos.curso_escolar', 'like', '%' . $value . '%')
+            ->orWhere('grupos.curso', 'like', '%' . $value . '%')
+            ->orWhereHas('formacion', function ($query) use ($value) {
+                $query->where('formacions.denominacion', 'like', '%' . $value . '%');
+            });
     }
 }

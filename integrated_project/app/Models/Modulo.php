@@ -22,10 +22,13 @@ class Modulo extends Model
     }
 
     public function scopeSearch($query, $value){
-        $query->where('curso', 'like', '%' . $value . '%')
-            ->orWhere('especialidad', 'like', '%' . $value . '%')
-            ->orWhere('denominacion', 'like', '%' . $value . '%')
-            ->orWhere('siglas', 'like', '%' . $value . '%')
-            ->orWhere('horas', 'like', '%' . $value . '%');
+        return $query->where('modulos.curso', 'like', '%' . $value . '%')
+            ->orWhere('modulos.especialidad', 'like', '%' . $value . '%')
+            ->orWhere('modulos.denominacion', 'like', '%' . $value . '%')
+            ->orWhere('modulos.siglas', 'like', '%' . $value . '%')
+            ->orWhere('modulos.horas', 'like', '%' . $value . '%')
+            ->orWhereHas('formacion', function ($query) use ($value) {
+                $query->where('formacions.siglas', 'like', '%' . $value . '%');
+            });
     }
 }

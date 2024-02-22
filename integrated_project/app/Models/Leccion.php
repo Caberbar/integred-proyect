@@ -26,6 +26,15 @@ class Leccion extends Model
     }
 
     public function scopeSearch($query, $value){
-        $query->where('horas', 'like', '%' . $value . '%');
+        return $query->where('leccions.horas', 'like', '%' . $value . '%')
+            ->orWhereHas('profesor', function ($query) use ($value) {
+                $query->where('profesors.nombre', 'like', '%' . $value . '%');
+            })
+            ->orWhereHas('modulo', function ($query) use ($value) {
+                $query->where('modulos.denominacion', 'like', '%' . $value . '%');
+            })
+            ->orWhereHas('grupo', function ($query) use ($value) {
+                $query->where('grupos.denominacion', 'like', '%' . $value . '%');
+            });
     }
 }

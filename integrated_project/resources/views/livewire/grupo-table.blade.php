@@ -44,7 +44,7 @@
                                     <th wire:click="doSort('turno')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="turno" columnName="Turn" /></th>
                                     <th wire:click="doSort('curso_escolar')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="curso_escolar" columnName="School course" /></th>
                                     <th wire:click="doSort('curso')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="curso" columnName="Course" /></th>
-                                    <th wire:click="doSort('siglas')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="siglas" columnName="Acronym" /></th>
+                                    <th wire:click="doSort('formacion_denominacion')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="formacion_denominacion" columnName="Formation denomination" /></th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -64,7 +64,7 @@
                                         {{$grupo->curso}}
                                     </td>
                                     <td>
-                                        {{$grupo->formacion->siglas}}
+                                        {{$grupo->formacion->denominacion}}
                                     </td>
                                     <td>
                                         <ul class="list-inline me-auto mb-0">

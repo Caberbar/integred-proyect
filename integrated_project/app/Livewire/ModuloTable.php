@@ -20,7 +20,7 @@ class ModuloTable extends Component
     public $search = ''; /*Valor por defecto de la busqueda*/
 
     public  $sortDirection = 'ASC'; /*Valor por defecto de la dirección de la tabla*/
-    public  $sortColumn = 'curso'; /*Valor por defecto de la dirección de la tabla*/
+    public  $sortColumn = 'denominacion'; /*Valor por defecto de la dirección de la tabla*/
     
     public function doSort($column){
         if($this->sortColumn === $column){
@@ -44,15 +44,21 @@ class ModuloTable extends Component
      * Renderizamos la página con todos los datos
      */
     public function render()
-    {
-        $modulos = Modulo::search($this->search)
-        ->orderBy($this->sortColumn, $this->sortDirection)
-        ->paginate($this->perPage);
+{
+    $modulos = Modulo::search($this->search)
+    ->when($this->sortColumn == 'formacion_siglas', function ($query) {
+        return $query->join('formacions', 'modulos.formacion_id', '=', 'formacions.id')
+            ->orderBy('formacions.siglas', $this->sortDirection)
+            ->select('modulos.*', 'formacions.siglas as formacion_siglas'); // Cambia el nombre de la columna siglas de la tabla formaciones
+    }, function ($query) {
+        return $query->orderBy($this->sortColumn, $this->sortDirection);
+    })
+    ->paginate($this->perPage);
 
-        $formaciones = Formacion::all();
+    $formaciones = Formacion::all();
 
-        return view('livewire.modulo-table', compact('modulos', 'formaciones'));
-    }
+    return view('livewire.modulo-table', compact('modulos', 'formaciones'));
+}
      /**
      * Es un hook de iniciación de la página web con todos los atributos a null, para evitar problemas de iniciación.
      */
