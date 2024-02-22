@@ -36,8 +36,6 @@ class GrupoTable extends Component
 
     public  $sortDirection = 'ASC'; /*Valor por defecto de la dirección de la tabla*/
     public  $sortColumn = 'denominacion'; /*Valor por defecto de la dirección de la tabla*/
-    public  $sortColumnTeachers = 'siglas'; /*Valor por defecto de la dirección de la tabla*/
-
 
     public function doSort($column)
     {
@@ -65,14 +63,18 @@ class GrupoTable extends Component
      */
     public function render()
     {
-        $formaciones = Formacion::search($this->search)
-            ->orderBy($this->sortColumnTeachers, $this->sortDirection)
+        $grupos = Grupo::search($this->search)
+            ->when($this->sortColumn == 'formacion_denominacion', function ($query) {
+                return $query->join('formacions', 'grupos.formacion_id', '=', 'formacions.id')
+                    ->orderBy('formacions.denominacion', $this->sortDirection)
+                    ->select('grupos.*', 'formacions.denominacion as formacion_denominacion'); // Cambia el nombre de la columna siglas de la tabla formaciones
+            }, function ($query) {
+                return $query->orderBy($this->sortColumn, $this->sortDirection);
+            })
             ->paginate($this->perPage);
 
-        $grupos = Grupo::search($this->search)
-            ->orderBy($this->sortColumn, $this->sortDirection)
-            ->paginate($this->perPage);
-            
+        $formaciones = Formacion::all();
+
         return view('livewire.grupo-table', compact('grupos', 'formaciones'));
     }
     /**

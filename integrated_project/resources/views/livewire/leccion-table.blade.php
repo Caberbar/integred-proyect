@@ -36,14 +36,14 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive dt-responsive">
-                        @if ($modulos != null)
+                        @if ($lecciones != null)
                         <table id="dom-jqry" class="table table-striped table-bordered nowrap">
                             <thead>
                                 <tr>
                                     <th wire:click="doSort('horas')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="horas" columnName="Hours" /></th>
-                                    <th wire:click="doSort('teachers')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="teachers" columnName="Teachers" /></th>
-                                    <th wire:click="doSort('modulo')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="modulo" columnName="Module" /></th>
-                                    <th wire:click="doSort('grupo')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="grupo" columnName="Group" /></th>
+                                    <th wire:click="doSort('profesor_nombre')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="profesor_nombre" columnName="Teachers" /></th>
+                                    <th wire:click="doSort('modulo_nombre')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="modulo_nombre" columnName="Module" /></th>
+                                    <th wire:click="doSort('grupo_nombre')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="grupo_nombre" columnName="Group" /></th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -101,31 +101,13 @@
             <input type="hidden" wire:model="leccion_id">
 
             <label for="">Escoja Profesor</label>
-            <select wire:model="profesor_id">
-                @forelse ($profesores as $profesor)
-                <option value="{{$profesor->id}}">{{$profesor->nombre }}{{$profesor->apellido1}}</option>
-                @empty
-                <option value=null>No hay profesores churra</option>
-                @endforelse
-            </select>
+            
 
             <label for="">Escoja Modulo</label>
-            <select wire:model="modulo_id">
-                @forelse ($modulos as $modulo)
-                <option value="{{$modulo->id}}">{{$modulo->denominacion }}</option>
-                @empty
-                <option value=null>No hay modulos churra</option>
-                @endforelse
-            </select>
+            
 
             <label for="">Escoja Grupo</label>
-            <select wire:model="grupo_id">
-                @forelse ($grupos as $grupo)
-                <option value="{{$grupo->id}}">{{$grupo->denominacion }}</option>
-                @empty
-                <option value=null>No hay grupo churra</option>
-                @endforelse
-            </select>
+            
             <button type="submit">Update</button>
         </form>
         <!-- QUITAR CUANDO ESTE VENTANA MODAL -->
