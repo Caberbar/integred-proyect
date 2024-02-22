@@ -249,6 +249,32 @@ body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+.pagination-center{
+  justify-content: center;
+}
+
+.column-table-flex{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.column-tables{
+  cursor: pointer;
+  transition: all ease 0.3s;
+}
+
+.column-tables:hover{
+  transition: all ease 0.3s;
+  background: RGBA(209, 209, 209, 1)
+}
+
+.icon-arrow-up{
+  width: 25px;
+  height: 25px;
+}
+
 hr {
   margin: 1rem 0;
   color: inherit;

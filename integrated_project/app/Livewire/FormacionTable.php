@@ -4,9 +4,13 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Formacion;
+use Livewire\WithPagination;
 
 class FormacionTable extends Component
 {
+    
+    use WithPagination;
+
     public $formacion_id,$siglas, $denominacion;
     public $error;
 
@@ -19,12 +23,40 @@ class FormacionTable extends Component
         $this->denominacion = null;
     }
 
+    public $perPage = 10; /*Valor por defecto de numeros de usuarios en una tabla*/
+    public $search = ''; /*Valor por defecto de la busqueda*/
+
+    public  $sortDirection = 'ASC'; /*Valor por defecto de la dirección de la tabla*/
+    public  $sortColumn = 'siglas'; /*Valor por defecto de la dirección de la tabla*/
+
+    
+    public function doSort($column){
+        if($this->sortColumn === $column){
+            $this->sortDirection =($this->sortDirection == 'ASC') ? 'DESC' : 'ASC';
+            return;
+        }
+        $this->sortColumn = $column;
+        $this -> sortDirection = 'ASC';
+    }
+
+    // Life cycle hooks
+    public function updatedPerPage(){
+        $this->resetPage();
+    }
+
+    public function updatedSearch(){
+        $this->resetPage();
+    }
+
     /**
      * Renderizamos la página con todos los datos
      */
     public function render()
     {
-        $formaciones = Formacion::all();
+        $formaciones = Formacion::search($this->search)
+        ->orderBy($this->sortColumn, $this->sortDirection)
+        ->paginate($this->perPage);
+
         return view('livewire.formacion-table', compact('formaciones'));
     }
     /**

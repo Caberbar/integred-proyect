@@ -7,39 +7,93 @@ use App\Models\Profesor;
 use App\Models\Leccion;
 use App\Models\Grupo;
 use App\Models\Modulo;
+use Livewire\WithPagination;
+
 
 class LeccionTable extends Component
 {
+
+    use WithPagination;
 
     public $horas, $leccion_id, $grupo_id, $modulo_id, $profesor_id;
 
     /**
      * Es un hook de iniciación de la página web con todos los atributos a null, para evitar problemas de iniciación.
      */
-    public function mount(){
+    public function mount()
+    {
         $this->horas = null;
         $this->leccion_id = null;
         $this->grupo_id = null;
         $this->modulo_id = null;
         $this->profesor_id = null;
     }
+
+    public $perPage = 10; /*Valor por defecto de numeros de usuarios en una tabla*/
+    public $search = ''; /*Valor por defecto de la busqueda*/
+
+    public  $sortDirection = 'ASC'; /*Valor por defecto de la dirección de la tabla*/
+    public  $sortColumn = 'horas'; /*Valor por defecto de la dirección de la tabla*/
+
+
+    public function doSort($column)
+    {
+        if ($this->sortColumn === $column) {
+            $this->sortDirection = ($this->sortDirection == 'ASC') ? 'DESC' : 'ASC';
+            return;
+        }
+        $this->sortColumn = $column;
+        $this->sortDirection = 'ASC';
+    }
+
+    // Life cycle hooks
+    public function updatedPerPage()
+    {
+        $this->resetPage();
+    }
+
+    public function updatedSearch()
+    {
+        $this->resetPage();
+    }
+
     /**
      * Renderizamos la página con todos los datos
      */
     public function render()
     {
+        $lecciones = Leccion::search($this->search)
+            ->when($this->sortColumn == 'profesor_nombre', function ($query) {
+                return $query->join('profesors', 'leccions.profesor_id', '=', 'profesors.id')
+                    ->orderBy('profesors.nombre', $this->sortDirection)
+                    ->select('leccions.*', 'profesors.nombre as profesor_nombre');
+            })
+            ->when($this->sortColumn == 'modulo_nombre', function ($query) {
+                return $query->join('modulos', 'leccions.modulo_id', '=', 'modulos.id')
+                    ->orderBy('modulos.denominacion', $this->sortDirection)
+                    ->select('leccions.*', 'modulos.denominacion as modulo_nombre');
+            })
+            ->when($this->sortColumn == 'grupo_nombre', function ($query) {
+                return $query->join('grupos', 'leccions.grupo_id', '=', 'grupos.id')
+                    ->orderBy('grupos.denominacion', $this->sortDirection)
+                    ->select('leccions.*', 'grupos.denominacion as grupo_nombre');
+            })
+            ->orderBy($this->sortColumn, $this->sortDirection)
+            ->paginate($this->perPage);
+
         $profesores = Profesor::all();
         $modulos = Modulo::all();
         $grupos = Grupo::all();
-        $lecciones = Leccion::all();
-        return view('livewire.leccion-table', compact('lecciones', 'profesores', 'modulos','grupos'));
+
+        return view('livewire.leccion-table', compact('lecciones', 'profesores', 'modulos', 'grupos'));
     }
     /**
      * Una vez el usuario pulsa el boton edit, sincronizamos los datos estaticos de la tabla con los asincronos del componente,
      * mediante la busqueda de esta lección en la base de datos y asignandolo a nuestros atributos, que sera los que el usuario
      * modifique.
      */
-    public function edit($leccion_id){
+    public function edit($leccion_id)
+    {
         $leccion = Leccion::findOrFail($leccion_id);
 
         $this->leccion_id = $leccion_id;
@@ -48,13 +102,14 @@ class LeccionTable extends Component
         $this->profesor_id = $leccion->profesor_id;
         $this->horas = $leccion->horas;
     }
-     /**
+    /**
      * Buscamos el objeto al que el usuario quiere hacer la edición y modificamos sus atributos mediante, los
      * atributos que relleno de nuestra clase, pero primero comprobamos que el usuario selecciono una formacion,
      * mediante el id del modulo, que es un campo hidden del formulario, si este viene null, no selecciono ninguno, por lo
      * tanto no hacemos ninguna validacion ni modificacion, mostramos un mensaje de error por la pantalla.
      */
-    public function update(){
+    public function update()
+    {
         $leccion = Leccion::find($this->leccion_id);
 
         $this->validate();
@@ -69,14 +124,16 @@ class LeccionTable extends Component
     /**
      * Buscamos la lección en función de su id, y la eliminamos.
      */
-    public function delete($leccion_id){
+    public function delete($leccion_id)
+    {
         Leccion::find($leccion_id)->delete();
     }
     /**
      * Después de hacer el update necesitamos limpiar los datos, por si quiere editar otro campo evitar tener problemas
      * de sobreescritura de datos, o quiera hacer updates maliciosos.
      */
-    public function resetInputs(){
+    public function resetInputs()
+    {
         $this->horas = null;
         $this->leccion_id = null;
         $this->grupo_id = null;
@@ -93,7 +150,7 @@ class LeccionTable extends Component
     public function rules(): array
     {
         return [
-            'horas'=>[
+            'horas' => [
                 'required',
                 'integer',
             ],

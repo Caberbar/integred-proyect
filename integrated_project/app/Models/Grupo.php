@@ -20,4 +20,15 @@ class Grupo extends Model
     {
         return $this->belongsTo(Formacion::class);
     }
+
+    public function scopeSearch($query, $value)
+    {
+        return $query->where('grupos.denominacion', 'like', '%' . $value . '%')
+            ->orWhere('grupos.turno', 'like', '%' . $value . '%')
+            ->orWhere('grupos.curso_escolar', 'like', '%' . $value . '%')
+            ->orWhere('grupos.curso', 'like', '%' . $value . '%')
+            ->orWhereHas('formacion', function ($query) use ($value) {
+                $query->where('formacions.denominacion', 'like', '%' . $value . '%');
+            });
+    }
 }
