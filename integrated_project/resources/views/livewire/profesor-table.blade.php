@@ -27,7 +27,7 @@
                             <div class="row">
                                 <div class="col-sm-12 col-md-12">
                                     <a href="{{route('profesor.create')}}" class="btn btn-primary d-inline-flex align-item-center">
-                                        <i class="ti ti-plus f-18"></i> Add Customer
+                                        <i class="ti ti-plus f-18"></i> Add Teacher
                                     </a>
                                 </div>
                             </div>
@@ -36,7 +36,8 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive dt-responsive">
-                        @if ($teachers != null)
+
+                        @if ($teachers->isNotEmpty())
                         <table id="dom-jqry" class="table table-striped table-bordered nowrap">
                             <thead>
                                 <tr>
@@ -74,6 +75,27 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        @elseif($teachers->isEmpty() && $search != '')
+                        <table id="dom-jqry" class="table table-striped table-bordered nowrap">
+                            <thead>
+                                <tr>
+                                    <th wire:click="doSort('usu_seneca')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="usu_seneca" columnName="Seneca User" /></th>
+                                    <th wire:click="doSort('nombre')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="nombre" columnName="Name" /></th>
+                                    <th wire:click="doSort('apellido1')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="apellido1" columnName="First Name" /></th>
+                                    <th wire:click="doSort('apellido2')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="apellido2" columnName="Last Name" /></th>
+                                    <th wire:click="doSort('especialidad')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="especialidad" columnName="Speciality" /></th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="6">No results found.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        @else
+                        <p>No teachers found.</p>
+                        @endif
                     </div>
                 </div>
                 <div class="card-header">
@@ -132,9 +154,5 @@
             <button type="submit">Update</button>
         </form>
         <!-- QUITAR CUANDO ESTE VENTANA MODAL -->
-
-        @else
-        <p>No teachers register yet...</p>
-        @endif
     </div>
 </div>

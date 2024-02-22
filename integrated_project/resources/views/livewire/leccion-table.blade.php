@@ -36,7 +36,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive dt-responsive">
-                        @if ($lecciones != null)
+                        @if ($lecciones->isNotEmpty())
                         <table id="dom-jqry" class="table table-striped table-bordered nowrap">
                             <thead>
                                 <tr>
@@ -80,6 +80,27 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        @elseif($lecciones->isEmpty() && $search != '')
+                        <table id="dom-jqry" class="table table-striped table-bordered nowrap">
+                            <thead>
+                                <tr>
+                                    <th wire:click="doSort('usu_seneca')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="usu_seneca" columnName="Seneca User" /></th>
+                                    <th wire:click="doSort('nombre')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="nombre" columnName="Name" /></th>
+                                    <th wire:click="doSort('apellido1')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="apellido1" columnName="First Name" /></th>
+                                    <th wire:click="doSort('apellido2')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="apellido2" columnName="Last Name" /></th>
+                                    <th wire:click="doSort('especialidad')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="especialidad" columnName="Speciality" /></th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="6">No results found.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        @else
+                        <p>No lessons found.</p>
+                        @endif
                     </div>
                 </div>
                 <div class="card-header">
@@ -101,19 +122,15 @@
             <input type="hidden" wire:model="leccion_id">
 
             <label for="">Escoja Profesor</label>
-            
+
 
             <label for="">Escoja Modulo</label>
-            
+
 
             <label for="">Escoja Grupo</label>
-            
+
             <button type="submit">Update</button>
         </form>
         <!-- QUITAR CUANDO ESTE VENTANA MODAL -->
-
-        @else
-        <p>No lessons register yet...</p>
-        @endif
     </div>
 </div>
