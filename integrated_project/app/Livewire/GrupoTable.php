@@ -6,17 +6,22 @@ use Livewire\Component;
 use App\Models\Grupo;
 use App\Models\Formacion;
 use App\Models\Leccion;
+use Livewire\WithPagination;
+
 
 class GrupoTable extends Component
 {
+    use WithPagination;
 
-    public $grupo_id, $denominacion,$turno ,$curso_escolar, $curso, $formacion_id;
+
+    public $grupo_id, $denominacion, $turno, $curso_escolar, $curso, $formacion_id;
     public $error;
 
     /**
      * Es un hook de iniciación de la página web con todos los atributos a null, para evitar problemas de iniciación.
      */
-    public function mount(){
+    public function mount()
+    {
         $this->grupo_id = null;
         $this->denominacion = null;
         $this->curso_escolar = null;
@@ -25,13 +30,51 @@ class GrupoTable extends Component
         $this->turno = null;
         $this->error = null;
     }
+
+    public $perPage = 10; /*Valor por defecto de numeros de usuarios en una tabla*/
+    public $search = ''; /*Valor por defecto de la busqueda*/
+
+    public  $sortDirection = 'ASC'; /*Valor por defecto de la dirección de la tabla*/
+    public  $sortColumn = 'denominacion'; /*Valor por defecto de la dirección de la tabla*/
+
+    public function doSort($column)
+    {
+        if ($this->sortColumn === $column) {
+            $this->sortDirection = ($this->sortDirection == 'ASC') ? 'DESC' : 'ASC';
+            return;
+        }
+        $this->sortColumn = $column;
+        $this->sortDirection = 'ASC';
+    }
+
+    // Life cycle hooks
+    public function updatedPerPage()
+    {
+        $this->resetPage();
+    }
+
+    public function updatedSearch()
+    {
+        $this->resetPage();
+    }
+
     /**
      * Renderizamos la página con todos los datos
      */
     public function render()
     {
+        $grupos = Grupo::search($this->search)
+            ->when($this->sortColumn == 'formacion_denominacion', function ($query) {
+                return $query->join('formacions', 'grupos.formacion_id', '=', 'formacions.id')
+                    ->orderBy('formacions.denominacion', $this->sortDirection)
+                    ->select('grupos.*', 'formacions.denominacion as formacion_denominacion'); // Cambia el nombre de la columna siglas de la tabla formaciones
+            }, function ($query) {
+                return $query->orderBy($this->sortColumn, $this->sortDirection);
+            })
+            ->paginate($this->perPage);
+
         $formaciones = Formacion::all();
-        $grupos = Grupo::all();
+
         return view('livewire.grupo-table', compact('grupos', 'formaciones'));
     }
     /**
@@ -39,7 +82,8 @@ class GrupoTable extends Component
      * mediante la busqueda de este grupo en la base de datos y asignandolo a nuestros atributos, que sera los que el usuario
      * modifique.
      */
-    public function edit($grupo_id){
+    public function edit($grupo_id)
+    {
         $grupo = Grupo::findOrFail($grupo_id);
 
         $this->grupo_id = $grupo->id;
@@ -48,7 +92,6 @@ class GrupoTable extends Component
         $this->curso_escolar = $grupo->curso_escolar;
         $this->curso = $grupo->curso;
         $this->formacion_id = $grupo->formacion->id;
-
     }
     /**
      * Buscamos el objeto al que el usuario quiere hacer la edición y modificamos sus atributos mediante, los
@@ -56,8 +99,9 @@ class GrupoTable extends Component
      * mediante el id del grupo, que es un campo hidden del formulario, si este viene null, no selecciono ninguno, por lo
      * tanto no hacemos ninguna validacion ni modificacion, mostramos un mensaje de error por la pantalla.
      */
-    public function update(){
-        if($this->grupo_id != null){
+    public function update()
+    {
+        if ($this->grupo_id != null) {
             $this->validate();
 
             $grupo = Grupo::findOrFail($this->grupo_id);
@@ -70,7 +114,7 @@ class GrupoTable extends Component
             $grupo->save();
 
             $this->resetInputs();
-        }else{
+        } else {
             $this->error = "No puedes hacer modificar sin seleccionar ningun grupo";
         }
     }
@@ -81,15 +125,16 @@ class GrupoTable extends Component
      * las recorremos una a una y las vamos borrando, una vez eliminado todo eliminamos el grupo.
      *
      */
-    public function delete($grupo_id){
+    public function delete($grupo_id)
+    {
 
         $grupo = Grupo::find($grupo_id);
         $lecciones = $grupo->lecciones;
-           if($lecciones != null){
-                foreach($lecciones as $leccion){
-                    $leccion->delete();
-                }
-           }
+        if ($lecciones != null) {
+            foreach ($lecciones as $leccion) {
+                $leccion->delete();
+            }
+        }
         $grupo->delete();
     }
 
@@ -97,7 +142,8 @@ class GrupoTable extends Component
      * Después de hacer el update necesitamos limpiar los datos, por si quiere editar otro campo evitar tener problemas
      * de sobreescritura de datos, o quiera hacer updates maliciosos.
      */
-    public function resetInputs(){
+    public function resetInputs()
+    {
         $this->grupo_id = null;
         $this->denominacion = null;
         $this->curso_escolar = null;
@@ -112,21 +158,22 @@ class GrupoTable extends Component
      * Se llama con $this->validate(), porque queremos validar los atributos de este componente
      * que son los que el usuario modifica en el form.
      */
-    public function rules(){
+    public function rules()
+    {
         return [
-            'denominacion'=>[
+            'denominacion' => [
                 'required',
                 'max:255',
                 'min:3'
             ],
-            'curso_escolar'=>[
+            'curso_escolar' => [
                 'required',
                 'regex:/^\d{4}\/\d{4}$/i',
             ],
-            'curso'=>[
+            'curso' => [
                 'required',
             ],
-            'turno'=>[
+            'turno' => [
                 'required',
                 'max:255',
                 'regex:/^(Mañana|Tarde)$/i'
@@ -136,7 +183,7 @@ class GrupoTable extends Component
                 'integer',
                 'min:0'
             ],
-            'grupo_id'=>[
+            'grupo_id' => [
                 'required',
                 'integer',
                 'min:0'

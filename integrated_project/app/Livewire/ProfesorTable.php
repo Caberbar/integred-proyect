@@ -3,12 +3,15 @@
 namespace App\Livewire;
 use App\Models\Profesor;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class ProfesorTable extends Component
 {
 
+    use WithPagination;
+
     public $profesor_id, $nombre, $apellido1, $apellido2, $especialidad;
-    public $search, $error;
+    public $error;
 
     /**
      * Es un hook de iniciación de la página web con todos los atributos a null, para evitar problemas de iniciación.
@@ -21,18 +24,47 @@ class ProfesorTable extends Component
         $this->especialidad = null;
     }
 
+    public $perPage = 10; /*Valor por defecto de numeros de usuarios en una tabla*/
+    public $search = ''; /*Valor por defecto de la busqueda*/
+
+    public  $sortDirection = 'ASC'; /*Valor por defecto de la dirección de la tabla*/
+    public  $sortColumn = 'usu_seneca'; /*Valor por defecto de la dirección de la tabla*/
+
+    
+    public function doSort($column){
+        if($this->sortColumn === $column){
+            $this->sortDirection =($this->sortDirection == 'ASC') ? 'DESC' : 'ASC';
+            return;
+        }
+        $this->sortColumn = $column;
+        $this -> sortDirection = 'ASC';
+    }
+
+    // Life cycle hooks
+    public function updatedPerPage(){
+        $this->resetPage();
+    }
+
+    public function updatedSearch(){
+        $this->resetPage();
+    }
+
      /**
      * Renderizamos la página con todos los datos
      */
     public function render()
     {
-        $teachers = Profesor::where('nombre', 'like', '%' . $this->search . '%')
-            ->orWhere('apellido1', 'like', '%' . $this->search . '%')
-            ->orWhere('apellido2', 'like', '%' . $this->search . '%')
-            ->orWhere('usu_seneca', 'like', '%' . $this->search . '%')
-            ->orWhere('especialidad', 'like', '%' . $this->search . '%')
-            ->get();
-        // $teachers = Profesor::all();
+        // $teachers = Profesor::where('nombre', 'like', '%' . $this->search . '%')
+        //     ->orWhere('apellido1', 'like', '%' . $this->search . '%')
+        //     ->orWhere('apellido2', 'like', '%' . $this->search . '%')
+        //     ->orWhere('usu_seneca', 'like', '%' . $this->search . '%')
+        //     ->orWhere('especialidad', 'like', '%' . $this->search . '%')
+        //     ->get();
+
+        $teachers = Profesor::search($this->search)
+        ->orderBy($this->sortColumn, $this->sortDirection)
+        ->paginate($this->perPage);
+        
         return view('livewire.profesor-table', compact('teachers'));
     }
 

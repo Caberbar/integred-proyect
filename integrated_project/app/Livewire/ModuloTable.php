@@ -6,20 +6,59 @@ use Livewire\Component;
 
 use App\Models\Modulo;
 use App\Models\Formacion;
+use Livewire\WithPagination;
+
 
 class ModuloTable extends Component
 {
+    use WithPagination;
+
     public $modulo_id, $curso, $formacion_id, $denominacion, $siglas, $horas;
     public $error;
+
+    public $perPage = 10; /*Valor por defecto de numeros de usuarios en una tabla*/
+    public $search = ''; /*Valor por defecto de la busqueda*/
+
+    public  $sortDirection = 'ASC'; /*Valor por defecto de la dirección de la tabla*/
+    public  $sortColumn = 'denominacion'; /*Valor por defecto de la dirección de la tabla*/
+    
+    public function doSort($column){
+        if($this->sortColumn === $column){
+            $this->sortDirection =($this->sortDirection == 'ASC') ? 'DESC' : 'ASC';
+            return;
+        }
+        $this->sortColumn = $column;
+        $this -> sortDirection = 'ASC';
+    }
+
+    // Life cycle hooks
+    public function updatedPerPage(){
+        $this->resetPage();
+    }
+
+    public function updatedSearch(){
+        $this->resetPage();
+    }
+
     /**
      * Renderizamos la página con todos los datos
      */
     public function render()
-    {
-        $modulos = Modulo::all();
-        $formaciones = Formacion::all();
-        return view('livewire.modulo-table', compact('modulos', 'formaciones'));
-    }
+{
+    $modulos = Modulo::search($this->search)
+    ->when($this->sortColumn == 'formacion_siglas', function ($query) {
+        return $query->join('formacions', 'modulos.formacion_id', '=', 'formacions.id')
+            ->orderBy('formacions.siglas', $this->sortDirection)
+            ->select('modulos.*', 'formacions.siglas as formacion_siglas'); // Cambia el nombre de la columna siglas de la tabla formaciones
+    }, function ($query) {
+        return $query->orderBy($this->sortColumn, $this->sortDirection);
+    })
+    ->paginate($this->perPage);
+
+    $formaciones = Formacion::all();
+
+    return view('livewire.modulo-table', compact('modulos', 'formaciones'));
+}
      /**
      * Es un hook de iniciación de la página web con todos los atributos a null, para evitar problemas de iniciación.
      */
