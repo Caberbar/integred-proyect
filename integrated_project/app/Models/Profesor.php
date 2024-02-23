@@ -9,7 +9,16 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Profesor extends Model
 {
     use HasFactory;
-    
+
+
+    protected $fillable = [
+        'use_seneca',
+        'nombre',
+        'apellido1',
+        'apellido2',
+        'especialidad',
+    ];
+
     public function lecciones(): HasMany
     {
         return $this->hasMany(Leccion::class);

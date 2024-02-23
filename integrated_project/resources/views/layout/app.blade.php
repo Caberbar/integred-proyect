@@ -31,18 +31,19 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" id="main-style-link" />
     <link rel="stylesheet" href="{{ asset('css/style-preset.css') }}" />
 
+    <!-- [ CSS MODAL] -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
 </head>
 
 
 <body>
     @include('nav_bar') <!-- Incluir la barra de navegación común a todas las páginas -->
 
-    <div class="pc-container">
-        <div class="pc-content">
-            @yield('content') <!-- Aquí se incluirá el contenido específico de cada página -->
-        </div>
-    </div>
 
-    
+        @yield('content') <!-- Aquí se incluirá el contenido específico de cada página -->
+
+
+
 
     @include('footer') <!-- Incluir el pie de página común a todas las páginas -->
