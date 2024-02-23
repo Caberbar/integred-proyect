@@ -5,23 +5,26 @@
 @section('content')
 <div class="pc-container">
     <div class="pc-content">
-        <form action="{{ route('formaciones.insert') }}" method="POST">
+        <form action="{{ route('formaciones.insert') }}" method="POST" id="insert-form">
             @csrf
 
-            @error('siglas')
-                <p>Las siglas no tienen un formato valido</p>
-            @enderror
             <label for="">Acronym</label>
             <input type="text" name="siglas" required>
-
-            @error('denominacion')
-                <p>La denominacion no tienen un formato valido</p>
+            <p class="error" id="error_siglas">Acronym must be at least 2 characters long.</p>
+            @error('siglas')
+                <p class="error show" id="error_siglas">Acronym must be at least 2 characters long.</p>
             @enderror
+
             <label for="">Denomination</label>
             <input type="text" name="denominacion" required>
+            <p class="error" id="error_denominacion">Denomination must be between 3 and 255 characters long.</p>
+            @error('denominacion')
+                <p class="error show" id="error_denominacion">Denomination must be between 3 and 255 characters long.</p>
+            @enderror
 
-            <input type="submit" value="Create">
+            <input type="submit" value="Create" id="insert-submit">
         </form>
     </div>
 </div>
+<script type="text/javascript" src="{{asset('js/validations/formacion-validation.js')}}"></script>
 @endsection
