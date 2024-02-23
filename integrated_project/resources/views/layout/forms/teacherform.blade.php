@@ -5,30 +5,31 @@
 @section('content')
 <div class="pc-container">
     <div class="pc-content">
-        <form action="{{route('profesor.insert')}}" method="POST">
+        <form action="{{route('profesor.insert')}}" method="POST" id="insert-form">
             @csrf
 
-            <label for="">User seneca:</label>
+            <label for="">Seneca User:</label>
             <input type="text" name="usu_seneca" required>
+            <p class="error" id="error_usu_seneca">The Seneca User must be composed of 7 letters and 3 numbers.</p>
 
-            <label for="">Name:</label>
+            <label for="">First Name:</label>
             <input type="text" name="nombre" required>
+            <p class="error" id="error_nombre">Name must be between 3 and 30 characters long.</p>
 
-            <label for="">First Name</label>
+            <label for="">Last Names</label>
             <input type="text" name="apellido1">
-
-            <label for="">Last Name</label>
             <input type="text" name="apellido2">
+            <p class="error" id="error_apellidos">Each last name must be between 3 and 50 characters long.</p>
 
             <label for="">Speciality</label>
-            <input type="text" name="especialidad">
             <select name="especialidad">
                 <option value="secundaria">Secundaria</option>
                 <option value="formacion profesional">Formacion profesional</option>
             </select>
 
-            <input type="submit" value="Insert">
+            <input type="submit" value="Insert" id="insert-submit">
         </form>
     </div>
 </div>
+<script type="text/javascript" src="{{asset('js/validations/profesor-validation.js')}}"></script>
 @endsection

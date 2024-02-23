@@ -30,6 +30,8 @@
     <!-- [Template CSS Files] -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" id="main-style-link" />
     <link rel="stylesheet" href="{{ asset('css/style-preset.css') }}" />
+    <!-- JS Validation's Styles -->
+    <link rel="stylesheet" href="{{ asset('css/js-validations.css') }}" />
 
 </head>
 
