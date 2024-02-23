@@ -8,9 +8,11 @@ use Livewire\WithPagination;
 
 class FormacionTable extends Component
 {
-    
+
     use WithPagination;
 
+    public Formacion $formacion;
+    public $accion = 'Crear';
     public $formacion_id,$siglas, $denominacion;
     public $error;
 
@@ -21,6 +23,8 @@ class FormacionTable extends Component
         $this->formacion_id = null;
         $this->siglas = null;
         $this->denominacion = null;
+        $this->formacion = new Formacion;
+        $this->accion;
     }
 
     public $perPage = 10; /*Valor por defecto de numeros de usuarios en una tabla*/
@@ -29,7 +33,7 @@ class FormacionTable extends Component
     public  $sortDirection = 'ASC'; /*Valor por defecto de la dirección de la tabla*/
     public  $sortColumn = 'siglas'; /*Valor por defecto de la dirección de la tabla*/
 
-    
+
     public function doSort($column){
         if($this->sortColumn === $column){
             $this->sortDirection =($this->sortDirection == 'ASC') ? 'DESC' : 'ASC';
@@ -59,36 +63,33 @@ class FormacionTable extends Component
 
         return view('livewire.formacion-table', compact('formaciones'));
     }
-    /**
-     * Una vez el usuario pulsa el boton edit, sincronizamos los datos estaticos de la tabla con los asincronos del componente,
-     * mediante la busqueda de esta formación en la base de datos y asignandolo a nuestros atributos, que sera los que el usuario
-     * modifique.
-     */
-    public function edit($formacion_id){
-        $formacion = Formacion::findOrFail($formacion_id);
 
-        $this->formacion_id = $formacion_id;
-        $this->siglas = $formacion->siglas;
-        $this->denominacion = $formacion->denominacion;
-    }
-    /**
-     * Buscamos el objeto al que el usuario quiere hacer la edición y modificamos sus atributos mediante, los
-     * atributos que relleno de nuestra clase, pero primero comprobamos que el usuario selecciono una formacion,
-     * mediante el id del modulo, que es un campo hidden del formulario, si este viene null, no selecciono ninguno, por lo
-     * tanto no hacemos ninguna validacion ni modificacion, mostramos un mensaje de error por la pantalla.
-     */
-    public function update(){
-        if($this->formacion_id != null){
-            $formacion = Formacion::find($this->formacion_id);
-            $formacion->siglas = $this->siglas;
-            $formacion->denominacion = $this->denominacion;
-            $formacion->save();
 
-            $this->resetInputs();
+    public function modal($formacion_id = null){
+        if($formacion_id != null){
+            $this->accion = 'Update';
+            $this->formacion = Formacion::findOrFail($formacion_id);
+            $this->denominacion = $this->formacion->denominacion;
+            $this->siglas = $this->formacion->siglas;
         }else{
-            $this->error = "No puedes modificar una formación si no la seleccionas";
+            $this->accion = 'Create';
+            $this->formacion->siglas = $this->siglas;
+            $this->formacion->denominacion = $this->denominacion;
         }
     }
+
+
+    public function save(){
+        $this->validate($this->rules());
+        $formacion = $this->formacion;
+        $formacion->siglas = $this->siglas;
+        $formacion->denominacion = $this->denominacion;
+
+        $formacion->save();
+        $this->mount();
+        $this->dispatch('cerrar_modal');
+    }
+
 
     /**
      * Buscamos la formación que el usuario desea eliminar
@@ -125,16 +126,6 @@ class FormacionTable extends Component
         $formacion->delete();
     }
 
-    /**
-     * Después de hacer el update necesitamos limpiar los datos, por si quiere editar otro campo evitar tener problemas
-     * de sobreescritura de datos, o quiera hacer updates maliciosos.
-     */
-    public function resetInputs(){
-        $this->formacion_id = null;
-        $this->siglas = null;
-        $this->denominacion = null;
-        $this->error = null;
-    }
     /**
      * Metodo de validación cuando el usuario hace UPDATE.
      *

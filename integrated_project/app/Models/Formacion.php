@@ -10,6 +10,12 @@ class Formacion extends Model
 {
     use HasFactory;
 
+
+    protected $fillable = [
+        'siglas',
+        'denominacion'
+    ];
+
     public function modulos(): HasMany
     {
         return $this->hasMany(Modulo::class);
