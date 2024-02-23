@@ -23,8 +23,8 @@
 
             <label for="">Speciality</label>
             <select name="especialidad">
-                <option value="secundaria">Secundaria</option>
-                <option value="formacion profesional">Formacion profesional</option>
+                <option value="secundaria">Secondary Education</option>
+                <option value="formacion profesional">Vocational Training</option>
             </select>
 
             <input type="submit" value="Insert" id="insert-submit">

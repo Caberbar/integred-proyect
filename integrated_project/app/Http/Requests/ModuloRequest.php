@@ -32,7 +32,7 @@ class ModuloRequest extends FormRequest
         return [
             'horas'=>[
                 'required',
-                'min:0',
+                'min:1',
                 'integer',
             ],
             'denominacion'=>[

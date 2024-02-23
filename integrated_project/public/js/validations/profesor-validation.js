@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
      * @param {string} name Atributo name del input del que se va a sacar el dato
      * @param {int} min Minimo valor que puede tener el número (inclusive)
      * @param {int} max Maximo valor que puede tener el número (inclusive)
-     * @returns 
+     * @returns {boolean} True si el numero esta entre los valores especificados
      */
     function validarNum(name, min, max){
         campo = document.getElementsByName(name)[0].value;
