@@ -11,6 +11,14 @@ class Grupo extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'denominacion',
+        'turno',
+        'curso_escolar',
+        'curso',
+        'formacion_id',
+    ];
+
     public function lecciones(): HasMany
     {
         return $this->hasMany(Leccion::class);

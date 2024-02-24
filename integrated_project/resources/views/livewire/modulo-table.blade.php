@@ -1,4 +1,70 @@
 <div>
+    <!-- Modal -->
+    <div class="modal fade" id="ModuloModal" tabindex="-1" aria-labelledby="ModuloModalLabel" aria-hidden="true" wire:ignore.self>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="ModuloModalLabel"> {{$accion}} Formacion</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"  id='cerrar_modal'></button>
+                </div>
+                <div class="modal-body">
+                    @error('horas')
+                        <p>{{$message}}</p>
+                    @enderror
+                    <label for="">Horas</label>
+                    <input type="number" required wire:model="horas">
+                    @error('denominacion')
+                        <p>{{$message}}</p>
+                    @enderror
+                    <label for="">Denominacion</label>
+                    <input type="text" required wire:model="denominacion">
+                    @error('especialidad')
+                        <p>{{$message}}</p>
+                    @enderror
+                    <label for="">Especialidad</label>
+                    <select wire:model="especialidad">
+                        <option value="null">Seleccione una especialidad </option>
+                        <option value='secundaria'>Secundaria</option>
+                        <option value='formacion profesional'>Formacion profesional</option>
+                    </select>
+                    @error('siglas')
+                        <p>{{$message}}</p>
+                    @enderror
+                    <label for="">Siglas</label>
+                    <input type="text" required wire:model="siglas">
+
+                    @error('curso')
+                        <p>{{$message}}</p>
+                    @enderror
+                    <label for="">Curso</label>
+                    <select wire:model="curso">
+                        <option value="null">Seleccione un curso </option>
+                        <option value='1'>1º</option>
+                        <option value='2'>2º</option>
+                        <option value='3'>3º</option>
+                        <option value='4'>4º</option>
+                    </select>
+
+                    @error('formacion_id')
+                        <p>{{$message}}</p>
+                    @enderror
+                    <label for="">Formacion</label>
+                    <select wire:model="formacion_id">
+                        <option value="null">Seleccione una formacion</option>
+                        @forelse ($formaciones as $formacion)
+                            <option value='{{ $formacion->id }}'>{{$formacion->denominacion}}</option>
+                        @empty
+                            <option>No hay formaciones registradas</option>
+                        @endforelse
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='cerrar_modal'>CLOSE</button>
+                    <button type="button" class="btn btn-primary" wire:click='save' wire:loading.attr='disable' wire:target='save'> {{ $accion }} Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <!-- DOM/Jquery table start -->
         <div class="col-sm-12">
@@ -26,9 +92,11 @@
                             <br>
                             <div class="row">
                                 <div class="col-sm-12 col-md-12">
-                                    <a href="{{route('modulos.create')}}" class="btn btn-primary d-inline-flex align-item-center">
-                                        <i class="ti ti-plus f-18"></i> Add Module
-                                    </a>
+                                    <!-- BOTON VENTANA MODAL -->
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#ModuloModal" wire:click='modal()'>
+                                        Create teacher
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -61,14 +129,14 @@
                                     <td>
                                         <ul class="list-inline me-auto mb-0">
                                             <li class="list-inline-item align-bottom" data-bs-toggle="tooltip" aria-label="Edit" data-bs-original-title="Edit">
-                                                <a href="#" class="avtar avtar-xs btn-link-success btn-pc-default" wire:click="edit({{ $modulo->id }})" data-bs-toggle="modal" data-bs-target="#customer-edit_add-modal">
-                                                    <i class="ti ti-edit-circle f-18"></i>
-                                                </a>
+                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModuloModal" wire:click="modal({{ $modulo->id }})">
+                                                    EDIT
+                                                </button>
                                             </li>
                                             <li class="list-inline-item align-bottom" data-bs-toggle="tooltip" aria-label="Delete" data-bs-original-title="Delete">
-                                                <a href="#" class="avtar avtar-xs btn-link-danger btn-pc-default" wire:click="delete({{ $modulo->id }})">
-                                                    <i class="ti ti-trash f-18"></i>
-                                                </a>
+                                                <button class="btn btn-primary" wire:click="delete({{ $modulo->id }})" wire:loading.attr='disable' wire:target='delete'>
+                                                    DELETE
+                                                </button>
                                             </li>
                                         </ul>
                                     </td>
@@ -112,53 +180,13 @@
                 </div>
             </div>
         </div>
-
-        <!-- QUITAR CUANDO ESTE VENTANA MODAL -->
-        <form wire:submit.prevent="update" style="display: none;">
-        @csrf
-                    <input type="hidden" wire:model="modulo_id">
-
-                    @error('denominacion')
-                    <p>La denominacion no es valida</p>
-                    @enderror
-                    <label for="">Denominacion</label>
-                    <input type="text" required wire:model="denominacion">
-
-                    @error('siglas')
-                    <p>La siglas no es valida</p>
-                    @enderror
-                    <label for="">Siglas</label>
-                    <input type="text" required wire:model="siglas">
-
-
-                    @error('curso')
-                    <p>El curso no es valida</p>
-                    @enderror
-                    <label for="">Course</label>
-                    <select wire:model="curso">
-                        <option value="1">1º</option>
-                        <option value="2">2º</option>
-                        <option value="3">3º</option>
-                        <option value="4">4º</option>
-                    </select>
-
-                    @error('horas')
-                    <p>Las horas no es valida</p>
-                    @enderror
-                    <label for="">Hours</label>
-                    <input type="text" wire:model="horas" required>
-
-                    @error('formacion')
-                    <p>La formacion no es valida</p>
-                    @enderror
-                    <label for="">Formación</label>
-                    <select wire:model="formacion">
-                        
-                    </select>
-
-                    <button type="submit">Update</button>
-                </form>
-        </form>
-        <!-- QUITAR CUANDO ESTE VENTANA MODAL -->
     </div>
+    <!--
+        AÑADIRLO A UN JS Y LINKEARLO NO DEJAR LA CHAPUZA ESTA
+    -->
+    <script>
+        window.addEventListener('cerrar_modal', event => {
+            document.getElementById('cerrar_modal').click();
+        });
+    </script>
 </div>

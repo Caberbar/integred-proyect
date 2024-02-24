@@ -10,6 +10,13 @@ class Leccion extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'horas',
+        'profesor_id',
+        'modulo_id',
+        'grupo_id'
+    ];
+
     public function profesor(): BelongsTo
     {
         return $this->belongsTo(Profesor::class);

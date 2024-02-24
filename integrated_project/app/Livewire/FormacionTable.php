@@ -73,14 +73,13 @@ class FormacionTable extends Component
             $this->siglas = $this->formacion->siglas;
         }else{
             $this->accion = 'Create';
-            $this->formacion->siglas = $this->siglas;
-            $this->formacion->denominacion = $this->denominacion;
+            $this->mount();
         }
     }
 
 
     public function save(){
-        $this->validate($this->rules());
+        $this->validate();
         $formacion = $this->formacion;
         $formacion->siglas = $this->siglas;
         $formacion->denominacion = $this->denominacion;
@@ -137,6 +136,7 @@ class FormacionTable extends Component
         return [
             'siglas'=>[
                 'required',
+                'min:3',
             ],
             'denominacion'=>[
                 'required',

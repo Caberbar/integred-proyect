@@ -1,6 +1,6 @@
 <div>
     <!-- Modal -->
-    <div class="modal fade" id="FormacionModal" tabindex="-1" aria-labelledby="FormacionModalLabel" aria-hidden="true" wire:ignore.slef>
+    <div class="modal fade" id="FormacionModal" tabindex="-1" aria-labelledby="FormacionModalLabel" aria-hidden="true" wire:ignore.self>
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -22,7 +22,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='cerrar_modal'>CLOSE</button>
-                    <button type="button" class="btn btn-primary" wire:click='save' wire:loading.attr='disable' wire:target='save'> {{ $accion }} Changes</button>
+                    <button type="button" class="btn btn-primary" wire:click='save' wire:loading.remove wire:target='save'> {{ $accion }} Changes</button>
                 </div>
             </div>
         </div>
@@ -95,7 +95,7 @@
                                                         </button>
                                                     </li>
                                                     <li class="list-inline-item align-bottom" data-bs-toggle="tooltip" aria-label="Delete" data-bs-original-title="Delete">
-                                                        <button  class="btn btn-primary"  wire:click="delete({{ $formacion->id }})" wire:loading.attr='disable' wire:target='delete'>
+                                                        <button  class="btn btn-primary" wire:loading.remove wire:target='delete' wire:click="delete({{ $formacion->id }})">
                                                             DELETE
                                                         </button>
                                                     </li>

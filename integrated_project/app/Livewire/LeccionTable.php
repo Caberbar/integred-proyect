@@ -15,6 +15,8 @@ class LeccionTable extends Component
 
     use WithPagination;
 
+    public Leccion $leccion;
+    public $accion = 'Crear';
     public $horas, $leccion_id, $grupo_id, $modulo_id, $profesor_id;
 
     /**
@@ -23,10 +25,10 @@ class LeccionTable extends Component
     public function mount()
     {
         $this->horas = null;
-        $this->leccion_id = null;
         $this->grupo_id = null;
         $this->modulo_id = null;
         $this->profesor_id = null;
+        $this->leccion = new Leccion;
     }
 
     public $perPage = 10; /*Valor por defecto de numeros de usuarios en una tabla*/
@@ -87,39 +89,32 @@ class LeccionTable extends Component
 
         return view('livewire.leccion-table', compact('lecciones', 'profesores', 'modulos', 'grupos'));
     }
-    /**
-     * Una vez el usuario pulsa el boton edit, sincronizamos los datos estaticos de la tabla con los asincronos del componente,
-     * mediante la busqueda de esta lección en la base de datos y asignandolo a nuestros atributos, que sera los que el usuario
-     * modifique.
-     */
-    public function edit($leccion_id)
-    {
-        $leccion = Leccion::findOrFail($leccion_id);
 
-        $this->leccion_id = $leccion_id;
-        $this->modulo_id = $leccion->modulo_id;
-        $this->grupo_id = $leccion->grupo_id;
-        $this->profesor_id = $leccion->profesor_id;
-        $this->horas = $leccion->horas;
+    public function modal($leccion_id = null){
+        if($leccion_id != null){
+            $this->accion = 'Edit';
+            $this->leccion = Leccion::findOrFail($leccion_id);
+            $this->horas = $this->leccion->horas;
+            $this->grupo_id = $this->leccion->grupo_id;
+            $this->modulo_id = $this->leccion->modulo_id;
+            $this->profesor_id = $this->leccion->profesor_id;
+        }else{
+            $this->accion = 'Create';
+            $this->mount();
+        }
     }
-    /**
-     * Buscamos el objeto al que el usuario quiere hacer la edición y modificamos sus atributos mediante, los
-     * atributos que relleno de nuestra clase, pero primero comprobamos que el usuario selecciono una formacion,
-     * mediante el id del modulo, que es un campo hidden del formulario, si este viene null, no selecciono ninguno, por lo
-     * tanto no hacemos ninguna validacion ni modificacion, mostramos un mensaje de error por la pantalla.
-     */
-    public function update()
-    {
-        $leccion = Leccion::find($this->leccion_id);
-
+    public function save(){
         $this->validate();
 
+        $leccion = $this->leccion;
         $leccion->horas = $this->horas;
+        $leccion->grupo_id = $this->grupo_id;
         $leccion->modulo_id = $this->modulo_id;
         $leccion->profesor_id = $this->profesor_id;
-        $leccion->grupo_id = $this->grupo_id;
+
         $leccion->save();
-        $this->resetInputs();
+        $this->mount();
+        $this->dispatch('cerrar_modal');
     }
     /**
      * Buscamos la lección en función de su id, y la eliminamos.
@@ -128,18 +123,7 @@ class LeccionTable extends Component
     {
         Leccion::find($leccion_id)->delete();
     }
-    /**
-     * Después de hacer el update necesitamos limpiar los datos, por si quiere editar otro campo evitar tener problemas
-     * de sobreescritura de datos, o quiera hacer updates maliciosos.
-     */
-    public function resetInputs()
-    {
-        $this->horas = null;
-        $this->leccion_id = null;
-        $this->grupo_id = null;
-        $this->modulo_id = null;
-        $this->profesor_id = null;
-    }
+
 
     /**
      * Metodo de validación cuando el usuario hace UPDATE.
@@ -147,28 +131,27 @@ class LeccionTable extends Component
      * Se llama con $this->validate(), porque queremos validar los atributos de este componente
      * que son los que el usuario modifica en el form.
      */
-    public function rules(): array
-    {
-        return [
-            'horas' => [
-                'required',
-                'integer',
-            ],
-            'modulo_id' => [
-                'required',
-                'integer',
-                'min:0'
-            ],
-            'profesor_id' => [
-                'required',
-                'integer',
-                'min:0'
-            ],
-            'grupo_id' => [
-                'required',
-                'integer',
-                'min:0'
-            ],
-        ];
-    }
+    protected $rules = [
+        'horas' => [
+            'required',
+            'integer',
+            'min:0',
+        ],
+        'modulo_id' => [
+            'required',
+            'integer',
+            'min:0'
+        ],
+        'profesor_id' => [
+            'required',
+            'integer',
+            'min:0'
+        ],
+        'grupo_id' => [
+            'required',
+            'integer',
+            'min:0'
+        ],
+    ];
+
 }

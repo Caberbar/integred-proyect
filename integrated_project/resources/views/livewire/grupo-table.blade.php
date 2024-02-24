@@ -1,4 +1,63 @@
 <div>
+        <!-- Modal -->
+        <div class="modal fade" id="GrupoModal" tabindex="-1" aria-labelledby="GrupoModalLabel" aria-hidden="true" wire:ignore.self>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="GrupoModalLabel"> {{ $accion }} Grupo</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        @error('denominacion')
+                            <p class="alert alert-danger">Denominacion</p>
+                        @enderror
+                        <label for="">Denominacion</label>
+                        <input type="text" required wire:model="denominacion">
+                        @error('turno')
+                            <p class="alert alert-danger">turno</p>
+                        @enderror
+                        <label for="">Turno</label>
+                        <select wire:model="turno">
+                            <option value="null">Seleccione un curso </option>
+                            <option value="Mañana">Mañana</option>
+                            <option value="Tarde">Tarde</option>
+                        </select>
+                        @error('curso_escolar')
+                            <p class="alert alert-danger">curso_escolar</p>
+                        @enderror
+                        <label for="">Curso Escolar</label>
+                        <input type="text" required wire:model="curso_escolar">
+                        @error('curso')
+                            <p class="alert alert-danger">curso</p>
+                        @enderror
+                        <label for="">Curso</label>
+                        <select wire:model="curso">
+                            <option value="null">Seleccione un curso </option>
+                            <option value="1">1º</option>
+                            <option value="2">2º</option>
+                            <option value="3">3º</option>
+                            <option value="4">4º</option>
+                        </select>
+                        @error('formacion_id')
+                            <p class="alert alert-danger">formacion_id</p>
+                        @enderror
+                        <label for="">Formación</label>
+                        <select wire:model="formacion_id">
+                            <option value="null">Seleccione un curso </option>
+                            @forelse ($formaciones as $formacion)
+                                <option value="{{$formacion->id}}">{{$formacion->denominacion}}</option>
+                            @empty
+                                <option value=null>No hay formaciones registradas</option>
+                            @endforelse
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='cerrar_modal'>CLOSE</button>
+                        <button type="button" class="btn btn-primary" wire:click='save' wire:loading.attr='disable' wire:target='save'> {{ $accion }} Changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     <div class="row">
         <!-- DOM/Jquery table start -->
         <div class="col-sm-12">
@@ -26,9 +85,10 @@
                             <br>
                             <div class="row">
                                 <div class="col-sm-12 col-md-12">
-                                    <a href="{{route('grupos.create')}}" class="btn btn-primary d-inline-flex align-item-center">
-                                        <i class="ti ti-plus f-18"></i> Add Group
-                                    </a>
+                                    <!-- BOTON VENTANA MODAL -->
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#GrupoModal" wire:click='modal()'>
+                                        Create group
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -70,14 +130,14 @@
                                     <td>
                                         <ul class="list-inline me-auto mb-0">
                                             <li class="list-inline-item align-bottom" data-bs-toggle="tooltip" aria-label="Edit" data-bs-original-title="Edit">
-                                                <a href="#" class="avtar avtar-xs btn-link-success btn-pc-default" wire:click="edit({{ $grupo->id }})" data-bs-toggle="modal" data-bs-target="#customer-edit_add-modal">
-                                                    <i class="ti ti-edit-circle f-18"></i>
-                                                </a>
+                                                <button class="btn btn-primary" wire:click="modal({{ $grupo->id }})" wire:loading.attr='disable' wire:target='modal'>
+                                                    EDIT
+                                                </button>
                                             </li>
                                             <li class="list-inline-item align-bottom" data-bs-toggle="tooltip" aria-label="Delete" data-bs-original-title="Delete">
-                                                <a href="#" class="avtar avtar-xs btn-link-danger btn-pc-default" wire:click="delete({{ $grupo->id }})">
-                                                    <i class="ti ti-trash f-18"></i>
-                                                </a>
+                                                <button class="btn btn-primary" wire:click="delete({{ $grupo->id }})" wire:loading.attr='disable' wire:target='delete'>
+                                                    DELETE
+                                                </button>
                                             </li>
                                         </ul>
                                     </td>
@@ -121,42 +181,13 @@
                 </div>
             </div>
         </div>
-
-        <!-- QUITAR CUANDO ESTE VENTANA MODAL -->
-        <form wire:submit.prevent="update" style="display: none;">
-            input type="hidden" wire:model="grupo_id">
-
-            <label for="">Denominacion</label>
-            <input type="text" required wire:model="denominacion">
-
-            <label for="">Turno</label>
-            <select wire:model="turno">
-                <option value="Mañana">Mañana</option>
-                <option value="Tarde">Tarde</option>
-            </select>
-
-            <label for="">Curso Escolar</label>
-            <input type="text" required wire:model="curso_escolar">
-
-            <label for="">Curso</label>
-            <select wire:model="curso">
-                <option value="1">1º</option>
-                <option value="2">2º</option>
-                <option value="3">3º</option>
-                <option value="4">4º</option>
-            </select>
-
-            <label for="">Formación</label>
-            <select wire:model="formacion_id">
-                @forelse ($formaciones as $formacion)
-                <option value="{{$formacion->id}}">{{$formacion->denominacion}}</option>
-                @empty
-                <option value=null>No hay formaciones registradas</option>
-                @endforelse
-            </select>
-
-            <button type="submit">Update</button>
-        </form>
-        <!-- QUITAR CUANDO ESTE VENTANA MODAL -->
     </div>
+    <!--
+        AÑADIRLO A UN JS Y LINKEARLO NO DEJAR LA CHAPUZA ESTA
+    -->
+    <script>
+        window.addEventListener('cerrar_modal', event => {
+            document.getElementById('cerrar_modal').click();
+        });
+    </script>
 </div>

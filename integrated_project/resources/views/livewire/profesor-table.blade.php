@@ -1,7 +1,6 @@
 <div>
     <!-- Modal -->
-    <div class="modal fade" id="FormacionModal" tabindex="-1" aria-labelledby="FormacionModalLabel" aria-hidden="true"
-        wire:ignore.slef>
+    <div class="modal fade" id="FormacionModal" tabindex="-1" aria-labelledby="FormacionModalLabel" aria-hidden="true" wire:ignore.self>
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -9,7 +8,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <label for="">Uusario Seneca</label>
+                    <label for="">Usario Seneca</label>
                     <input type="text" required wire:model="usu_seneca">
 
                     <label for="">Name</label>
@@ -33,7 +32,6 @@
                             The last name formad isn´t valid
                         </p>
                     @enderror
-                    <label for="">Speciality</label>
                     @error('especialidad')
                         <p>
                             The speciality formad isn´t valid
@@ -41,6 +39,7 @@
                     @enderror
                     <label for="">Speciality</label>
                     <select wire:model="especialidad">
+                        <option value="null">Seleccione una especialidad </option>
                         <option value="secundaria">Secundaria</option>
                         <option value="formacion profesional">Formacion Profesional</option>
                     </select>

@@ -11,6 +11,15 @@ class Modulo extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'siglas',
+        'denominacion',
+        'curso',
+        'especialidad',
+        'formacion_id',
+        'horas'
+    ];
+
     public function lecciones(): HasMany
     {
         return $this->hasMany(Leccion::class);
