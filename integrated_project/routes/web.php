@@ -72,6 +72,8 @@ Route::post('/register/save', [UserController::class, 'save'])->name('register.s
 Route::view('/login', 'layout.forms.login')->name('login');
 Route::post('/login/confirm', [UserController::class, 'login'])->name('login.confirm');
 
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+
 /**
  *  --------------------------------
  *      RUTA DE PERFIL

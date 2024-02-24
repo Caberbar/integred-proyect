@@ -25,7 +25,7 @@ class LeccionRequest extends FormRequest
             'horas'=>[
                 'required',
                 'integer',
-                'min:0'
+                'min:1'
             ],
             'modulo_id' => [
                 'required',

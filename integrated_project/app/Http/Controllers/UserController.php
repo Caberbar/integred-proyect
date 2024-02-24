@@ -40,4 +40,9 @@ class UserController extends Controller
             return  redirect()->route('login.confirm')->with('error', 'Invalid credentials');
         }
     }
+
+    public function logout() {
+        Auth::logout();
+        return redirect()->intended(route('home'));
+    }
 }
