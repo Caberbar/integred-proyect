@@ -41,7 +41,8 @@ class UserController extends Controller
         }
     }
 
-    public function logout(){
+
+    public function logout() {
         Auth::logout();
         return redirect()->intended(route('home'));
     }
