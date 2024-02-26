@@ -1,36 +1,55 @@
 document.addEventListener('DOMContentLoaded', function() {
     var submit = document.getElementById('insert-submit');
-    var form = document.getElementById('insert-form');
-    // Click al boton de submit
-    submit.addEventListener('click', function(event) {
-        // Evitamos que el boton haga submit
-        event.preventDefault();
-        var haveErrors = false;
+    var errors = {};
+    errors['siglas'] = true;
+    errors['denominacion'] = true;
 
-        // Siglas
+    // Siglas Validation
+    document.getElementById('siglas').addEventListener('focusout', function() {
         if(!validar('siglas', '^.{2,}$')){ 
             // Si hay errores mostramos el mensaje de error
             document.getElementById('error_siglas').classList.add('show');
-            haveErrors = true;
+            errors['siglas'] = true;
         }else{ 
             // Si no hay errores escondemos el mensaje de error
             document.getElementById('error_siglas').classList.remove('show');
+            errors['siglas'] = false;
         }
+        actualizarBoton();
+    });
 
-        // Denominacion
+    // Denominacion Validation
+    document.getElementById('denominacion').addEventListener('focusout', function() {
         if(!validar('denominacion', '^.{3,255}$')){ 
             // Si hay errores mostramos el mensaje de error
             document.getElementById('error_denominacion').classList.add('show');
-            haveErrors = true;
+            errors['denominacion'] = false;
         }else{ 
             // Si no hay errores escondemos el mensaje de error
             document.getElementById('error_denominacion').classList.remove('show');
+            errors['denominacion'] = false;
+        }
+        actualizarBoton();
+    });
+
+    /**
+     * Comprueba si hay errores y activa o desactiva el boton
+     */
+    function actualizarBoton(){
+        var haveErrors = false;
+        // console.log(errors);
+
+        // Recorremos todos los errores y si hay alguno desactivamos el boton
+        for(var key in errors){
+            if(errors[key])
+                haveErrors = true;
         }
 
-        // Si no hay ningun error, hacemos submit
-        if(!haveErrors)
-            form.submit();
-    });
+        if(haveErrors)
+            submit.setAttribute('disabled', true);
+        else
+            submit.removeAttribute('disabled');
+    }
 
     /**
      * Valida un dato string segun su nombre y una expresion regular
@@ -39,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
      * @returns {boolean} True si el dato cumple con la regex
      */
     function validar(name, regularExpression){
-        campo = document.getElementsByName(name)[0].value;
+        campo = document.getElementById(name).value;
         regex = new RegExp(regularExpression);
         return regex.test(campo);
     }

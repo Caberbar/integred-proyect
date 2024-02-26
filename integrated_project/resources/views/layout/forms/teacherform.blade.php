@@ -31,5 +31,4 @@
         </form>
     </div>
 </div>
-<script type="text/javascript" src="{{asset('js/validations/profesor-validation.js')}}"></script>
 @endsection
