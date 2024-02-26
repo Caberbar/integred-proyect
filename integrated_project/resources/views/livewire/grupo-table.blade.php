@@ -4,50 +4,50 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="GrupoModalLabel"> {{ $accion }} Grupo</h1>
+                        <h1 class="modal-title fs-5" id="GrupoModalLabel"> {{ $accion }} Group</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         @error('denominacion')
-                            <p class="alert alert-danger">Denominacion</p>
+                            <p class="alert alert-danger">The denomination isn´t valid</p>
                         @enderror
-                        <label for="">Denominacion</label>
+                        <label for="">Denomination</label>
                         <input type="text" required wire:model="denominacion">
                         @error('turno')
-                            <p class="alert alert-danger">turno</p>
+                            <p class="alert alert-danger">The turn isn´t valid</p>
                         @enderror
-                        <label for="">Turno</label>
+                        <label for="">Turn</label>
                         <select wire:model="turno">
-                            <option value="null">Seleccione un curso </option>
-                            <option value="Mañana">Mañana</option>
-                            <option value="Tarde">Tarde</option>
+                            <option value="null">Select any turn</option>
+                            <option value="Mañana">Moring</option>
+                            <option value="Tarde">Afternoon</option>
                         </select>
                         @error('curso_escolar')
-                            <p class="alert alert-danger">curso_escolar</p>
+                            <p class="alert alert-danger">The school year is not valid</p>
                         @enderror
-                        <label for="">Curso Escolar</label>
+                        <label for="">School year</label>
                         <input type="text" required wire:model="curso_escolar">
                         @error('curso')
-                            <p class="alert alert-danger">curso</p>
+                            <p class="alert alert-danger">The course isn´t valid</p>
                         @enderror
-                        <label for="">Curso</label>
+                        <label for="">Course</label>
                         <select wire:model="curso">
-                            <option value="null">Seleccione un curso </option>
+                            <option value="null">Select any course </option>
                             <option value="1">1º</option>
                             <option value="2">2º</option>
                             <option value="3">3º</option>
                             <option value="4">4º</option>
                         </select>
                         @error('formacion_id')
-                            <p class="alert alert-danger">formacion_id</p>
+                            <p class="alert alert-danger">The formation isn´t valid</p>
                         @enderror
-                        <label for="">Formación</label>
+                        <label for="">Formation</label>
                         <select wire:model="formacion_id">
-                            <option value="null">Seleccione un curso </option>
+                            <option value="null">Select any formation</option>
                             @forelse ($formaciones as $formacion)
                                 <option value="{{$formacion->id}}">{{$formacion->denominacion}}</option>
                             @empty
-                                <option value=null>No hay formaciones registradas</option>
+                                <option value=null>No formation register yet</option>
                             @endforelse
                         </select>
                     </div>
@@ -130,7 +130,7 @@
                                     <td>
                                         <ul class="list-inline me-auto mb-0">
                                             <li class="list-inline-item align-bottom" data-bs-toggle="tooltip" aria-label="Edit" data-bs-original-title="Edit">
-                                                <button class="btn btn-primary" wire:click="modal({{ $grupo->id }})" wire:loading.attr='disable' wire:target='modal'>
+                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#GrupoModal" wire:click='modal({{$grupo->id}})'>
                                                     EDIT
                                                 </button>
                                             </li>

@@ -4,41 +4,41 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="ModuloModalLabel"> {{$accion}} Formacion</h1>
+                    <h1 class="modal-title fs-5" id="ModuloModalLabel"> {{$accion}} Module</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"  id='cerrar_modal'></button>
                 </div>
                 <div class="modal-body">
                     @error('horas')
-                        <p>{{$message}}</p>
+                        <p>The hours entered are not valid</p>
                     @enderror
-                    <label for="">Horas</label>
+                    <label for="">Hours</label>
                     <input type="number" required wire:model="horas">
                     @error('denominacion')
-                        <p>{{$message}}</p>
+                        <p>The Denomination does not have a valid format</p>
                     @enderror
-                    <label for="">Denominacion</label>
+                    <label for="">Denomination</label>
                     <input type="text" required wire:model="denominacion">
                     @error('especialidad')
-                        <p>{{$message}}</p>
+                        <p>The speciality formad isn´t valid</p>
                     @enderror
-                    <label for="">Especialidad</label>
+                    <label for="">Speciality</label>
                     <select wire:model="especialidad">
-                        <option value="null">Seleccione una especialidad </option>
-                        <option value='secundaria'>Secundaria</option>
-                        <option value='formacion profesional'>Formacion profesional</option>
+                        <option value="null">Select a specialty</option>
+                        <option value='secundaria'>High school</option>
+                        <option value='formacion profesional'>Vocational training</option>
                     </select>
                     @error('siglas')
-                        <p>{{$message}}</p>
+                        <p>The acronyms do not have a valid format</p>
                     @enderror
-                    <label for="">Siglas</label>
+                    <label for="">Acronym</label>
                     <input type="text" required wire:model="siglas">
 
                     @error('curso')
-                        <p>{{$message}}</p>
+                        <p>The course isn´t valid</p>
                     @enderror
-                    <label for="">Curso</label>
+                    <label for="">Course</label>
                     <select wire:model="curso">
-                        <option value="null">Seleccione un curso </option>
+                        <option value="null">Select a course</option>
                         <option value='1'>1º</option>
                         <option value='2'>2º</option>
                         <option value='3'>3º</option>
@@ -46,15 +46,15 @@
                     </select>
 
                     @error('formacion_id')
-                        <p>{{$message}}</p>
+                        <p>The formation isn´t valid</p>
                     @enderror
-                    <label for="">Formacion</label>
+                    <label for="">Formation</label>
                     <select wire:model="formacion_id">
-                        <option value="null">Seleccione una formacion</option>
+                        <option value="null">Select a formation</option>
                         @forelse ($formaciones as $formacion)
                             <option value='{{ $formacion->id }}'>{{$formacion->denominacion}}</option>
                         @empty
-                            <option>No hay formaciones registradas</option>
+                            <option>No formation register yet</option>
                         @endforelse
                     </select>
                 </div>

@@ -4,18 +4,18 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="FormacionModalLabel"> {{$accion}} Formacion</h1>
+                    <h1 class="modal-title fs-5" id="FormacionModalLabel"> {{$accion}} Formation</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     @error('siglas')
-                        <p>Las siglas no tienen un formato valido</p>
+                        <p>The acronyms do not have a valid format</p>
                     @enderror
                     <label for="">Acronym</label>
                     <input type="text" wire:model="siglas" required>
 
                     @error('denominacion')
-                        <p>La denominacion no tienen un formato valido</p>
+                        <p>The Denomination does not have a valid format</p>
                     @enderror
                     <label for="">Denomination</label>
                     <input type="text" wire:model="denominacion" required>
@@ -60,7 +60,7 @@
                                 <div class="col-sm-12 col-md-12">
                                     <!-- BOTON VENTANA MODAL -->
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#FormacionModal" wire:click='modal()'>
-                                        Crear denominación
+                                        Create Formation
                                     </button>
                                 </div>
                             </div>

@@ -8,7 +8,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <label for="">Usario Seneca</label>
+                    <label for="">Seneca User</label>
                     <input type="text" required wire:model="usu_seneca">
 
                     <label for="">Name</label>
@@ -39,9 +39,9 @@
                     @enderror
                     <label for="">Speciality</label>
                     <select wire:model="especialidad">
-                        <option value="null">Seleccione una especialidad </option>
-                        <option value="secundaria">Secundaria</option>
-                        <option value="formacion profesional">Formacion Profesional</option>
+                        <option value="null">Select a specialty </option>
+                        <option value="secundaria">high school</option>
+                        <option value="formacion profesional">Vocational training</option>
                     </select>
                 </div>
                 <div class="modal-footer">

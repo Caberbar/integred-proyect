@@ -82,7 +82,7 @@ class GrupoTable extends Component
 
     public function modal($grupo_id = null){
         if($grupo_id != null){
-            $this->accion = 'Editar';
+            $this->accion = 'Edit';
 
             $this->grupo = Grupo::findOrFail($grupo_id);
             $this->denominacion = $this->grupo->denominacion;
@@ -91,7 +91,7 @@ class GrupoTable extends Component
             $this->formacion_id = $this->grupo->formacion_id;
             $this->turno = $this->grupo->turno;
         }else{
-            $this->accion = 'Crear';
+            $this->accion = 'Create';
             $this->mount();
         }
     }

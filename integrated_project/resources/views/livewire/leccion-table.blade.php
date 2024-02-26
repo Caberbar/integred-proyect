@@ -4,50 +4,50 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="LeccionModalLabel"> {{ $accion }} Leccion</h1>
+                    <h1 class="modal-title fs-5" id="LeccionModalLabel"> {{ $accion }} Lesson</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     @error('horas')
-                        <p class="alert alert-danger">Las horas no es valido</p>
+                        <p class="alert alert-danger">The hours isn´t valid</p>
                     @enderror
-                    <label for="">Cantidad de horas</label>
+                    <label for="">Hours</label>
                     <input type="number" wire:model="horas" required>
 
                     @error('profesor_id')
-                        <p class="alert alert-danger">El profesor no es valido</p>
+                        <p class="alert alert-danger">The teacher isn´t valid</p>
                     @enderror
-                    <label for="">Escoja Profesor</label>
+                    <label for="">Choose Teacher</label>
                     <select wire:model='profesor_id'>
-                        <option value="null">Seleccione un profesor </option>
+                        <option value="null">Select any teacher</option>
                         @forelse ($profesores as $profesor)
                             <option value={{$profesor->id}}>{{$profesor->nombre}}</option>
                         @empty
-                            <option value="null">No hay profesores</option>
+                            <option value="null">No teacher register yet...</option>
                         @endforelse
                     </select>
                     @error('modulo_id')
-                        <p class="alert alert-danger">El modulo no es valido</p>
+                        <p class="alert alert-danger">The module isn´t valid</p>
                     @enderror
-                    <label for="">Escoja Modulo</label>
+                    <label for="">Choose Module</label>
                     <select wire:model='modulo_id'>
-                        <option value="null">Seleccione un modulo </option>
+                        <option value="null">Select any module</option>
                         @forelse ($modulos as $modulo)
                             <option value={{$modulo->id}}>{{$modulo->denominacion}}</option>
                         @empty
-                            <option value="null">No hay modulos</option>
+                            <option value="null">No modules register yet</option>
                         @endforelse
                     </select>
                     @error('grupo_id')
-                        <p class="alert alert-danger">El grupo no es valido</p>
+                        <p class="alert alert-danger">The group isn´t valid</p>
                     @enderror
-                    <label for="">Escoja Grupo</label>
+                    <label for="">Choose group</label>
                     <select wire:model='grupo_id'>
-                        <option value="null">Seleccione un grupo </option>
+                        <option value="null">Select any group </option>
                         @forelse ($grupos as $grupo)
                             <option value={{$grupo->id}}>{{$grupo->denominacion}}</option>
                         @empty
-                            <option value="null">No hay grupos</option>
+                            <option value="null">no group register yet</option>
                         @endforelse
                     </select>
                 </div>
@@ -87,7 +87,7 @@
                                 <div class="col-sm-12 col-md-12">
                                      <!-- BOTON VENTANA MODAL -->
                                      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#LeccionModal" wire:click='modal()'>
-                                        Create leccion
+                                        Create lesson
                                     </button>
                                 </div>
                             </div>
