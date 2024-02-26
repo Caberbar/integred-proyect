@@ -97,6 +97,7 @@ class ProfesorTable extends Component
         $this->validate($this->rules());
 
         $profesor = $this->profesor;
+        $profesor->usu_seneca = $this->usu_seneca;
         $profesor->nombre = $this->nombre;
         $profesor->apellido1 = $this->apellido1;
         $profesor->apellido2 = $this->apellido2;
@@ -132,6 +133,9 @@ class ProfesorTable extends Component
      */
     public function rules(){
         return [
+            'usu_seneca'=>[
+                'required',
+            ],
             'nombre'=>[
                 'required',
                 'max:30',

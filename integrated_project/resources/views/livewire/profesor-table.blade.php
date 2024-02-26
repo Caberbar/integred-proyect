@@ -8,30 +8,36 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    @error('usu_seneca')
+                        <p>
+                            The user of seneca formad isn´t valid
+                        </p>
+                    @enderror
                     <label for="">Seneca User</label>
                     <input type="text" required wire:model="usu_seneca">
-
-                    <label for="">Name</label>
-                    <input type="text" required wire:model="nombre">
-                    @error('name')
+                    @error('nombre')
                         <p>
                             The named formad isn´t valid
                         </p>
                     @enderror
-                    <label for="">First Name</label>
-                    <input type="text" required wire:model="apellido1">
+                    <label for="">Name</label>
+                    <input type="text" required wire:model="nombre">
                     @error('apellido1')
                         <p>
                             The first name formad isn´t valid
                         </p>
                     @enderror
-                    <label for="">Last Name</label>
-                    <input type="text" required wire:model="apellido2">
+                    <label for="">First Name</label>
+                    <input type="text" required wire:model="apellido1">
+
                     @error('apellido2')
                         <p>
                             The last name formad isn´t valid
                         </p>
                     @enderror
+                    <label for="">Last Name</label>
+                    <input type="text" required wire:model="apellido2">
+
                     @error('especialidad')
                         <p>
                             The speciality formad isn´t valid
