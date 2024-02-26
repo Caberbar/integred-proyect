@@ -20,6 +20,41 @@ use App\Http\Controllers\UserController;
  */
 Route::view('/', 'index')->name('home');
 
+/**
+ *  --------------------------------
+ *      RUTAS DE LOS PROFESORES
+ *  --------------------------------
+ */
+Route::view('/profesor', 'profesor')->name('profesor');
+
+/**
+ *  --------------------------------
+ *      RUTAS DE LAS LECCIONES
+ *  --------------------------------
+ */
+Route::view('/lecciones', 'lecciones')->name('lecciones');
+
+/**
+ *  --------------------------------
+ *      RUTAS DE LOS MODULOS
+ *  --------------------------------
+ */
+Route::view('/modulos', 'modulos')->name('modulos');
+
+/**
+ *  --------------------------------
+ *      RUTAS DE LOS FORMACIÓN
+ *  --------------------------------
+ */
+Route::view('/formaciones', 'formaciones')->name('formaciones');
+
+/**
+ *  --------------------------------
+ *      RUTAS DE LOS GRUPOS
+ *  --------------------------------
+ */
+Route::view('/grupos', 'grupos')->name('grupos');
+
 
 /**
  *  --------------------------------
