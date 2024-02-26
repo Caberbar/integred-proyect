@@ -8,21 +8,23 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    @error('siglas')
-                        <p>The acronyms do not have a valid format</p>
-                    @enderror
                     <label for="">Acronym</label>
-                    <input type="text" wire:model="siglas" required>
-
-                    @error('denominacion')
-                        <p>The Denomination does not have a valid format</p>
+                    <input type="text" wire:model="siglas" required id="siglas">
+                    <p class="error" id="error_siglas">Acronym must be at least 2 characters long.</p>
+                    @error('siglas')
+                        <p class="error show">Acronym must be at least 2 characters long.</p>
                     @enderror
+
                     <label for="">Denomination</label>
-                    <input type="text" wire:model="denominacion" required>
+                    <input type="text" wire:model="denominacion" required id="denominacion">
+                    <p class="error" id="error_denominacion">Denomination must be between 3 and 255 characters long.</p>
+                    @error('denominacion')
+                        <p class="error show">Denomination must be between 3 and 255 characters long.</p>
+                    @enderror
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='cerrar_modal'>CLOSE</button>
-                    <button type="button" class="btn btn-primary" wire:click='save' wire:loading.remove wire:target='save'> {{ $accion }} Changes</button>
+                    <button type="button" id="insert-submit" class="btn btn-primary" wire:click='save' wire:loading.remove wire:target='save' disabled="true"> {{ $accion }} Changes</button>
                 </div>
             </div>
         </div>
@@ -160,4 +162,5 @@
             document.getElementById('cerrar_modal').click();
         });
     </script>
+    <script type="text/javascript" src="{{asset('js/validations/formacion-validation.js')}}"></script>
 </div>
