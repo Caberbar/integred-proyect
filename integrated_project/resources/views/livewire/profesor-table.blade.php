@@ -8,6 +8,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    @error('usu_seneca')
+                        <p>
+                            The user of seneca formad isn´t valid
+                        </p>
+                    @enderror
                     <label for="">Seneca User</label>
                     <input type="text" required wire:model="usu_seneca" id="usu_seneca">
                     <p class="error" id="error_usu_seneca">The Seneca User must be composed of 7 letters and 3 numbers.</p>
@@ -29,6 +34,7 @@
                     @error('apellido2')
                         <p class="error show">
                             The second last name format isn´t valid
+
                         </p>
                     @enderror
                     <p class="error" id="error_apellidos">Each last name must be between 3 and 50 characters long.</p>
