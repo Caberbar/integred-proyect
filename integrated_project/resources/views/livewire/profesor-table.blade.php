@@ -9,44 +9,47 @@
                 </div>
                 <div class="modal-body">
                     <label for="">Seneca User</label>
-                    <input type="text" required wire:model="usu_seneca">
+                    <input type="text" required wire:model="usu_seneca" id="usu_seneca">
+                    <p class="error" id="error_usu_seneca">The Seneca User must be composed of 7 letters and 3 numbers.</p>
 
                     <label for="">Name</label>
-                    <input type="text" required wire:model="nombre">
+                    <input type="text" required wire:model="nombre" id="nombre">
+                    <p class="error" id="error_nombre">Name must be between 3 and 30 characters long.</p>
                     @error('name')
-                        <p>
+                        <p class="error show">
                             The named formad isn´t valid
                         </p>
                     @enderror
-                    <label for="">First Name</label>
-                    <input type="text" required wire:model="apellido1">
+                    <label for="">Last Names</label>
+                    <input type="text" required wire:model="apellido1" id="apellido1">
                     @error('apellido1')
-                        <p>
-                            The first name formad isn´t valid
+                        <p class="error show">
+                            The first last name formad isn´t valid
                         </p>
                     @enderror
-                    <label for="">Last Name</label>
-                    <input type="text" required wire:model="apellido2">
+                    <input type="text" required wire:model="apellido2" id="apellido2">
                     @error('apellido2')
-                        <p>
-                            The last name formad isn´t valid
+                        <p class="error show">
+                            The second last name formad isn´t valid
                         </p>
                     @enderror
+                    <p class="error" id="error_apellidos">Each last name must be between 3 and 50 characters long.</p>
                     @error('especialidad')
-                        <p>
+                        <p class="error show">
                             The speciality formad isn´t valid
                         </p>
                     @enderror
                     <label for="">Speciality</label>
-                    <select wire:model="especialidad">
+                    <select wire:model="especialidad" id="speciality">
                         <option value="null">Select a specialty </option>
                         <option value="secundaria">high school</option>
                         <option value="formacion profesional">Vocational training</option>
                     </select>
+                    <p class="error" id="error_speciality">Select a speciality.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='cerrar_modal'>CLOSE</button>
-                    <button type="button" class="btn btn-primary" wire:click='save' wire:loading.attr='disable' wire:target='save'> {{ $accion }} Changes</button>
+                    <button type="button" class="btn btn-primary" id="insert-submit" wire:click='save' wire:loading.attr='disable' wire:target='save' disabled="true"> {{ $accion }} Changes</button>
                 </div>
             </div>
         </div>
@@ -200,4 +203,5 @@
             document.getElementById('cerrar_modal').click();
         });
     </script>
+<script type="text/javascript" src="{{asset('js/validations/profesor-validation.js')}}"></script>
 </div>
