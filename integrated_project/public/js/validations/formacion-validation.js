@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Siglas Validation
     document.getElementById('siglas').addEventListener('focusout', function() {
-        if(!validar('siglas', '^.{2,}$')){ 
+        if(!validar('siglas', '^.{3,}$')){ 
             // Si hay errores mostramos el mensaje de error
             document.getElementById('error_siglas').classList.add('show');
             errors['siglas'] = true;

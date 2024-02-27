@@ -10,7 +10,7 @@
 
             <label for="">Acronym</label>
             <input type="text" name="siglas" required>
-            <p class="error" id="error_siglas">Acronym must be at least 2 characters long.</p>
+            <p class="error" id="error_siglas">Acronym must be at least 3 characters long.</p>
             @error('siglas')
                 <p class="error show" id="error_siglas">Acronym must be at least 2 characters long.</p>
             @enderror
