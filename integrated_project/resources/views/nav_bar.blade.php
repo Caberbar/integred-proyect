@@ -34,7 +34,8 @@
         </li>
 
 
-
+        @auth
+        @if(auth()->user()->roles->contains('id', 1) || auth()->user()->roles->contains('id', 2))
         <li class="pc-item pc-caption">
           <label>Tables</label>
           <i class="ti ti-chart-arcs"></i>
@@ -56,7 +57,7 @@
                 <use xlink:href="#custom-shopping-bag"></use>
               </svg>
             </span>
-            <span class="pc-mtext">Education / Formation</span>
+            <span class="pc-mtext">Formation</span>
           </a>
         </li>
         <li class="pc-item">
@@ -86,6 +87,21 @@
             </span>
             <span class="pc-mtext">Lessons</span></a>
         </li>
+        @auth
+        @if(auth()->user()->roles->contains('id', 1))
+        <li class="pc-item">
+          <a href="{{ route('roles') }}" class="pc-link {{ Route::currentRouteName() == 'roles' ? 'active' : '' }}">
+            <span class="pc-micon">
+              <svg class="pc-icon">
+                <use xlink:href="#custom-shield"></use>
+              </svg>
+            </span>
+            <span class="pc-mtext">Roles</span></a>
+        </li>
+        @endif
+        @endauth
+        @endif
+        @endauth
       </ul>
     </div>
   </div>
@@ -122,6 +138,8 @@
     <!-- [Mobile Media Block end] -->
     <div class="ms-auto">
       <ul class="list-unstyled">
+        <!-- If the user NOT loggin, show the buttons -->
+        @guest
         <li class="dropdown pc-h-item">
           <a href="{{route('login')}}">
             <button type="button" class="btn btn-info">Login</button>
@@ -136,6 +154,7 @@
           </a>
         </li>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        @endguest
         <li class="dropdown pc-h-item">
           <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
             <svg class="pc-icon">
@@ -163,20 +182,8 @@
             </a>
           </div>
         </li>
-        <!-- <?php
-        //if (auth()->check()) {
-        //  $roles = auth()->user()->roles;
-        //  echo auth()->user()->id;
-        //  echo '<br>';
-        //  foreach ($roles as $role) {
-        //    echo $role->id;
-        //  }
-        //} else {
-        //  echo 'NO';
-        //}
-        ?> -->
-        <!-- @auth
-        @if(auth()->user()->roles->contains('id', 1) || auth()->user()->roles->contains('id', 2)) -->
+        @auth
+        @if(auth()->user()->roles->contains('id', 1) || auth()->user()->roles->contains('id', 2))
         <li class="dropdown pc-h-item header-user-profile">
           <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" data-bs-auto-close="outside" aria-expanded="false">
             <img src="{{ asset('images/user/avatar-2.jpg') }}" alt="user-image" class="user-avtar" />
@@ -193,22 +200,22 @@
                   </div>
                   <div class="flex-grow-1 ms-3">
                     <?php
-                            $nombre;
-                            $email;
-                            $user = Auth::user();
-                            if($user != null){
-                                $nombre = auth()->user()->name;
-                                $email= auth()->user()->email;
-                            }else{
-                                $nombre = 'User';
-                                $email = 'You are not registered';
-                            }
+                    $nombre;
+                    $email;
+                    $user = Illuminate\Support\Facades\Auth::user();
+                    if ($user != null) {
+                      $nombre = auth()->user()->name;
+                      $email = auth()->user()->email;
+                    } else {
+                      $nombre = 'User';
+                      $email = 'You are not registered';
+                    }
                     ?>
                     <h6 class="mb-1">
-                        <?php echo $nombre ?>
+                      <?php echo $nombre ?>
                     </h6>
                     <span>
-                        <?php echo $email ?>
+                      <?php echo $email ?>
                     </span>
                   </div>
                 </div>
@@ -263,11 +270,10 @@
           </div>
     </div>
     </li>
-    <!-- @endif
-    @endauth -->
+    @endif
+    @endauth
     </ul>
   </div>
   </div>
 </header>
 </div>
-<!-- [ Header ] end -->

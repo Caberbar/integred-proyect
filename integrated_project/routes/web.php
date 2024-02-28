@@ -55,6 +55,12 @@ Route::view('/formaciones', 'formaciones')->name('formaciones');
  */
 Route::view('/grupos', 'grupos')->name('grupos');
 
+/**
+ *  --------------------------------
+ *      RUTAS DE LOS ROLES
+ *  --------------------------------
+ */
+Route::view('/rol', 'roles')->name('roles');
 
 /**
  *  --------------------------------

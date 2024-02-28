@@ -8,15 +8,15 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    @error('usu_seneca')
-                    <p>
-                        The user of seneca formad isn´t valid
-                    </p>
-                    @enderror
                     <div class="form-group">
                         <label for="usu_seneca" class="col-form-label">Seneca User:</label>
                         <input type="text" class="form-control" required wire:model="usu_seneca" id="usu_seneca">
                         <p class="error" id="error_usu_seneca">The Seneca User must be composed of 7 letters and 3 numbers.</p>
+                        @error('usu_seneca')
+                        <p class="error show">
+                            The user of seneca formad isn´t valid.
+                        </p>
+                        @enderror
                     </div>
 
 
@@ -34,14 +34,14 @@
                         <input type="text" class="form-control" required wire:model="apellido1" id="apellido1">
                         @error('apellido1')
                         <p class="error show">
-                            The first last name format isn´t valid
+                            The first last name format isn´t valid.
                         </p>
                         @enderror
                         <br>
                         <input type="text" class="form-control" required wire:model="apellido2" id="apellido2">
                         @error('apellido2')
                         <p class="error show">
-                            The second last name format isn´t valid
+                            The second last name format isn´t valid.
 
                         </p>
                         @enderror
@@ -51,8 +51,8 @@
                         <label for="speciality" class="col-form-label">Speciality:</label>
                         <select class="form-control" wire:model="especialidad" id="speciality" required="" aria-describedby="bouncer-error_select" aria-invalid="true">
                             <option value="null">Select a specialty </option>
-                            <option value="secundaria">high school</option>
-                            <option value="formacion profesional">Vocational training</option>
+                            <option value="secundaria">High school</option>
+                            <option value="formacion profesional">Vocational training.</option>
                         </select>
                         <p class="error" id="error_speciality">Select a speciality.</p>
                         @error('especialidad')
@@ -93,6 +93,8 @@
                                 </div>
                             </div>
                             <br>
+                            @auth
+                            @if(auth()->user()->roles->contains('id', 1))
                             <div class="row">
                                 <div class="col-sm-12 col-md-12">
                                     <!-- BOTON VENTANA MODAL -->
@@ -101,6 +103,8 @@
                                     </button>
                                 </div>
                             </div>
+                            @endif
+                            @endauth
                         </div>
                     </div>
                 </div>
@@ -116,7 +120,11 @@
                                     <th wire:click="doSort('apellido1')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="apellido1" columnName="First Name" /></th>
                                     <th wire:click="doSort('apellido2')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="apellido2" columnName="Last Name" /></th>
                                     <th wire:click="doSort('especialidad')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="especialidad" columnName="Speciality" /></th>
+                                    @auth
+                                    @if(auth()->user()->roles->contains('id', 1))
                                     <th>Actions</th>
+                                    @endif
+                                    @endauth
                                 </tr>
                             </thead>
                             <tbody>
@@ -127,6 +135,8 @@
                                     <td>{{ $teacher->apellido1 }}</td>
                                     <td>{{ $teacher->apellido2 }}</td>
                                     <td>{{ $teacher->especialidad }}</td>
+                                    @auth
+                                    @if(auth()->user()->roles->contains('id', 1))
                                     <td>
                                         <ul class="list-inline me-auto mb-0">
                                             <li class="list-inline-item align-bottom" data-bs-toggle="tooltip" data-bs-original-title="Edit">
@@ -135,13 +145,15 @@
                                                 </a>
                                             </li>
 
-                                            <li class="list-inline-item align-bottom" data-bs-toggle="tooltip">
+                                            <li class="list-inline-item align-bottom" data-bs-toggle="tooltip" data-bs-original-title="Delete">
                                                 <a href="#" onclick="return false;" class="avtar avtar-xs btn-link-danger btn-pc-default" wire:click="delete({{ $teacher->id }})" wire:loading.attr='disable' wire:target='delete'>
                                                     <i class="ti ti-trash f-18"></i>
                                                 </a>
                                             </li>
                                         </ul>
                                     </td>
+                                    @endif
+                                    @endauth
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -149,15 +161,17 @@
                         @elseif($teachers->isEmpty() && $search != '')
                         <table id="dom-jqry" class="table table-striped table-bordered nowrap">
                             <thead>
-                                <tr>
-                                    <th wire:click="doSort('usu_seneca')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="usu_seneca" columnName="Seneca User" /></th>
+                            <th wire:click="doSort('usu_seneca')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="usu_seneca" columnName="Seneca User" /></th>
                                     <th wire:click="doSort('nombre')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="nombre" columnName="Name" /></th>
                                     <th wire:click="doSort('apellido1')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="apellido1" columnName="First Name" /></th>
                                     <th wire:click="doSort('apellido2')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="apellido2" columnName="Last Name" /></th>
-                                    <th wire:click="doSort('especialidad')" class="column-tables">
-                                        <x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="especialidad" columnName="Speciality" />
+                                    <th wire:click="doSort('especialidad')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="especialidad" columnName="Speciality" /></th>
                                     </th>
+                                    @auth
+                                    @if(auth()->user()->roles->contains('id', 1))
                                     <th>Actions</th>
+                                    @endif
+                                    @endauth
                                 </tr>
                             </thead>
                             <tbody>
