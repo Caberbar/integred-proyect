@@ -60,7 +60,7 @@
                             @forelse ($grupos as $grupo)
                             <option value={{$grupo->id}}>{{$grupo->denominacion}}</option>
                             @empty
-                            <option value="null">no group register yet...</option>
+                            <option value="null">No group register yet...</option>
                             @endforelse
                         </select>
                         <p class="error" id="error_grupo_id">Select a speciality.</p>
