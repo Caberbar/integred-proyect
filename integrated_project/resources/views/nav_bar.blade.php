@@ -163,8 +163,24 @@
                     <img src="{{ asset('images/user/avatar-2.jpg') }}" alt="user-image" class="user-avtar wid-35" />
                   </div>
                   <div class="flex-grow-1 ms-3">
-                    <h6 class="mb-1">Carson Darrin 🖖</h6>
-                    <span>carson.darrin@company.io</span>
+                    <?php
+                            $nombre;
+                            $email;
+                            $user = Auth::user();
+                            if($user != null){
+                                $nombre = auth()->user()->name;
+                                $email= auth()->user()->email;
+                            }else{
+                                $nombre = 'User';
+                                $email = 'You are not registered';
+                            }
+                    ?>
+                    <h6 class="mb-1">
+                        <?php echo $nombre ?>
+                    </h6>
+                    <span>
+                        <?php echo $email ?>
+                    </span>
                   </div>
                 </div>
                 <hr class="border-secondary border-opacity-50" />

@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title', 'Teacher')
+@section('title', 'Rol')
 
 @section('content')
 <section class="pc-container">
@@ -11,13 +11,13 @@
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="page-header-title">
-                            <h2 class="mb-0">Teachers</h2>
+                            <h2 class="mb-0">Rol</h2>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        @livewire('profesor-table')
+        @livewire('rol-table')
     </div>
 </section>
 @endsection

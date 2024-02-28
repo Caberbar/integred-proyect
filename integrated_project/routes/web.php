@@ -77,3 +77,11 @@ Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 Route::view('/profile', 'profile')->name('profile');
 Route::view('/settings', 'settings')->name('settings');
 Route::view('/chgpasswd', 'chgpasswd')->name('chgpasswd');
+
+/**
+ *  --------------------------------
+ *      RUTA DE AAÑADIR ROLES
+ *  --------------------------------
+ */
+
+Route::view('/rol', 'roles')->name('roles');
