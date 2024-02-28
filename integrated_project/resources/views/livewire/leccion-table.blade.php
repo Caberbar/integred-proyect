@@ -10,7 +10,7 @@
                 <div class="modal-body">
 
                     <div class="form-group">
-                        <label for="horas" class="col-form-label">Hoursr:</label>
+                        <label for="horas" class="col-form-label">Hours:</label>
                         <input type="number" class="form-control" required wire:model="horas" id="horas">
                         <p class="error" id="error_horas">The hours isn´t valid.</p>
                         @error('horas')

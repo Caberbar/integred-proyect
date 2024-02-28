@@ -65,7 +65,7 @@
                             @forelse ($formaciones as $formacion)
                             <option value="{{$formacion->id}}">{{$formacion->denominacion}}</option>
                             @empty
-                            <option value=null>No formation register yet</option>
+                            <option value=null>No formation register yet...</option>
                             @endforelse
                         </select>
                         <p class="error" id="error_formacion_id">The school year is not valid.</p>
