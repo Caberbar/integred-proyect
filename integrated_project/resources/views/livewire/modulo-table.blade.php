@@ -5,62 +5,86 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="ModuloModalLabel"> {{$accion}} Module</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"  id='cerrar_modal'></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id='cerrar_modal'></button>
                 </div>
                 <div class="modal-body">
-                    @error('horas')
-                        <p>The hours entered are not valid</p>
-                    @enderror
-                    <label for="">Hours</label>
-                    <input type="number" required wire:model="horas">
-                    @error('denominacion')
-                        <p>The Denomination does not have a valid format</p>
-                    @enderror
-                    <label for="">Denomination</label>
-                    <input type="text" required wire:model="denominacion">
-                    @error('especialidad')
-                        <p>The speciality formad isn´t valid</p>
-                    @enderror
-                    <label for="">Speciality</label>
-                    <select wire:model="especialidad">
-                        <option value="null">Select a specialty</option>
-                        <option value='secundaria'>High school</option>
-                        <option value='formacion profesional'>Vocational training</option>
-                    </select>
-                    @error('siglas')
-                        <p>The acronyms do not have a valid format</p>
-                    @enderror
-                    <label for="">Acronym</label>
-                    <input type="text" required wire:model="siglas">
 
-                    @error('curso')
-                        <p>The course isn´t valid</p>
-                    @enderror
-                    <label for="">Course</label>
-                    <select wire:model="curso">
-                        <option value="null">Select a course</option>
-                        <option value='1'>1º</option>
-                        <option value='2'>2º</option>
-                        <option value='3'>3º</option>
-                        <option value='4'>4º</option>
-                    </select>
+                    <div class="form-group">
+                        <label for="denominacion" class="col-form-label">Denomination:</label>
+                        <input type="text" class="form-control" required wire:model="denominacion" id="denominacion">
+                        <!-- <p class="error" id="error_denominacion">The Denomination does not have a valid format.</p> -->
+                        @error('denominacion')
+                        <p class="error show">The Denomination does not have a valid format.</p>
+                        @enderror
+                    </div>
 
-                    @error('formacion_id')
-                        <p>The formation isn´t valid</p>
-                    @enderror
-                    <label for="">Formation</label>
-                    <select wire:model="formacion_id">
-                        <option value="null">Select a formation</option>
-                        @forelse ($formaciones as $formacion)
+                    <div class="form-group">
+                        <label for="especialidad" class="col-form-label">Speciality:</label>
+                        <select class="form-control" wire:model="especialidad" id="especialidad" required="" aria-describedby="bouncer-error_select" aria-invalid="true">
+                            <option value="null">Select a specialty </option>
+                            <option value="secundaria">High school</option>
+                            <option value="formacion profesional">Vocational training</option>
+                        </select>
+                        <!-- <p class="error" id="error_especialidad">The speciality formad isn´t valid.</p> -->
+                        @error('especialidad')
+                        <p class="error show">The speciality formad isn´t valid.</p>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label for="siglas" class="col-form-label">Acronym:</label>
+                        <input type="text" class="form-control" required wire:model="siglas" id="siglas">
+                        <!-- <p class="error" id="error_siglas">The acronyms do not have a valid format.</p> -->
+                        @error('siglas')
+                        <p class="error show">The acronyms do not have a valid format.</p>
+                        @enderror
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="curso" class="col-form-label">Course:</label>
+                        <select class="form-control" wire:model="curso" id="curso" required="" aria-describedby="bouncer-error_select" aria-invalid="true">
+                            <option value="null">Select a course</option>
+                            <option value='1'>1º</option>
+                            <option value='2'>2º</option>
+                            <option value='3'>3º</option>
+                            <option value='4'>4º</option>
+                        </select>
+                        <!-- <p class="error" id="error_curso">The course isn´t valid.</p> -->
+                        @error('curso')
+                        <p class="error show">The course isn´t valid.</p>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label for="horas" class="col-form-label">Hours:</label>
+                        <input type="number" class="form-control" required wire:model="horas" id="horas">
+                        <!-- <p class="error" id="error_horas">The hours entered are not valid.</p> -->
+                        @error('horas')
+                        <p class="error show">The hours entered are not valid.</p>
+                        @enderror
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="formacion_id" class="col-form-label">Course:</label>
+                        <select class="form-control" wire:model="formacion_id" id="formacion_id" required="" aria-describedby="bouncer-error_select" aria-invalid="true">
+                            <option value="null">Select a formation</option>
+                            @forelse ($formaciones as $formacion)
                             <option value='{{ $formacion->id }}'>{{$formacion->denominacion}}</option>
-                        @empty
+                            @empty
                             <option>No formation register yet</option>
-                        @endforelse
-                    </select>
+                            @endforelse
+                        </select>
+                        <!-- <p class="error" id="error_formacion_id">The formation isn´t valid.</p> -->
+                        @error('formacion_id')
+                        <p class="error show">The formation isn´t valid.</p>
+                        @enderror
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='cerrar_modal'>CLOSE</button>
-                    <button type="button" class="btn btn-primary" wire:click='save' wire:loading.attr='disable' wire:target='save'> {{ $accion }} Changes</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='cerrar_modal'>Close</button>
+                    <button type="button" class="btn btn-primary" wire:click='save' wire:loading.attr='disable' wire:target='save'> {{ $accion }}</button>
                 </div>
             </div>
         </div>
@@ -90,21 +114,24 @@
                                 </div>
                             </div>
                             <br>
+                            @auth
+                            @if(auth()->user()->roles->contains('id', 1))
                             <div class="row">
                                 <div class="col-sm-12 col-md-12">
                                     <!-- BOTON VENTANA MODAL -->
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#ModuloModal" wire:click='modal()'>
-                                        Create teacher
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModuloModal" wire:click='modal()'>
+                                        Create module
                                     </button>
                                 </div>
                             </div>
+                            @endif
+                            @endauth
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive dt-responsive">
-                    @if ($modulos->isNotEmpty())
+                        @if ($modulos->isNotEmpty())
                         <table id="dom-jqry" class="table table-striped table-bordered nowrap">
                             <thead>
                                 <tr>
@@ -113,8 +140,12 @@
                                     <th wire:click="doSort('siglas')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="siglas" columnName="Acronym" /></th>
                                     <th wire:click="doSort('curso')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="curso" columnName="Cours" /></th>
                                     <th wire:click="doSort('horas')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="horas" columnName="Hours" /></th>
-                                    <th wire:click="doSort('formacion_siglas')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="formacion_siglas" columnName="Acronym" /></th>
+                                    <th wire:click="doSort('formacion_siglas')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="formacion_siglas" columnName="Formation" /></th>
+                                    @auth
+                                    @if(auth()->user()->roles->contains('id', 1))
                                     <th>Actions</th>
+                                    @endif
+                                    @endauth
                                 </tr>
                             </thead>
                             <tbody>
@@ -126,20 +157,24 @@
                                     <td>{{ $modulo->curso }}</td>
                                     <td>{{ $modulo->horas }}</td>
                                     <td>{{ $modulo->formacion->siglas}}</td>
+                                    @auth
+                                    @if(auth()->user()->roles->contains('id', 1))
                                     <td>
                                         <ul class="list-inline me-auto mb-0">
-                                            <li class="list-inline-item align-bottom" data-bs-toggle="tooltip" aria-label="Edit" data-bs-original-title="Edit">
-                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModuloModal" wire:click="modal({{ $modulo->id }})">
-                                                    EDIT
-                                                </button>
+                                            <li class="list-inline-item align-bottom" data-bs-toggle="tooltip" data-bs-original-title="Edit">
+                                                <a href="#" class="avtar avtar-xs btn-link-success btn-pc-default" data-bs-toggle="modal" data-bs-target="#ModuloModal" wire:click="modal({{ $modulo->id }})">
+                                                    <i class="ti ti-edit-circle f-18"></i>
+                                                </a>
                                             </li>
-                                            <li class="list-inline-item align-bottom" data-bs-toggle="tooltip" aria-label="Delete" data-bs-original-title="Delete">
-                                                <button class="btn btn-primary" wire:click="delete({{ $modulo->id }})" wire:loading.attr='disable' wire:target='delete'>
-                                                    DELETE
-                                                </button>
+                                            <li class="list-inline-item align-bottom" data-bs-toggle="tooltip" data-bs-original-title="Delete">
+                                                <a href="#" onclick="return false;" class="avtar avtar-xs btn-link-danger btn-pc-default" wire:click="delete({{ $modulo->id }})" wire:loading.attr='disable' wire:target='delete'>
+                                                    <i class="ti ti-trash f-18"></i>
+                                                </a>
                                             </li>
                                         </ul>
                                     </td>
+                                    @endif
+                                    @endauth
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -148,12 +183,17 @@
                         <table id="dom-jqry" class="table table-striped table-bordered nowrap">
                             <thead>
                                 <tr>
-                                    <th wire:click="doSort('usu_seneca')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="usu_seneca" columnName="Seneca User" /></th>
-                                    <th wire:click="doSort('nombre')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="nombre" columnName="Name" /></th>
-                                    <th wire:click="doSort('apellido1')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="apellido1" columnName="First Name" /></th>
-                                    <th wire:click="doSort('apellido2')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="apellido2" columnName="Last Name" /></th>
+                                    <th wire:click="doSort('denominacion')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="denominacion" columnName="Denomination" /></th>
                                     <th wire:click="doSort('especialidad')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="especialidad" columnName="Speciality" /></th>
+                                    <th wire:click="doSort('siglas')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="siglas" columnName="Acronym" /></th>
+                                    <th wire:click="doSort('curso')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="curso" columnName="Cours" /></th>
+                                    <th wire:click="doSort('horas')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="horas" columnName="Hours" /></th>
+                                    <th wire:click="doSort('formacion_siglas')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="formacion_siglas" columnName="Formation" /></th>
+                                    @auth
+                                    @if(auth()->user()->roles->contains('id', 1))
                                     <th>Actions</th>
+                                    @endif
+                                    @endauth
                                 </tr>
                             </thead>
                             <tbody>

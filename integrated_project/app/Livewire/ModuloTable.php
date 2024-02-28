@@ -77,7 +77,7 @@ class ModuloTable extends Component
 
     public function modal($modulo_id = null){
         if($modulo_id != null){
-            $this->accion = 'Editar';
+            $this->accion = 'Edit';
             $this->modulo = Modulo::findOrFail($modulo_id);
             $this->denominacion = $this->modulo->denominacion;
             $this->siglas = $this->modulo->siglas;
@@ -86,7 +86,7 @@ class ModuloTable extends Component
             $this->especialidad = $this->modulo->especialidad;
             $this->formacion_id = $this->modulo->formacion_id;
         }else{
-            $this->accion = 'Crear';
+            $this->accion = 'Create';
             $this->mount();
         }
     }
