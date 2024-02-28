@@ -1,5 +1,5 @@
 <!-- [Page Specific JS] start -->
-<script src="{{ asset('js/plugins/apexcharts.min.js') }}"></script>
+<!-- <script src="{{ asset('js/plugins/apexcharts.min.js') }}"></script> -->
 <script src="{{ asset('js/pages/dashboard-default.js') }}"></script>
 <!-- [Page Specific JS] end -->
 <!-- Required Js -->

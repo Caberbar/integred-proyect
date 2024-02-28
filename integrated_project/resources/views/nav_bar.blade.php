@@ -110,17 +110,32 @@
           <a href="#" class="pc-head-link ms-0" id="mobile-collapse">
             <i class="ti ti-menu-2"></i>
           </a>
-        </li>&nbsp;&nbsp;
+        </li>
+        <!-- </li>&nbsp;&nbsp;
         <li class="pc-h-item">
           <span class="pc-mtext"><a href="{{route('login')}}">Login</a></span>&nbsp;|&nbsp;
           <span class="pc-mtext"><a href="{{route('logout')}}">Logout</a></span>&nbsp;|&nbsp;
           <span class="pc-mtext"><a href="{{route('register')}}">Register</a></span>
-        </li>
+        </li> -->
       </ul>
     </div>
     <!-- [Mobile Media Block end] -->
     <div class="ms-auto">
       <ul class="list-unstyled">
+        <li class="dropdown pc-h-item">
+          <a href="{{route('login')}}">
+            <button type="button" class="btn btn-info">Login</button>
+          </a>
+        </li>
+        <li class="dropdown pc-h-item">
+          &nbsp;&nbsp;&nbsp;
+        </li>
+        <li class="dropdown pc-h-item">
+          <a href="{{route('register')}}">
+            <button type="button" class="btn btn-info">Register</button>
+          </a>
+        </li>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <li class="dropdown pc-h-item">
           <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
             <svg class="pc-icon">
@@ -148,6 +163,20 @@
             </a>
           </div>
         </li>
+        <!-- <?php
+        //if (auth()->check()) {
+        //  $roles = auth()->user()->roles;
+        //  echo auth()->user()->id;
+        //  echo '<br>';
+        //  foreach ($roles as $role) {
+        //    echo $role->id;
+        //  }
+        //} else {
+        //  echo 'NO';
+        //}
+        ?> -->
+        <!-- @auth
+        @if(auth()->user()->roles->contains('id', 1) || auth()->user()->roles->contains('id', 2)) -->
         <li class="dropdown pc-h-item header-user-profile">
           <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" data-bs-auto-close="outside" aria-expanded="false">
             <img src="{{ asset('images/user/avatar-2.jpg') }}" alt="user-image" class="user-avtar" />
@@ -223,17 +252,19 @@
                 </a>
                 <hr class="border-secondary border-opacity-50" />
                 <div class="d-grid mb-3">
-                  <button class="btn btn-primary">
+                  <a class="btn btn-primary" href="{{ route('logout') }}">
                     <svg class="pc-icon me-2">
                       <use xlink:href="#custom-logout-1-outline"></use>
                     </svg>Logout
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>
           </div>
     </div>
     </li>
+    <!-- @endif
+    @endauth -->
     </ul>
   </div>
   </div>
