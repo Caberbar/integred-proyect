@@ -4,78 +4,78 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="GrupoModalLabel"> {{ $accion }} Group</h1>
+                    <h1 class="modal-title fs-5" id="GrupoModalLabel"> {{ $accion }} {{ trans('integrated.groups_modal.group') }}</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
 
 
                     <div class="form-group">
-                        <label for="denominacion" class="col-form-label">Denomination:</label>
+                        <label for="denominacion" class="col-form-label"> {{ trans('integrated.groups_modal.label_denomination') }}</label>
                         <input type="text" class="form-control" required wire:model="denominacion" id="denominacion">
-                        <p class="error" id="error_denominacion">The denomination isn´t valid.</p>
+                        <p class="error" id="error_denominacion">{{ trans('integrated.groups_modal.invalid_denomination') }}</p>
                         @error('denominacion')
-                        <p class="alert alert-danger">The denomination isn´t valid.</p>
+                        <p class="alert alert-danger">{{ trans('integrated.groups_modal.invalid_denomination') }}</p>
                         @enderror
                     </div>
 
                     <div class="form-group">
-                        <label for="turno" class="col-form-label">Turn:</label>
+                        <label for="turno" class="col-form-label">{{ trans('integrated.groups_modal.label_turn') }}</label>
                         <select class="form-control" wire:model="turno" id="turno" required="" aria-describedby="bouncer-error_select" aria-invalid="true">
-                            <option value="null">Select any turn</option>
-                            <option value="Mañana">Morning</option>
-                            <option value="Tarde">Afternoon</option>
+                            <option value="null">{{ trans('integrated.groups_modal.select_any_turn') }}</option>
+                            <option value="Mañana">{{ trans('integrated.groups_modal.morning') }}</option>
+                            <option value="Tarde">{{ trans('integrated.groups_modal.afternoon') }}</option>
                         </select>
-                        <p class="error" id="error_turno">The turn isn´t valid.</p>
+                        <p class="error" id="error_turno">{{ trans('integrated.groups_modal.invalid_turn') }}</p>
                         @error('turno')
-                        <p class="alert alert-danger">The turn isn´t valid.</p>
+                        <p class="alert alert-danger">{{ trans('integrated.groups_modal.invalid_turn') }}</p>
                         @enderror
                     </div>
 
 
                     <div class="form-group">
-                        <label for="curso_escolar" class="col-form-label">School year:</label>
+                        <label for="curso_escolar" class="col-form-label">{{ trans('integrated.groups_modal.label_school_year') }}</label>
                         <input type="text" class="form-control" required wire:model="curso_escolar" id="curso_escolar">
-                        <p class="error" id="error_curso_escolar">The school year is not valid.</p>
+                        <p class="error" id="error_curso_escolar">{{ trans('integrated.groups_modal.invalid_school_year') }}</p>
                         @error('curso_escolar')
-                        <p class="alert alert-danger">The school year is not valid.</p>
+                        <p class="alert alert-danger">{{ trans('integrated.groups_modal.invalid_school_year') }}</p>
                         @enderror
                     </div>
 
                     <div class="form-group">
-                        <label for="curso" class="col-form-label">Course:</label>
+                        <label for="curso" class="col-form-label">{{ trans('integrated.groups_modal.label_course') }}</label>
                         <select class="form-control" wire:model="curso" id="curso" required="" aria-describedby="bouncer-error_select" aria-invalid="true">
-                            <option value="null">Select any course</option>
+                            <option value="null">{{ trans('integrated.groups_modal.select_any_course') }}</option>
                             <option value="1">1º</option>
                             <option value="2">2º</option>
                             <option value="3">3º</option>
                             <option value="4">4º</option>
                         </select>
-                        <p class="error" id="error_curso">The school year is not valid.</p>
+                        <p class="error" id="error_curso">{{ trans('integrated.groups_modal.invalid_course') }}</p>
                         @error('curso')
-                        <p class="alert alert-danger">The school year is not valid.</p>
+                        <p class="alert alert-danger">{{ trans('integrated.groups_modal.invalid_course') }}</p>
                         @enderror
                     </div>
 
 
                     <div class="form-group">
-                        <label for="formacion_id" class="col-form-label">Formation:</label>
+                        <label for="formacion_id" class="col-form-label">{{ trans('integrated.groups_modal.label_formation') }}</label>
                         <select class="form-control" wire:model="formacion_id" id="formacion_id" required="" aria-describedby="bouncer-error_select" aria-invalid="true">
-                            <option value="null">Select any formation</option>
+                            <option value="null">{{ trans('integrated.groups_modal.select_any_formation') }}</option>
                             @forelse ($formaciones as $formacion)
                             <option value="{{$formacion->id}}">{{$formacion->denominacion}}</option>
                             @empty
-                            <option value=null>No formation register yet</option>
+                            <option value=null>{{ trans('integrated.groups_modal.no_formation_register') }}</option>
                             @endforelse
                         </select>
-                        <p class="error" id="error_formacion_id">The school year is not valid.</p>
+                        <p class="error" id="error_formacion_id">{{ trans('integrated.groups_modal.invalid_formation') }}</p>
                         @error('formacion_id')
-                        <p class="alert alert-danger">The formation isn´t valid</p>
+                        <p class="alert alert-danger">{{ trans('integrated.groups_modal.invalid_formation') }}</p>
                         @enderror
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='cerrar_modal'>Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='cerrar_modal'>{{ trans('integrated.groups_modal.close_btn') }}</button>
                     <button type="button" class="btn btn-primary" wire:click='save' wire:loading.attr='disable' wire:target='save'> {{ $accion }}</button>
                 </div>
             </div>
@@ -91,18 +91,18 @@
                             <div class="row">
                                 <div class="col-sm-12 col-md-6">
                                     <div class="dataTables_length" id="dom-jqry_length">
-                                        <label>Show&nbsp;
+                                        <label>{{ trans('integrated.groups_page.show') }}&nbsp;
                                             <select name="dom-jqry_length" aria-controls="dom-jqry" class="form-select form-select-sm" wire:model.live="perPage">
                                                 <option value="10">10</option>
                                                 <option value="25">25</option>
                                                 <option value="50">50</option>
                                                 <option value="100">100</option>
-                                            </select>&nbsp; entries
+                                            </select>&nbsp; {{ trans('integrated.groups_page.entries') }}
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-sm-12 col-md-6">
-                                    <div id="dom-jqry_filter" class="dataTables_filter"><label>Search:<input type="search" wire:model.live.debounce.300ms="search" class="form-control form-control-sm" placeholder="" aria-controls="dom-jqry"></label></div>
+                                    <div id="dom-jqry_filter" class="dataTables_filter"><label>{{ trans('integrated.groups_page.search') }}<input type="search" wire:model.live.debounce.300ms="search" class="form-control form-control-sm" placeholder="" aria-controls="dom-jqry"></label></div>
                                 </div>
                             </div>
                             <br>
@@ -112,7 +112,7 @@
                                 <div class="col-sm-12 col-md-12">
                                     <!-- BOTON VENTANA MODAL -->
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#GrupoModal" wire:click='modal()'>
-                                        Create group
+                                        {{ trans('integrated.groups_page.create_group') }}
                                     </button>
                                 </div>
                             </div>
@@ -129,19 +129,19 @@
                             <thead>
                                 <tr>
                                     <th wire:click="doSort('denominacion')" class="column-tables">
-                                        <x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="denominacion" columnName="Denomination" />
+                                        <x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="denominacion" columnName="{!! trans('integrated.groups_page.denomination') !!}" />
                                     </th>
-                                    <th wire:click="doSort('turno')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="turno" columnName="Turn" /></th>
+                                    <th wire:click="doSort('turno')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="turno" columnName="{!! trans('integrated.groups_page.turn') !!}" /></th>
                                     <th wire:click="doSort('curso_escolar')" class="column-tables">
-                                        <x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="curso_escolar" columnName="School course" />
+                                        <x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="curso_escolar" columnName="{{!! trans('integrated.groups_page.school_course') !!}}" />
                                     </th>
-                                    <th wire:click="doSort('curso')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="curso" columnName="Course" /></th>
+                                    <th wire:click="doSort('curso')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="curso" columnName="{!! trans('integrated.groups_page.course') !!}" /></th>
                                     <th wire:click="doSort('formacion_denominacion')" class="column-tables">
-                                        <x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="formacion_denominacion" columnName="Formation denomination" />
+                                        <x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="formacion_denominacion" columnName="{!! trans('integrated.groups_page.formation_denomination') !!}" />
                                     </th>
                                     @auth
                                     @if (auth()->user()->roles->contains('id', 1))
-                                    <th>Actions</th>
+                                    <th>  {{ trans('integrated.groups_page.actions') }}</th>
                                     @endif
                                     @endauth
                                 </tr>
@@ -212,12 +212,12 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td colspan="6">No results found.</td>
+                                    <td colspan="6">{{ trans('integrated.groups_modal.no_results_found') }}</td>
                                 </tr>
                             </tbody>
                         </table>
                         @else
-                        <p>No groups found.</p>
+                        <p>{{ trans('integrated.groups_modal.no_groups_found') }}</p>
                         @endif
                     </div>
                 </div>
