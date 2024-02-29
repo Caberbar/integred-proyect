@@ -4,73 +4,73 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="LeccionModalLabel"> {{ $accion }} Lesson</h1>
+                    <h1 class="modal-title fs-5" id="LeccionModalLabel"> {{ $accion }} {{ trans('integrated.lessons_modal.modal_title') }}</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
 
                     <div class="form-group">
-                        <label for="horas" class="col-form-label">Hoursr:</label>
+                        <label for="horas" class="col-form-label">{{ trans('integrated.lessons_modal.hours_label') }}</label>
                         <input type="number" class="form-control" required wire:model="horas" id="horas">
-                        <p class="error" id="error_horas">The hours isn´t valid.</p>
+                        <p class="error" id="error_horas">{{ trans('integrated.lessons_modal.hours_input_invalid_message') }}</p>
                         @error('horas')
-                        <p class="alert alert-danger">The hours isn´t valid.</p>
+                        <p class="alert alert-danger">{{ trans('integrated.lessons_modal.hours_input_invalid_message') }}</p>
                         @enderror
                     </div>
 
 
                     <div class="form-group">
-                        <label for="profesor_id" class="col-form-label">Teacher:</label>
+                        <label for="profesor_id" class="col-form-label">{{ trans('integrated.lessons_modal.teacher_label') }}</label>
                         <select class="form-control" wire:model="profesor_id" id="profesor_id" required="" aria-describedby="bouncer-error_select" aria-invalid="true">
-                            <option value="null">Select any teacher</option>
+                            <option value="null">{{ trans('integrated.lessons_modal.select_any_teacher') }}</option>
                             @forelse ($profesores as $profesor)
                             <option value={{$profesor->id}}>{{$profesor->nombre}}&nbsp;{{$profesor->apellido1}}&nbsp;{{$profesor->apellido2}}</option>
                             @empty
-                            <option value="null">No teacher register yet...</option>
+                            <option value="null">{{ trans('integrated.lessons_modal.no_teacher_registered') }}</option>
                             @endforelse
                         </select>
-                        <p class="error" id="error_profesor_id">Select a speciality.</p>
+                        <p class="error" id="error_profesor_id">{{ trans('integrated.lessons_modal.error_profesor_id_message') }}</p>
                         @error('profesor_id')
-                        <p class="alert alert-danger">The teacher isn´t valid.</p>
+                        <p class="alert alert-danger">{{ trans('integrated.lessons_modal.error_teacher_message') }}</p>
                         @enderror
                     </div>
 
 
                     <div class="form-group">
-                        <label for="modulo_id" class="col-form-label">Module:</label>
+                        <label for="modulo_id" class="col-form-label">{{ trans('integrated.lessons_modal.module_label') }}</label>
                         <select class="form-control" wire:model="modulo_id" id="modulo_id" required="" aria-describedby="bouncer-error_select" aria-invalid="true">
-                            <option value="null">Select any module</option>
+                            <option value="null">{{ trans('integrated.lessons_modal.select_any_module') }}</option>
                             @forelse ($modulos as $modulo)
                             <option value={{$modulo->id}}>{{$modulo->denominacion}}</option>
                             @empty
-                            <option value="null">No modules register yet...</option>
+                            <option value="null">{{ trans('integrated.lessons_modal.no_modules_registered') }}</option>
                             @endforelse
                         </select>
-                        <p class="error" id="error_modulo_id">Select a speciality.</p>
+                        <p class="error" id="error_modulo_id">{{ trans('integrated.lessons_modal.select_any_module') }}</p>
                         @error('modulo_id')
-                        <p class="alert alert-danger">>The module isn´t valid.</p>
+                        <p class="alert alert-danger">{{ trans('integrated.lessons_modal.error_module_message') }}</p>
                         @enderror
                     </div>
 
 
                     <div class="form-group">
-                        <label for="grupo_id" class="col-form-label">Group:</label>
+                        <label for="grupo_id" class="col-form-label">{{ trans('integrated.lessons_modal.group_label') }}</label>
                         <select class="form-control" wire:model="grupo_id" id="grupo_id" required="" aria-describedby="bouncer-error_select" aria-invalid="true">
-                            <option value="null">Select any group </option>
+                            <option value="null">{{ trans('integrated.lessons_modal.select_any_group') }}</option>
                             @forelse ($grupos as $grupo)
                             <option value={{$grupo->id}}>{{$grupo->denominacion}}</option>
                             @empty
-                            <option value="null">no group register yet...</option>
+                            <option value="null">{{ trans('integrated.lessons_modal.no_groups_registered') }}</option>
                             @endforelse
                         </select>
-                        <p class="error" id="error_grupo_id">Select a speciality.</p>
+                        <p class="error" id="error_grupo_id">{{ trans('integrated.lessons_modal.error_grupo_id_message') }}</p>
                         @error('grupo_id')
-                        <p class="alert alert-danger">The group isn´t valid</p>
+                        <p class="alert alert-danger">{{ trans('integrated.lessons_modal.error_group_message') }}</p>
                         @enderror
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='cerrar_modal'>Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='cerrar_modal'>{{ trans('integrated.lessons_modal.close_btn') }}</button>
                     <button type="button" class="btn btn-primary" wire:click='save' wire:loading.attr='disable' wire:target='save'> {{ $accion }}</button>
                 </div>
             </div>
@@ -86,18 +86,18 @@
                             <div class="row">
                                 <div class="col-sm-12 col-md-6">
                                     <div class="dataTables_length" id="dom-jqry_length">
-                                        <label>Show&nbsp;
+                                        <label>{{ trans('integrated.lessons_page.lessons_show')}}&nbsp;
                                             <select name="dom-jqry_length" aria-controls="dom-jqry" class="form-select form-select-sm" wire:model.live="perPage">
                                                 <option value="10">10</option>
                                                 <option value="25">25</option>
                                                 <option value="50">50</option>
                                                 <option value="100">100</option>
-                                            </select>&nbsp; entries
+                                            </select>&nbsp; {{ trans('integrated.lessons_page.lessons_entries')}}
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-sm-12 col-md-6">
-                                    <div id="dom-jqry_filter" class="dataTables_filter"><label>Search:<input type="search" wire:model.live.debounce.300ms="search" class="form-control form-control-sm" placeholder="" aria-controls="dom-jqry"></label></div>
+                                    <div id="dom-jqry_filter" class="dataTables_filter"><label> {{ trans('integrated.lessons_page.lessons_search')}}<input type="search" wire:model.live.debounce.300ms="search" class="form-control form-control-sm" placeholder="" aria-controls="dom-jqry"></label></div>
                                 </div>
                             </div>
                             <br>
@@ -107,7 +107,7 @@
                                 <div class="col-sm-12 col-md-12">
                                     <!-- BOTON VENTANA MODAL -->
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#LeccionModal" wire:click='modal()'>
-                                        Create lesson
+                                        {{ trans('integrated.lessons_page.create_lesson')}}
                                     </button>
                                 </div>
                             </div>
@@ -188,12 +188,12 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td colspan="6">No results found.</td>
+                                    <td colspan="6">{{ trans('integrated.lessons_page.no_results_found') }}</td>
                                 </tr>
                             </tbody>
                         </table>
                         @else
-                        <p>No lessons found.</p>
+                        <p>{{ trans('integrated.lessons_page.no_results_found') }}</p>
                         @endif
                     </div>
                 </div>

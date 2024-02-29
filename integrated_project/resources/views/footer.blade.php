@@ -25,9 +25,8 @@
   Script para la tabla responsive
 -->
 <script>
-setInterval(() => {
-        // [ Configuration Option ]
-        $('#res-config').DataTable({
+      // [ Configuration Option ]
+      $('#res-config').DataTable({
         responsive: true
       });
 
@@ -46,7 +45,38 @@ setInterval(() => {
         }
       });
 
-}, 500);
+      const pageLinkBtns= $('.card-header a.page-link');
+
+      $.each(pageLinkBtns, function (index, pageLinkBtn) { 
+         
+        pageLinkBtn.addEventListener('click', function () { 
+
+          setTimeout(() => {
+            // [ Configuration Option ]
+            $('#res-config').DataTable({
+              responsive: true
+            });
+
+            // [ New Constructor ]
+            var newcs = $('#new-cons').DataTable();
+
+            new $.fn.dataTable.Responsive(newcs);
+
+            // [ Immediately Show Hidden Details ]
+            $('#show-hide-res').DataTable({
+              responsive: {
+                details: {
+                  display: $.fn.dataTable.Responsive.display.childRowImmediate,
+                  type: ''
+                }
+              }
+            });
+          }, 1000);
+
+         });
+
+
+      });
 
 </script>
 
