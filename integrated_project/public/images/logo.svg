@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="OBJECTS" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 136.72 166.08">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: #4680ff;
+      }
+
+      .cls-2 {
+        font-family: Tahoma-Bold, Tahoma;
+        font-size: 29.71px;
+        font-weight: 700;
+      }
+
+      .cls-3 {
+        fill: #3665cb;
+      }
+    </style>
+  </defs>
+  <text class="cls-2" transform="translate(11.84 153.64)"><tspan x="0" y="0">ZAISÉN</tspan></text>
+  <g>
+    <path class="cls-1" d="m101.32,86.9v17.07H23.9L124.01,0H21.05v52.44L61.76,10.16h38.36L0,114.13h111.49v-27.23h-10.16ZM31.21,27.23V10.16h16.44l-16.44,17.07Z"/>
+    <polygon class="cls-3" points="61.76 10.16 47.65 10.16 42.63 15.37 61.76 10.16"/>
+    <polygon class="cls-1" points="126.51 114.13 136.68 114.13 136.72 .22 27.03 114.13 50.93 103.97 126.54 25.45 126.51 114.13"/>
+    <polygon class="cls-3" points="36.82 103.97 50.93 103.97 41.63 98.97 36.82 103.97"/>
+    <polygon class="cls-1" points="77.33 90.06 111.51 90.06 111.51 79.89 87.12 79.89 77.33 90.06"/>
+    <polygon class="cls-1" points="96.76 69.73 111.51 69.73 111.51 54.41 96.76 69.73"/>
+  </g>
+</svg>
