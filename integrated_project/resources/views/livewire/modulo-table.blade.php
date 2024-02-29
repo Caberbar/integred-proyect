@@ -8,83 +8,69 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id='cerrar_modal'></button>
                 </div>
                 <div class="modal-body">
+                    <label for="">Hours</label>
+                    <input type="number" required wire:model="horas" id="horas" min="1">
+                    <p class="error" id="error_horas">Hours must be a number greater than 0.</p>
+                    @error('horas')
+                        <p class="error show" id="error_horas">Hours must be a number greater than 0.</p>
+                    @enderror
+                    
+                    <label for="">Denomination</label>
+                    <input type="text" required wire:model="denominacion" id="denominacion">
+                    <p class="error" id="error_denominacion">Denomination must be between 2 and 255 characters long.</p>
+                    @error('denominacion')
+                        <p class="error show" id="error_denominacion">Denomination must be between 2 and 255 characters long.</p>
+                    @enderror
+                    
+                    <label for="">Speciality</label>
+                    <select wire:model="especialidad" id="especialidad">
+                        <option value="-1">Select a specialty</option>
+                        <option value='secundaria'>High school</option>
+                        <option value='formacion profesional'>Vocational training</option>
+                    </select>
+                    <p class="error" id="error_speciality">Select a speciality.</p>
+                    @error('especialidad')
+                        <p class="error show">Select a speciality.</p>
+                    @enderror
 
-                    <div class="form-group">
-                        <label for="denominacion" class="col-form-label">Denomination:</label>
-                        <input type="text" class="form-control" required wire:model="denominacion" id="denominacion">
-                        <!-- <p class="error" id="error_denominacion">The Denomination does not have a valid format.</p> -->
-                        @error('denominacion')
-                        <p class="error show">The Denomination does not have a valid format.</p>
-                        @enderror
-                    </div>
+                    <label for="">Acronym</label>
+                    <input type="text" required wire:model="siglas" id="siglas">
+                    <p class="error" id="error_siglas">Acronym must be at least 2 characters long.</p>
+                    @error('siglas')
+                        <p class="error show" id="error_siglas">Acronym must be at least 2 characters long.</p>
+                    @enderror
 
-                    <div class="form-group">
-                        <label for="especialidad" class="col-form-label">Speciality:</label>
-                        <select class="form-control" wire:model="especialidad" id="especialidad" required="" aria-describedby="bouncer-error_select" aria-invalid="true">
-                            <option value="null">Select a specialty </option>
-                            <option value="secundaria">High school</option>
-                            <option value="formacion profesional">Vocational training</option>
-                        </select>
-                        <!-- <p class="error" id="error_especialidad">The speciality formad isn´t valid.</p> -->
-                        @error('especialidad')
-                        <p class="error show">The speciality formad isn´t valid.</p>
-                        @enderror
-                    </div>
+                    <label for="">Course</label>
+                    <select wire:model="curso" id="curso">
+                        <option value="-1">Select a course</option>
+                        <option value='1'>1º</option>
+                        <option value='2'>2º</option>
+                        <option value='3'>3º</option>
+                        <option value='4'>4º</option>
+                    </select>
+                    <p class="error" id="error_curso2">Select a course.</p>
+                    <p class="error" id="error_curso">Vocational Training can't have 3rd or 4th course.</p>
+                    @error('curso')
+                        <p class="error show" id="error_curso">Course doesn't have a valid value.</p>
+                    @enderror
 
-                    <div class="form-group">
-                        <label for="siglas" class="col-form-label">Acronym:</label>
-                        <input type="text" class="form-control" required wire:model="siglas" id="siglas">
-                        <!-- <p class="error" id="error_siglas">The acronyms do not have a valid format.</p> -->
-                        @error('siglas')
-                        <p class="error show">The acronyms do not have a valid format.</p>
-                        @enderror
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="curso" class="col-form-label">Course:</label>
-                        <select class="form-control" wire:model="curso" id="curso" required="" aria-describedby="bouncer-error_select" aria-invalid="true">
-                            <option value="null">Select a course</option>
-                            <option value='1'>1º</option>
-                            <option value='2'>2º</option>
-                            <option value='3'>3º</option>
-                            <option value='4'>4º</option>
-                        </select>
-                        <!-- <p class="error" id="error_curso">The course isn´t valid.</p> -->
-                        @error('curso')
-                        <p class="error show">The course isn´t valid.</p>
-                        @enderror
-                    </div>
-
-                    <div class="form-group">
-                        <label for="horas" class="col-form-label">Hours:</label>
-                        <input type="number" class="form-control" required wire:model="horas" id="horas">
-                        <!-- <p class="error" id="error_horas">The hours entered are not valid.</p> -->
-                        @error('horas')
-                        <p class="error show">The hours entered are not valid.</p>
-                        @enderror
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="formacion_id" class="col-form-label">Course:</label>
-                        <select class="form-control" wire:model="formacion_id" id="formacion_id" required="" aria-describedby="bouncer-error_select" aria-invalid="true">
-                            <option value="null">Select a formation</option>
-                            @forelse ($formaciones as $formacion)
+                    <label for="">Formation</label>
+                    <select wire:model="formacion_id" id="formacion">
+                        <option value="-1">Select a formation</option>
+                        @forelse ($formaciones as $formacion)
                             <option value='{{ $formacion->id }}'>{{$formacion->denominacion}}</option>
-                            @empty
-                            <option>No formation register yet...</option>
-                            @endforelse
-                        </select>
-                        <!-- <p class="error" id="error_formacion_id">The formation isn´t valid.</p> -->
-                        @error('formacion_id')
-                        <p class="error show">The formation isn´t valid.</p>
-                        @enderror
-                    </div>
+                        @empty
+                            <option value="-1">No formation register yet</option>
+                        @endforelse
+                    </select>
+                    <p class="error" id="error_formacion">Select a formation.</p>
+                    @error('formacion_id')
+                        <p class="error show">Select a formation.</p>
+                    @enderror
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='cerrar_modal'>Close</button>
-                    <button type="button" class="btn btn-primary" wire:click='save' wire:loading.attr='disable' wire:target='save'> {{ $accion }}</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='cerrar_modal'>CLOSE</button>
+                    <button type="button" class="btn btn-primary" id="insert-submit" disabled="true" wire:click='save' wire:loading.attr='disable' wire:target='save'> {{ $accion }} Changes</button>
                 </div>
             </div>
         </div>
@@ -229,4 +215,6 @@
             document.getElementById('cerrar_modal').click();
         });
     </script>
+    <script type="text/javascript" src="{{asset('js/validations/modulo-validation.js')}}"></script>
 </div>
+

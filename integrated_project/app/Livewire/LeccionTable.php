@@ -135,7 +135,7 @@ class LeccionTable extends Component
         'horas' => [
             'required',
             'integer',
-            'min:0',
+            'min:1',
         ],
         'modulo_id' => [
             'required',

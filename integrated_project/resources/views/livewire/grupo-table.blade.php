@@ -1,82 +1,69 @@
 <div>
-    <!-- Modal -->
-    <div class="modal fade" id="GrupoModal" tabindex="-1" aria-labelledby="GrupoModalLabel" aria-hidden="true" wire:ignore.self>
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="GrupoModalLabel"> {{ $accion }} Group</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-
-
-                    <div class="form-group">
-                        <label for="denominacion" class="col-form-label">Denomination:</label>
-                        <input type="text" class="form-control" required wire:model="denominacion" id="denominacion">
-                        <p class="error" id="error_denominacion">The denomination isn´t valid.</p>
-                        @error('denominacion')
-                        <p class="alert alert-danger">The denomination isn´t valid.</p>
-                        @enderror
+        <!-- Modal -->
+        <div class="modal fade" id="GrupoModal" tabindex="-1" aria-labelledby="GrupoModalLabel" aria-hidden="true" wire:ignore.self>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="GrupoModalLabel"> {{ $accion }} Group</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-
-                    <div class="form-group">
-                        <label for="turno" class="col-form-label">Turn:</label>
-                        <select class="form-control" wire:model="turno" id="turno" required="" aria-describedby="bouncer-error_select" aria-invalid="true">
-                            <option value="null">Select any turn</option>
+                    <div class="modal-body">
+                        <label for="">Denomination</label>
+                        <input type="text" required wire:model="denominacion" id="denominacion">
+                        <p class="error" id="error_denominacion">Denomination must be between 3 and 255 characters long.</p>
+                        @error('denominacion')
+                            <p class="error show" id="error_denominacion">Denomination must be between 3 and 255 characters long.</p>
+                        @enderror
+                        
+                        <label for="">Turn</label>
+                        <select wire:model="turno" id="turno">
+                            <option value="-1">Select any turn</option>
                             <option value="Mañana">Morning</option>
                             <option value="Tarde">Afternoon</option>
                         </select>
-                        <p class="error" id="error_turno">The turn isn´t valid.</p>
+                        <p class="error" id="error_turno">Select a turn.</p>
                         @error('turno')
-                        <p class="alert alert-danger">The turn isn´t valid.</p>
+                            <p class="alert alert-danger">The turn isn´t valid</p>
                         @enderror
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="curso_escolar" class="col-form-label">School year:</label>
-                        <input type="text" class="form-control" required wire:model="curso_escolar" id="curso_escolar">
-                        <p class="error" id="error_curso_escolar">The school year is not valid.</p>
+                        
+                        <label for="">School year</label>
+                        <input type="text" required wire:model="curso_escolar" id="curso_escolar">
+                        <p class="error" id="error_curso_escolar">School year must have the format: YYYY/YYYY.</p>
                         @error('curso_escolar')
-                        <p class="alert alert-danger">The school year is not valid.</p>
+                            <p class="alert alert-danger">The school year is not valid</p>
                         @enderror
-                    </div>
 
-                    <div class="form-group">
-                        <label for="curso" class="col-form-label">Course:</label>
-                        <select class="form-control" wire:model="curso" id="curso" required="" aria-describedby="bouncer-error_select" aria-invalid="true">
-                            <option value="null">Select any course</option>
+                        <label for="">Course</label>
+                        <select wire:model="curso" id="curso">
+                            <option value="-1">Select any course </option>
                             <option value="1">1º</option>
                             <option value="2">2º</option>
                             <option value="3">3º</option>
                             <option value="4">4º</option>
                         </select>
-                        <p class="error" id="error_curso">The school year is not valid.</p>
+                        <p class="error" id="error_curso">Select a course.</p>
                         @error('curso')
-                        <p class="alert alert-danger">The school year is not valid.</p>
+                            <p class="error show" id="error_curso">Course doesn't have a valid value.</p>
                         @enderror
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="formacion_id" class="col-form-label">Formation:</label>
-                        <select class="form-control" wire:model="formacion_id" id="formacion_id" required="" aria-describedby="bouncer-error_select" aria-invalid="true">
-                            <option value="null">Select any formation</option>
+                        
+                        <label for="">Formation</label>
+                        <select wire:model="formacion_id" id="formacion">
+                            <option value="-1">Select any formation</option>
                             @forelse ($formaciones as $formacion)
                             <option value="{{$formacion->id}}">{{$formacion->denominacion}}</option>
                             @empty
-                            <option value=null>No formation register yet...</option>
+                                <option value="-1">No formation register yet</option>
                             @endforelse
                         </select>
-                        <p class="error" id="error_formacion_id">The school year is not valid.</p>
+                        <p class="error" id="error_formacion">Select a formation.</p>
                         @error('formacion_id')
-                        <p class="alert alert-danger">The formation isn´t valid</p>
+                            <p class="error show">Select a formation.</p>
                         @enderror
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='cerrar_modal'>Close</button>
-                    <button type="button" class="btn btn-primary" wire:click='save' wire:loading.attr='disable' wire:target='save'> {{ $accion }}</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='cerrar_modal'>CLOSE</button>
+                        <button type="button" class="btn btn-primary" id="insert-submit" disabled="true" wire:click='save' wire:loading.attr='disable' wire:target='save'> {{ $accion }} Changes</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -231,4 +218,6 @@
             document.getElementById('cerrar_modal').click();
         });
     </script>
+    <script type="text/javascript" src="{{asset('js/validations/grupo-validation.js')}}"></script>
 </div>
+

@@ -8,70 +8,58 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <label for="">Hours</label>
+                    <input type="number" wire:model="horas" id="horas" required>
+                    <p class="error" id="error_horas">Hours must be a number greater than 0.</p>
+                    @error('horas')
+                        <p class="error show" id="error_horas">Hours must be a number greater than 0.</p>
+                    @enderror
 
-                    <div class="form-group">
-                        <label for="horas" class="col-form-label">Hours:</label>
-                        <input type="number" class="form-control" required wire:model="horas" id="horas">
-                        <p class="error" id="error_horas">The hours isn´t valid.</p>
-                        @error('horas')
-                        <p class="alert alert-danger">The hours isn´t valid.</p>
-                        @enderror
-                    </div>
+                    <label for="">Choose Teacher</label>
+                    <select wire:model='profesor_id' id="profesor">
+                        <option value="-1">Select any teacher</option>
+                        @forelse ($profesores as $profesor)
+                            <option value={{$profesor->id}}>{{$profesor->nombre}}</option>
+                        @empty
+                            <option value="-1">No teacher register yet...</option>
+                        @endforelse
+                    </select>
+                    <p class="error" id="error_profesor">Select a teacher.</p>
+                    @error('profesor_id')
+                        <p class="alert alert-danger">The teacher isn´t valid</p>
+                    @enderror
 
-
-                    <div class="form-group">
-                        <label for="profesor_id" class="col-form-label">Teacher:</label>
-                        <select class="form-control" wire:model="profesor_id" id="profesor_id" required="" aria-describedby="bouncer-error_select" aria-invalid="true">
-                            <option value="null">Select any teacher</option>
-                            @forelse ($profesores as $profesor)
-                            <option value={{$profesor->id}}>{{$profesor->nombre}}&nbsp;{{$profesor->apellido1}}&nbsp;{{$profesor->apellido2}}</option>
-                            @empty
-                            <option value="null">No teacher register yet...</option>
-                            @endforelse
-                        </select>
-                        <p class="error" id="error_profesor_id">Select a speciality.</p>
-                        @error('profesor_id')
-                        <p class="alert alert-danger">The teacher isn´t valid.</p>
-                        @enderror
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="modulo_id" class="col-form-label">Module:</label>
-                        <select class="form-control" wire:model="modulo_id" id="modulo_id" required="" aria-describedby="bouncer-error_select" aria-invalid="true">
-                            <option value="null">Select any module</option>
-                            @forelse ($modulos as $modulo)
+                    <label for="">Choose Module</label>
+                    <select wire:model='modulo_id' id="modulo">
+                        <option value="-1">Select any module</option>
+                        @forelse ($modulos as $modulo)
                             <option value={{$modulo->id}}>{{$modulo->denominacion}}</option>
-                            @empty
-                            <option value="null">No modules register yet...</option>
-                            @endforelse
-                        </select>
-                        <p class="error" id="error_modulo_id">Select a speciality.</p>
-                        @error('modulo_id')
-                        <p class="alert alert-danger">>The module isn´t valid.</p>
-                        @enderror
-                    </div>
+                        @empty
+                            <option value="-1">No modules register yet</option>
+                        @endforelse
+                    </select>
+                    <p class="error" id="error_modulo">Select a module.</p>
+                    @error('modulo_id')
+                        <p class="alert alert-danger">The module isn´t valid</p>
+                    @enderror
 
-
-                    <div class="form-group">
-                        <label for="grupo_id" class="col-form-label">Group:</label>
-                        <select class="form-control" wire:model="grupo_id" id="grupo_id" required="" aria-describedby="bouncer-error_select" aria-invalid="true">
-                            <option value="null">Select any group </option>
-                            @forelse ($grupos as $grupo)
+                    <label for="">Choose group</label>
+                    <select wire:model='grupo_id' id="grupo">
+                        <option value="-1">Select any group </option>
+                        @forelse ($grupos as $grupo)
                             <option value={{$grupo->id}}>{{$grupo->denominacion}}</option>
-                            @empty
-                            <option value="null">No group register yet...</option>
-                            @endforelse
-                        </select>
-                        <p class="error" id="error_grupo_id">Select a speciality.</p>
-                        @error('grupo_id')
+                        @empty
+                            <option value="-1">no group register yet</option>
+                        @endforelse
+                    </select>
+                    <p class="error" id="error_grupo">Select a group.</p>
+                    @error('grupo_id')
                         <p class="alert alert-danger">The group isn´t valid</p>
-                        @enderror
-                    </div>
+                    @enderror
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='cerrar_modal'>Close</button>
-                    <button type="button" class="btn btn-primary" wire:click='save' wire:loading.attr='disable' wire:target='save'> {{ $accion }}</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='cerrar_modal'>CLOSE</button>
+                    <button type="button" class="btn btn-primary" id="insert-submit" disabled="true" wire:click='save' wire:loading.attr='disable' wire:target='save'> {{ $accion }} Changes</button>
                 </div>
             </div>
         </div>
@@ -216,4 +204,6 @@
             document.getElementById('cerrar_modal').click();
         });
     </script>
+    <script type="text/javascript" src="{{asset('js/validations/leccion-validation.js')}}"></script>
 </div>
+
