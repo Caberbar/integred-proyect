@@ -3,7 +3,7 @@
 <!-- [Head] start -->
 
 <head>
-    <title>Home | Able Pro Dashboard Template</title>
+    <title>Zaisén</title>
     <!-- [Meta] -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
@@ -13,7 +13,7 @@
     <meta name="author" content="Phoenixcoded">
 
     <!-- [Favicon] icon -->
-    <link rel="icon" href="{{ asset('images/favicon.svg') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/x-icon">
     <!-- data tables css -->
     <link rel="stylesheet" href="{{ asset('css/plugins/dataTables.bootstrap5.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/plugins/responsive.bootstrap5.min.css') }}">

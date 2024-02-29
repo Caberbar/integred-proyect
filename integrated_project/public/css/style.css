@@ -381,6 +381,15 @@ blockquote {
   margin: 0 0 1rem;
 }
 
+.pc-sidebar .m-header {
+  padding: 73px 36px 0px 36px !important;
+}
+
+.badge.bg-light-success {
+  color: #f8f9fa !important;
+  background: #f8f9fa !important;
+}
+
 b,
 strong {
   font-weight: bolder;
