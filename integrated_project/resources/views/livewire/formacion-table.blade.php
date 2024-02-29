@@ -4,30 +4,30 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="FormacionModalLabel"> {{$accion}} Formation</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h1 class="modal-title fs-5" id="FormacionModalLabel"> {{$accion}} {{ trans('integrated.formations_modal.title') }}</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{!! trans('integrated.formations_modal.close_button') !!}"></button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="siglas" class="col-form-label">Acronym:</label>
+                        <label for="siglas" class="col-form-label"> {{ trans('integrated.formations_modal.acronym_label') }}</label>
                         <input type="text" class="form-control" required wire:model="siglas" id="siglas">
-                        <p class="error" id="error_siglas">Acronym must be at least 2 characters long.</p>
+                        <p class="error" id="error_siglas">{{ trans('integrated.formations_modal.acronym_error_message') }}</p>
                         @error('siglas')
-                        <p class="error show">Acronym must be at least 2 characters long.</p>
+                        <p class="error show">{{ trans('integrated.formations_modal.acronym_error_message') }}</p>
                         @enderror
                     </div>
 
                     <div class="form-group">
-                        <label for="denominacion" class="col-form-label">Denomination:</label>
+                        <label for="denominacion" class="col-form-label">{{ trans('integrated.formations_modal.denomination_label') }}</label>
                         <input type="text" class="form-control" required wire:model="denominacion" id="denominacion">
-                        <p class="error" id="error_denominacion">Denomination must be between 3 and 255 characters long.</p>
+                        <p class="error" id="error_denominacion">{{ trans('integrated.formations_modal.denomination_error_message') }}</p>
                         @error('denominacion')
-                        <p class="error show">Denomination must be between 3 and 255 characters long.</p>
+                        <p class="error show">{{ trans('integrated.formations_modal.denomination_error_message') }}</p>
                         @enderror
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='cerrar_modal'>Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='cerrar_modal'>{{ trans('integrated.formations_modal.close_button') }}</button>
                     <button type="button" id="insert-submit" class="btn btn-primary" wire:click='save' wire:loading.remove wire:target='save' disabled="true"> {{ $accion }}</button>
                 </div>
             </div>
@@ -43,18 +43,18 @@
                             <div class="row">
                                 <div class="col-sm-12 col-md-6">
                                     <div class="dataTables_length" id="dom-jqry_length">
-                                        <label>Show&nbsp;
+                                        <label>{{ trans('integrated.formations_modal.show_label') }}&nbsp;
                                             <select name="dom-jqry_length" aria-controls="dom-jqry" class="form-select form-select-sm" wire:model.live="perPage">
                                                 <option value="10">10</option>
                                                 <option value="25">25</option>
                                                 <option value="50">50</option>
                                                 <option value="100">100</option>
-                                            </select>&nbsp; entries
+                                            </select>&nbsp; {{ trans('integrated.formations_modal.entries_label') }}
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-sm-12 col-md-6">
-                                    <div id="dom-jqry_filter" class="dataTables_filter"><label>Search:<input type="search" wire:model.live.debounce.300ms="search" class="form-control form-control-sm" placeholder="" aria-controls="dom-jqry"></label></div>
+                                    <div id="dom-jqry_filter" class="dataTables_filter"><label>{{ trans('integrated.formations_modal.search_label') }}<input type="search" wire:model.live.debounce.300ms="search" class="form-control form-control-sm" placeholder="" aria-controls="dom-jqry"></label></div>
                                 </div>
                             </div>
                             <br>
@@ -64,7 +64,7 @@
                                 <div class="col-sm-12 col-md-12">
                                     <!-- BOTON VENTANA MODAL -->
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#FormacionModal" wire:click='modal()'>
-                                        Create Formation
+                                        {{ trans('integrated.formations_modal.create_formation_button') }}
                                     </button>
                                 </div>
                             </div>
@@ -79,11 +79,11 @@
                         <table id="new-cons" class="display table table-striped table-hover dt-responsive nowrap" style="width: 100%">
                             <thead>
                                 <tr>
-                                    <th wire:click="doSort('siglas')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="siglas" columnName="Acronym" /></th>
-                                    <th wire:click="doSort('denominacion')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="denominacion" columnName="Denomination" /></th>
+                                    <th wire:click="doSort('siglas')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="siglas" columnName="{!! trans('integrated.formations_page.formations')  !!}" /></th>
+                                    <th wire:click="doSort('denominacion')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="denominacion" columnName="{!! trans('integrated.formations_page.column_denomination')  !!}" /></th>
                                     @auth
                                     @if(auth()->user()->roles->contains('id', 1))
-                                    <th>Actions</th>
+                                    <th>{{ trans('integrated.formations_page.column_actions') }}</th>
                                     @endif
                                     @endauth
                                 </tr>
@@ -120,24 +120,24 @@
                         <table id="dom-jqry" class="table table-striped table-bordered nowrap">
                             <thead>
                                 <tr>
-                                    <th wire:click="doSort('siglas')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="siglas" columnName="Acronym" /></th>
-                                    <th wire:click="doSort('denominacion')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="denominacion" columnName="Denomination" /></th>
+                                    <th wire:click="doSort('siglas')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="siglas" columnName="{!! trans('integrated.formations_modal.column_acronym') !!}" /></th>
+                                    <th wire:click="doSort('denominacion')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="denominacion" columnName="{!! trans('integrated.formations_modal.column_denomination') !!}" /></th>
                                     </th>
                                     @auth
                                     @if(auth()->user()->roles->contains('id', 1))
-                                    <th>Actions</th>
+                                    <th>{{ trans('integrated.formations_page.actions') }}</th>
                                     @endif
                                     @endauth
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td colspan="6">No results found.</td>
+                                    <td colspan="6">{{ trans('integrated.formations_page.no_results_message') }}</td>
                                 </tr>
                             </tbody>
                         </table>
                         @else
-                        <p>No educations found.</p>
+                        <p>{{ trans('integrated.formations_page.no_educations_message') }}</p>
                         @endif
                     </div>
                 </div>

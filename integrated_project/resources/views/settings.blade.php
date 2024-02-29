@@ -15,7 +15,7 @@
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="page-header-title">
-                            <h2 class="mb-0">Settings</h2>
+                            <h2 class="mb-0">{{ trans('integrated.settings_page.settings') }}</h2>
                         </div>
                     </div>
                 </div>
@@ -178,11 +178,9 @@
                                                 <div class="form-group">
                                                     <label class="form-label">Language</label>
                                                     <select class="form-control">
-                                                        <option>Washington</option>
-                                                        <option>India</option>
-                                                        <option>Africa</option>
-                                                        <option>New York</option>
-                                                        <option>Malaysia</option>
+                                                        <option>English</option>
+                                                        <option>Spanish</option>
+                                                        <option>Portuguese</option>
                                                     </select>
                                                 </div>
                                             </div>

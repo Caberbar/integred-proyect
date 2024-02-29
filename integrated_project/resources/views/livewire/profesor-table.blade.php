@@ -4,65 +4,66 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="FormacionModalLabel"> {{ $accion }} Teacher</h1>
+                    <h1 class="modal-title fs-5" id="FormacionModalLabel"> {{ $accion }} {{ trans('integrated.teachers_modal.teacher')}}</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="usu_seneca" class="col-form-label">Seneca User:</label>
+                        <label for="usu_seneca" class="col-form-label">{{ trans('integrated.teachers_modal.seneca_user')}}</label>
                         <input type="text" class="form-control" required wire:model="usu_seneca" id="usu_seneca">
-                        <p class="error" id="error_usu_seneca">The Seneca User must be composed of 7 letters and 3 numbers.</p>
+                        <p class="error" id="error_usu_seneca">{{ trans('integrated.teachers_modal.seneca_user_error_message')}}</p>
                         @error('usu_seneca')
                         <p class="error show">
-                            The user of seneca formad isn´t valid.
+                            {{ trans('integrated.teachers_modal.seneca_user_error_invalid')}}
                         </p>
                         @enderror
                     </div>
 
 
                     <div class="form-group">
-                        <label for="nombre" class="col-form-label">Name:</label>
+                        <label for="nombre" class="col-form-label">       {{ trans('integrated.teachers_modal.name')}}</label>
                         <input type="text" class="form-control" required wire:model="nombre" id="nombre">
-                        <p class="error" id="error_nombre">Name must be between 3 and 30 characters long.</p>
+                        <p class="error" id="error_nombre">   {{ trans('integrated.teachers_modal.name_error_message')}}</p>
                         @error('name')
-                        <p class="error show">Name must be between 3 and 30 characters long.</p>
+                        <p class="error show"> {{ trans('integrated.teachers_modal.name_error_message')}}</p>
                         @enderror
                     </div>
 
                     <div class="form-group">
-                        <label for="" class="col-form-label">Last Name:</label>
+                        <label for="" class="col-form-label">{{ trans('integrated.teachers_modal.last_name')}}</label>
                         <input type="text" class="form-control" required wire:model="apellido1" id="apellido1">
                         @error('apellido1')
                         <p class="error show">
-                            The first last name format isn´t valid.
+                            {{ trans('integrated.teachers_modal.first_last_name_error_invalid')}}
                         </p>
                         @enderror
                         <br>
                         <input type="text" class="form-control" required wire:model="apellido2" id="apellido2">
                         @error('apellido2')
                         <p class="error show">
-                            The second last name format isn´t valid.
+                            {{ trans('integrated.teachers_modal.second_last_name_error_invalid')}}
 
                         </p>
                         @enderror
-                        <p class="error" id="error_apellidos">Each last name must be between 3 and 50 characters long.</p>
+                        <p class="error" id="error_apellidos"> {{ trans('integrated.teachers_modal.last_name_error_message')}}</p>
                     </div>
+
                     <div class="form-group">
-                        <label for="speciality" class="col-form-label">Speciality:</label>
+                        <label for="speciality" class="col-form-label"> {{ trans('integrated.teachers_modal.speciality')}}</label>
                         <select class="form-control" wire:model="especialidad" id="speciality" required="" aria-describedby="bouncer-error_select" aria-invalid="true">
-                            <option value="null">Select a specialty </option>
-                            <option value="secundaria">High school</option>
-                            <option value="formacion profesional">Vocational training.</option>
+                            <option value="null">{{ trans('integrated.teachers_modal.select_speciality_option')}}</option>
+                            <option value="secundaria">{{ trans('integrated.teachers_modal.high_school_option')}}</option>
+                            <option value="formacion profesional">{{ trans('integrated.teachers_modal.vocational_training_option')}}</option>
                         </select>
-                        <p class="error" id="error_speciality">Select a speciality.</p>
+                        <p class="error" id="error_speciality">{{ trans('integrated.teachers_modal.select_speciality_message')}}</p>
                         @error('especialidad')
-                        <p class="error show">Select a speciality.</p>
+                        <p class="error show">{{ trans('integrated.teachers_modal.select_speciality_message')}}</p>
                         @enderror
                     </div>
                 </div>
                 <br><br>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='cerrar_modal'>Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='cerrar_modal'>{{ trans('integrated.teachers_modal.close_button')}}</button>
                     <button type="button" class="btn btn-primary" id="insert-submit" wire:click='save' wire:loading.attr='disable' wire:target='save' disabled="true"> {{ $accion }}</button>
                 </div>
             </div>
@@ -78,18 +79,18 @@
                             <div class="row">
                                 <div class="col-sm-12 col-md-6">
                                     <div class="dataTables_length" id="dom-jqry_length">
-                                        <label>Show&nbsp;
+                                        <label>{{ trans('integrated.teachers_modal.show_label')}}&nbsp;
                                             <select name="dom-jqry_length" aria-controls="dom-jqry" class="form-select form-select-sm" wire:model.live="perPage">
                                                 <option value="10">10</option>
                                                 <option value="25">25</option>
                                                 <option value="50">50</option>
                                                 <option value="100">100</option>
-                                            </select>&nbsp; entries
+                                            </select>&nbsp; {{ trans('integrated.teachers_modal.entries_label')}}
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-sm-12 col-md-6">
-                                    <div id="dom-jqry_filter" class="dataTables_filter"><label>Search:<input type="search" wire:model.live.debounce.300ms="search" class="form-control form-control-sm" placeholder="" aria-controls="dom-jqry"></label></div>
+                                    <div id="dom-jqry_filter" class="dataTables_filter"><label> {{ trans('integrated.teachers_modal.search_label')}}<input type="search" wire:model.live.debounce.300ms="search" class="form-control form-control-sm" placeholder="" aria-controls="dom-jqry"></label></div>
                                 </div>
                             </div>
                             <br>
@@ -99,7 +100,7 @@
                                 <div class="col-sm-12 col-md-12">
                                     <!-- BOTON VENTANA MODAL -->
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#FormacionModal" wire:click='modal()'>
-                                        Create teacher
+                                        {{ trans('integrated.teachers_modal.create_teacher_button')}}
                                     </button>
                                 </div>
                             </div>
@@ -115,14 +116,14 @@
                         <table id="new-cons" class="display table table-striped table-hover dt-responsive nowrap" style="width: 100%">
                             <thead>
                                 <tr>
-                                    <th wire:click="doSort('usu_seneca')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="usu_seneca" columnName="Seneca User" /></th>
-                                    <th wire:click="doSort('nombre')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="nombre" columnName="Name" /></th>
-                                    <th wire:click="doSort('apellido1')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="apellido1" columnName="First Name" /></th>
-                                    <th wire:click="doSort('apellido2')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="apellido2" columnName="Last Name" /></th>
-                                    <th wire:click="doSort('especialidad')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="especialidad" columnName="Speciality" /></th>
+                                    <th wire:click="doSort('usu_seneca')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="usu_seneca" columnName="{!! trans('integrated.teachers_page.column_seneca_user') !!}" /></th>
+                                    <th wire:click="doSort('nombre')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="nombre" columnName="{!! trans('integrated.teachers_page.column_name') !!}" /></th>
+                                    <th wire:click="doSort('apellido1')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="apellido1" columnName="{!! trans('integrated.teachers_page.column_first_name') !!}" /></th>
+                                    <th wire:click="doSort('apellido2')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="apellido2" columnName="{!! trans('integrated.teachers_page.column_last_name') !!}" /></th>
+                                    <th wire:click="doSort('especialidad')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="especialidad" columnName="{!! trans('integrated.teachers_page.column_speciality') !!}" /></th>
                                     @auth
                                     @if(auth()->user()->roles->contains('id', 1))
-                                    <th>Actions</th>
+                                    <th>{{ trans('integrated.teachers_modal.actions_header')}}</th>
                                     @endif
                                     @endauth
                                 </tr>
@@ -169,19 +170,19 @@
                                     </th>
                                     @auth
                                     @if(auth()->user()->roles->contains('id', 1))
-                                    <th>Actions</th>
+                                    <th>{{ trans('integrated.teachers_modal.actions_header')}}</th>
                                     @endif
                                     @endauth
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td colspan="6">No results found.</td>
+                                    <td colspan="6">{{ trans('integrated.teachers_modal.no_results_message')}}</td>
                                 </tr>
                             </tbody>
                         </table>
                         @else
-                        <p>No teachers found.</p>
+                        <p>{{ trans('integrated.teachers_modal.no_teachers_message')}}</p>
                         @endif
                     </div>
                 </div>
