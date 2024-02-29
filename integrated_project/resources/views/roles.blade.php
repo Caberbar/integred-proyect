@@ -11,7 +11,7 @@
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="page-header-title">
-                            <h2 class="mb-0">Rol</h2>
+                            <h2 class="mb-0">{{ trans('integrated.roles_page.roles') }}</h2>
                         </div>
                     </div>
                 </div>

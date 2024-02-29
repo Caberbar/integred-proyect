@@ -4,47 +4,47 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="ModuloModalLabel"> {{$accion}} Module</h1>
+                    <h1 class="modal-title fs-5" id="ModuloModalLabel"> {{$accion}} {{trans('integrated.modules_modal.module')}}</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id='cerrar_modal'></button>
                 </div>
                 <div class="modal-body">
 
                     <div class="form-group">
-                        <label for="denominacion" class="col-form-label">Denomination:</label>
+                        <label for="denominacion" class="col-form-label">{{trans('integrated.modules_modal.label_denomination')}}</label>
                         <input type="text" class="form-control" required wire:model="denominacion" id="denominacion">
                         <!-- <p class="error" id="error_denominacion">The Denomination does not have a valid format.</p> -->
                         @error('denominacion')
-                        <p class="error show">The Denomination does not have a valid format.</p>
+                        <p class="error show">{{trans('integrated.modules_modal.invalid_denomination')}}</p>
                         @enderror
                     </div>
 
                     <div class="form-group">
-                        <label for="especialidad" class="col-form-label">Speciality:</label>
+                        <label for="especialidad" class="col-form-label">{{trans('integrated.modules_modal.label_speciality')}}</label>
                         <select class="form-control" wire:model="especialidad" id="especialidad" required="" aria-describedby="bouncer-error_select" aria-invalid="true">
-                            <option value="null">Select a specialty </option>
-                            <option value="secundaria">High school</option>
-                            <option value="formacion profesional">Vocational training</option>
+                            <option value="null">{{trans('integrated.modules_modal.select_speciality')}}</option>
+                            <option value="secundaria">{{trans('integrated.modules_modal.high_school')}}</option>
+                            <option value="formacion profesional">{{trans('integrated.modules_modal.vocational_training')}}</option>
                         </select>
                         <!-- <p class="error" id="error_especialidad">The speciality formad isn´t valid.</p> -->
                         @error('especialidad')
-                        <p class="error show">The speciality formad isn´t valid.</p>
+                        <p class="error show">{{trans('integrated.modules_modal.error_speciality')}}</p>
                         @enderror
                     </div>
 
                     <div class="form-group">
-                        <label for="siglas" class="col-form-label">Acronym:</label>
+                        <label for="siglas" class="col-form-label">{{trans('integrated.modules_modal.label_acronym')}}</label>
                         <input type="text" class="form-control" required wire:model="siglas" id="siglas">
                         <!-- <p class="error" id="error_siglas">The acronyms do not have a valid format.</p> -->
                         @error('siglas')
-                        <p class="error show">The acronyms do not have a valid format.</p>
+                        <p class="error show">{{trans('integrated.modules_modal.invalid_acronym')}}</p>
                         @enderror
                     </div>
 
 
                     <div class="form-group">
-                        <label for="curso" class="col-form-label">Course:</label>
+                        <label for="curso" class="col-form-label">{{trans('integrated.modules_modal.label_course')}}</label>
                         <select class="form-control" wire:model="curso" id="curso" required="" aria-describedby="bouncer-error_select" aria-invalid="true">
-                            <option value="null">Select a course</option>
+                            <option value="null">{{trans('integrated.modules_modal.select_course')}}</option>
                             <option value='1'>1º</option>
                             <option value='2'>2º</option>
                             <option value='3'>3º</option>
@@ -52,38 +52,38 @@
                         </select>
                         <!-- <p class="error" id="error_curso">The course isn´t valid.</p> -->
                         @error('curso')
-                        <p class="error show">The course isn´t valid.</p>
+                        <p class="error show">{{trans('integrated.modules_modal.error_course')}}</p>
                         @enderror
                     </div>
 
                     <div class="form-group">
-                        <label for="horas" class="col-form-label">Hours:</label>
+                        <label for="horas" class="col-form-label">{{trans('integrated.modules_modal.label_hours')}}</label>
                         <input type="number" class="form-control" required wire:model="horas" id="horas">
                         <!-- <p class="error" id="error_horas">The hours entered are not valid.</p> -->
                         @error('horas')
-                        <p class="error show">The hours entered are not valid.</p>
+                        <p class="error show">{{trans('integrated.modules_modal.invalid_hours')}}</p>
                         @enderror
                     </div>
 
 
                     <div class="form-group">
-                        <label for="formacion_id" class="col-form-label">Course:</label>
+                        <label for="formacion_id" class="col-form-label">{{trans('integrated.modules_modal.label_course')}}</label>
                         <select class="form-control" wire:model="formacion_id" id="formacion_id" required="" aria-describedby="bouncer-error_select" aria-invalid="true">
-                            <option value="null">Select a formation</option>
+                            <option value="null">{{trans('integrated.modules_modal.select_formation')}}</option>
                             @forelse ($formaciones as $formacion)
                             <option value='{{ $formacion->id }}'>{{$formacion->denominacion}}</option>
                             @empty
-                            <option>No formation register yet</option>
+                            <option>{{trans('integrated.modules_modal.no_formation_registered')}}</option>
                             @endforelse
                         </select>
                         <!-- <p class="error" id="error_formacion_id">The formation isn´t valid.</p> -->
                         @error('formacion_id')
-                        <p class="error show">The formation isn´t valid.</p>
+                        <p class="error show">{{trans('integrated.modules_modal.error_formation')}}</p>
                         @enderror
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='cerrar_modal'>Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='cerrar_modal'>{{trans('integrated.modules_modal.close_btn')}}</button>
                     <button type="button" class="btn btn-primary" wire:click='save' wire:loading.attr='disable' wire:target='save'> {{ $accion }}</button>
                 </div>
             </div>
@@ -99,18 +99,18 @@
                             <div class="row">
                                 <div class="col-sm-12 col-md-6">
                                     <div class="dataTables_length" id="dom-jqry_length">
-                                        <label>Show&nbsp;
+                                        <label>{{trans('integrated.modules_page.show')}}&nbsp;
                                             <select name="dom-jqry_length" aria-controls="dom-jqry" class="form-select form-select-sm" wire:model.live="perPage">
                                                 <option value="10">10</option>
                                                 <option value="25">25</option>
                                                 <option value="50">50</option>
                                                 <option value="100">100</option>
-                                            </select>&nbsp; entries
+                                            </select>&nbsp; {{trans('integrated.modules_page.entries')}}
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-sm-12 col-md-6">
-                                    <div id="dom-jqry_filter" class="dataTables_filter"><label>Search:<input type="search" wire:model.live.debounce.300ms="search" class="form-control form-control-sm" placeholder="" aria-controls="dom-jqry"></label></div>
+                                    <div id="dom-jqry_filter" class="dataTables_filter"><label>{{trans('integrated.modules_page.label_search')}}<input type="search" wire:model.live.debounce.300ms="search" class="form-control form-control-sm" placeholder="" aria-controls="dom-jqry"></label></div>
                                 </div>
                             </div>
                             <br>
@@ -120,7 +120,7 @@
                                 <div class="col-sm-12 col-md-12">
                                     <!-- BOTON VENTANA MODAL -->
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModuloModal" wire:click='modal()'>
-                                        Create module
+                                        {{trans('integrated.modules_page.create_module')}}
                                     </button>
                                 </div>
                             </div>
@@ -135,15 +135,15 @@
                         <table id="new-cons" class="display table table-striped table-hover dt-responsive nowrap" style="width: 100%">
                             <thead>
                                 <tr>
-                                    <th wire:click="doSort('denominacion')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="denominacion" columnName="Denomination" /></th>
-                                    <th wire:click="doSort('especialidad')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="especialidad" columnName="Speciality" /></th>
-                                    <th wire:click="doSort('siglas')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="siglas" columnName="Acronym" /></th>
-                                    <th wire:click="doSort('curso')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="curso" columnName="Cours" /></th>
-                                    <th wire:click="doSort('horas')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="horas" columnName="Hours" /></th>
-                                    <th wire:click="doSort('formacion_siglas')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="formacion_siglas" columnName="Formation" /></th>
+                                    <th wire:click="doSort('denominacion')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="denominacion" columnName="{!! trans('integrated.modules_page.denomination')!!}" /></th>
+                                    <th wire:click="doSort('especialidad')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="especialidad" columnName="{!! trans('integrated.modules_page.speciality')!!}" /></th>
+                                    <th wire:click="doSort('siglas')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="siglas" columnName="{!! trans('integrated.modules_page.acronym')!!}" /></th>
+                                    <th wire:click="doSort('curso')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="curso" columnName="{!! trans('integrated.modules_page.course')!!}" /></th>
+                                    <th wire:click="doSort('horas')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="horas" columnName="{!! trans('integrated.modules_page.hours')!!}" /></th>
+                                    <th wire:click="doSort('formacion_siglas')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="formacion_siglas" columnName="{!! trans('integrated.modules_page.formation')!!}" /></th>
                                     @auth
                                     @if(auth()->user()->roles->contains('id', 1))
-                                    <th>Actions</th>
+                                    <th>   {{trans('integrated.modules_page.actions')}}</th>
                                     @endif
                                     @endauth
                                 </tr>
@@ -198,12 +198,12 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td colspan="6">No results found.</td>
+                                    <td colspan="6">  {{trans('integrated.modules_page.no_results_found')}}</td>
                                 </tr>
                             </tbody>
                         </table>
                         @else
-                        <p>No modules found.</p>
+                        <p>  {{trans('integrated.modules_page.no_modules_found')}}</p>
                         @endif
                     </div>
                 </div>

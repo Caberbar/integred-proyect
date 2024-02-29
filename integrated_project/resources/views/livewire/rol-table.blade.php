@@ -5,34 +5,34 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="RolModalLabel"> {{ $accion }} Rol</h1>
+                        <h1 class="modal-title fs-5" id="RolModalLabel"> {{ $accion }} {{ trans('integrated.roles_modal.role') }}</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
 
                         <div class="form-group">
-                            <label for="nombre" class="col-form-label">Username:</label>
+                            <label for="nombre" class="col-form-label">{{ trans('integrated.roles_modal.label_username') }}</label>
                             <p>{{$nombre_usuario}}</p>
                         </div>
                         <div class="form-group">
-                            <label for="rol" class="col-form-label">Speciality:</label>
+                            <label for="rol" class="col-form-label">{{ trans('integrated.roles_modal.label_speciality') }}</label>
                             <select class="form-control" wire:model="rol" id="rol" required="" aria-describedby="bouncer-error_select" aria-invalid="true">
-                                <option value="null">Select any rol</option>
+                                <option value="null">{{ trans('integrated.roles_modal.select_any_role') }}</option>
                                 @forelse ($roles as $rol)
                                 <option value="{{$rol->id}}">{{$rol->name}}</option>
                                 @empty
-                                <option value="null">No Roles register yet...</option>
+                                <option value="null">{{ trans('integrated.roles_modal.no_roles_registered') }}</option>
                                 @endforelse
                             </select>
-                            <p class="error" id="error_rol">The chosen role is wrong.</p>
+                            <p class="error" id="error_rol">{{ trans('integrated.roles_modal.error_wrong_role') }}</p>
                             @error('rol')
-                            <p class="error show">The chosen role is wrong.</p>
+                            <p class="error show">{{ trans('integrated.roles_modal.error_wrong_role') }}</p>
                             @enderror
                         </div>
                     </div>
                     <br><br>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='cerrar_modal'>Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='cerrar_modal'>{{ trans('integrated.roles_modal.close_btn') }}</button>
                         <button type="button" class="btn btn-primary" id="insert-submit" wire:click='save' wire:loading.attr='disable' wire:target='save'>{{ $accion }}</button>
                     </div>
                 </div>
@@ -48,18 +48,18 @@
                                 <div class="row">
                                     <div class="col-sm-12 col-md-6">
                                         <div class="dataTables_length" id="dom-jqry_length">
-                                            <label>Show&nbsp;
+                                            <label>{{ trans('integrated.roles_page.show') }}&nbsp;
                                                 <select name="dom-jqry_length" aria-controls="dom-jqry" class="form-select form-select-sm" wire:model.live="perPage">
                                                     <option value="10">10</option>
                                                     <option value="25">25</option>
                                                     <option value="50">50</option>
                                                     <option value="100">100</option>
-                                                </select>&nbsp; entries
+                                                </select>&nbsp; {{ trans('integrated.roles_page.entries') }}
                                             </label>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-6">
-                                        <div id="dom-jqry_filter" class="dataTables_filter"><label>Search:<input type="search" wire:model.live.debounce.300ms="search" class="form-control form-control-sm" placeholder="" aria-controls="dom-jqry"></label></div>
+                                        <div id="dom-jqry_filter" class="dataTables_filter"><label>{{ trans('integrated.roles_page.label_search') }}<input type="search" wire:model.live.debounce.300ms="search" class="form-control form-control-sm" placeholder="" aria-controls="dom-jqry"></label></div>
                                     </div>
                                 </div>
                                 <br>
@@ -78,9 +78,9 @@
                             <table id="dom-jqry" class="table table-striped table-bordered nowrap">
                                 <thead>
                                     <tr>
-                                        <th wire:click="doSort('name')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="name" columnName="Username" /></th>
-                                        <th wire:click="doSort('role_name')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="role_name" columnName="Rol" /></th>
-                                        <th>Actions</th>
+                                        <th wire:click="doSort('name')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="name" columnName="{!! trans('integrated.roles_page.username') !!}" /></th>
+                                        <th wire:click="doSort('role_name')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="role_name" columnName="{!! trans('integrated.roles_page.rol') !!}" /></th>
+                                        <th>{{ trans('integrated.roles_page.actions') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -123,17 +123,17 @@
                                         }
                                         ?>
                                         <td><?php echo $rol ?></td>
-                                        <th>Actions</th>
+                                        <th>{{ trans('integrated.roles_page.actions') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td colspan="6">No results found.</td>
+                                        <td colspan="6">{{ trans('integrated.roles_page.no_results_found') }}</td>
                                     </tr>
                                 </tbody>
                             </table>
                             @else
-                            <p>No roles found.</p>
+                            <p>{{ trans('integrated.roles_page.no_roles_found') }}</p>
                             @endif
                         </div>
                     </div>
