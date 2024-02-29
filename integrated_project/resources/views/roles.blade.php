@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title', 'Modulos')
+@section('title', 'Rol')
 
 @section('content')
 <section class="pc-container">
@@ -11,13 +11,13 @@
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="page-header-title">
-                            <h2 class="mb-0">Modules</h2>
+                            <h2 class="mb-0">Rol</h2>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        @livewire('modulo-table')
+        @livewire('rol-table')
     </div>
 </section>
 @endsection

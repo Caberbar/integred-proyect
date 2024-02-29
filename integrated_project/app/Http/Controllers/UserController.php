@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Role;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\RegisterRequest;
@@ -20,6 +21,10 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
         ];
         $user = User::create($userData);
+        $role = Role::where('name', 'Register')->first(); // Asegúrate de tener el modelo Role importado
+        if ($role) {
+            $user->roles()->attach($role);
+        }
         Auth::login($user);
 
         return redirect()->route('home');

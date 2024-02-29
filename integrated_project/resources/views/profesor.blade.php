@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title', 'Modulos')
+@section('title', 'Teacher')
 
 @section('content')
 <section class="pc-container">
