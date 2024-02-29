@@ -65,5 +65,40 @@ return [
         'create_formation_button' => 'Create Formation',
         'column_acronym' => 'Acronym',
         'column_denomination' => 'Denomination',
-    ]
+    ],
+
+
+    /* lecciones */
+    'lessons_page' => [
+        'lessons' => 'Lessons',
+        'lessons_show' => 'Show',
+        'lessons_entries' => 'entries',
+        'lessons_search' => 'Search:',
+        'create_lesson' => 'Create lesson',
+        'no_results_found' => 'No results found.',
+    ],
+    /* lessons modal */
+    'lessons_modal' => [
+        'modal_title' => 'Lesson',
+        'close_button' => 'Close',
+        'hours_label' => 'Hours:',
+        'hours_input_placeholder' => 'Enter hours',
+        'hours_input_invalid_message' => 'The hours are not valid.',
+        'teacher_label' => 'Teacher:',
+        'select_any_teacher' => 'Select any teacher',
+        'no_teacher_registered' => 'No teacher registered yet...',
+        'error_profesor_id_message' => 'Select a speciality.',
+        'error_teacher_message' => 'The teacher is not valid.',
+        'module_label' => 'Module:',
+        'select_any_module' => 'Select any module',
+        'no_modules_registered' => 'No modules registered yet...',
+        'error_modulo_id_message' => 'Select a module.',
+        'error_module_message' => 'The module is not valid.',
+        'group_label' => 'Group:',
+        'select_any_group' => 'Select any group',
+        'no_groups_registered' => 'No groups registered yet...',
+        'error_grupo_id_message' => 'Select a group.',
+        'error_group_message' => 'The group is not valid.',
+        'close_btn' => 'Close',
+    ],
 ];

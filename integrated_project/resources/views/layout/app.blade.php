@@ -22,10 +22,11 @@
        .card-body  .dataTables_wrapper .row .col-md-7{
              display: none;
          }
+
         .card-body .dataTables_wrapper .row .col-md-6,
        .card-body  .dataTables_wrapper .row .col-md-6{
              display: none;
-         }
+         } 
 
          td.child ul.dtr-details li{
            display: flex;
