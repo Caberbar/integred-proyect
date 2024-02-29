@@ -16,6 +16,27 @@
     <link rel="icon" href="{{ asset('images/favicon.svg') }}" type="image/x-icon">
     <!-- data tables css -->
     <link rel="stylesheet" href="{{ asset('css/plugins/dataTables.bootstrap5.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/plugins/responsive.bootstrap5.min.css') }}">
+    <style>
+        .card-body .dataTables_wrapper .row .col-md-5,
+       .card-body  .dataTables_wrapper .row .col-md-7{
+             display: none;
+         }
+        .card-body .dataTables_wrapper .row .col-md-6,
+       .card-body  .dataTables_wrapper .row .col-md-6{
+             display: none;
+         }
+
+         td.child ul.dtr-details li{
+           display: flex;
+           flex-flow: row wrap;
+            align-items: center;
+            align-content: center;
+        }
+
+     </style>
+
+
     <!-- [Font] Family -->
     <link rel="stylesheet" href="{{ asset('fonts/inter/inter.css') }}" id="main-font-link" />
 

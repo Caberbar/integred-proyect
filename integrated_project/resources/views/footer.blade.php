@@ -16,6 +16,40 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="{{ asset('js/plugins/jquery.dataTables.min.js') }}"></script>
 
+{{-- Datatabe responsive js --}}
+<script src="{{ asset('js/plugins/dataTables.bootstrap5.min.js') }}"></script>
+<script src="{{ asset('js/plugins/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('js/plugins/responsive.bootstrap5.min.js') }}"></script>
+
+<!--
+  Script para la tabla responsive
+-->
+<script>
+setInterval(() => {
+        // [ Configuration Option ]
+        $('#res-config').DataTable({
+        responsive: true
+      });
+
+      // [ New Constructor ]
+      var newcs = $('#new-cons').DataTable();
+
+      new $.fn.dataTable.Responsive(newcs);
+
+      // [ Immediately Show Hidden Details ]
+      $('#show-hide-res').DataTable({
+        responsive: {
+          details: {
+            display: $.fn.dataTable.Responsive.display.childRowImmediate,
+            type: ''
+          }
+        }
+      });
+
+}, 500);
+
+</script>
+
 
 
 
