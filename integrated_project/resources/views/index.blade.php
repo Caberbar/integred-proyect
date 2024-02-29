@@ -13,13 +13,13 @@
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="page-header-title">
-                            <h2 class="mb-0">Home - En construcción 🏗️🚧👷🏻</h2>
+                            <h2 class="mb-0">Home</h2>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        @livewire('leccion-table')
+        @livewire('index-table')
     </div>
 </section>
 
