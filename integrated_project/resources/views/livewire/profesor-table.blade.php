@@ -112,7 +112,7 @@
                     <div class="table-responsive dt-responsive">
 
                         @if ($teachers->isNotEmpty())
-                        <table id="dom-jqry" class="table table-striped table-bordered nowrap">
+                        <table id="new-cons" class="display table table-striped table-hover dt-responsive nowrap" style="width: 100%">
                             <thead>
                                 <tr>
                                     <th wire:click="doSort('usu_seneca')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="usu_seneca" columnName="Seneca User" /></th>

@@ -118,7 +118,7 @@
                 <div class="card-body">
                     <div class="table-responsive dt-responsive">
                         @if ($modulos->isNotEmpty())
-                        <table id="dom-jqry" class="table table-striped table-bordered nowrap">
+                        <table id="new-cons" class="display table table-striped table-hover dt-responsive nowrap" style="width: 100%">
                             <thead>
                                 <tr>
                                     <th wire:click="doSort('denominacion')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="denominacion" columnName="Denomination" /></th>
