@@ -72,6 +72,13 @@ class ProfesorTable extends Component
         return view('livewire.profesor-table', compact('teachers'));
     }
 
+    /**
+     * Una función que realiza dos trabajos en uno, depende de que boton pulse en la vista viene con una variable o no,
+     * en el caso de que no venga con esta se le inicializa a null.
+     *
+     * Si esta es null, quiere decir que se va a crear un nuevo registro, en caso de que sea distinto a null es que se va a
+     * editar un registro, por lo tanto inicializamos todas nuestras variables con los datos de la BD.
+     */
     public function modal($profesor_id = null){
         if($profesor_id != null){
             $this->accion = 'Edit';
@@ -93,6 +100,12 @@ class ProfesorTable extends Component
             $profesor->especialidad = $this->especialidad;
         }
     }
+    /**
+     * Validamos todos los datos que introdujo el usuario por teclado y creamos el nuevo registro, en caso de editar
+     * los datos antiguos se conservan en el mismo estado y solo se actualizan los nuevos.
+     *
+     * Resetamos todas las variables con el hook de renderizado de la web y cerramos la ventana con un scrip.
+     */
     public function save(){
         $this->validate($this->rules());
 
@@ -107,11 +120,11 @@ class ProfesorTable extends Component
         $this->mount();
         $this->dispatch('cerrar_modal');
     }
+
     /**
      * Sacamos el objeto profesor en función del ID, una vez hecho eso por la relacion 1 a N
      * sacamos todas las lecciones que tiene ese grupo y si la variable lecciones es distinta de null
      * las recorremos una a una y las vamos borrando, una vez eliminado todo eliminamos el profesor.
-     *
      */
     public function delete($profesor_id){
         $profesor = Profesor::findOrFail($profesor_id);

@@ -17,6 +17,9 @@ class RolTable extends Component
     public User $usuario;
     public $roles;
 
+    /**
+     * Hook de iniciación al renderizar la página en el cual inicalizamos todas las variables
+     */
     public function mount()
     {
         $this->nombre_usuario = null;
@@ -73,6 +76,10 @@ class RolTable extends Component
         return view('livewire.rol-table', compact('usuarios', 'roles'));
     }
 
+    /**
+     *  Recogemos el id del usuario al que quiere editar el rango, lo buscamos en la base de datos y rellenamos las variables
+     *  con los datos de este.
+     */
     public function modal($usuario_id)
     {
 
@@ -80,7 +87,12 @@ class RolTable extends Component
         $this->nombre_usuario = $this->usuario->name;
         $this->id_usuario = $this->usuario->id;
     }
-
+    /**
+     *  Boton SAVE de la ventana modal
+     *
+     *  1.Comprobamos que el nuevo rol que le queremos asignar al usuario no lo tenga, en caso de tenerlo le mostramos un
+     *  mensaje diciendole que no puede asignar el mismo rol mas de una vez, en caso contrario se lo asigna.
+     */
     public function save()
     {
         $this->validate();
@@ -97,7 +109,9 @@ class RolTable extends Component
         $this->dispatch('cerrar_modal');
     }
 
-
+    /**
+     * Variable de validación que usa el metodo validate()
+     */
     protected $rules = [
         'id_usuario' => [
             'required',

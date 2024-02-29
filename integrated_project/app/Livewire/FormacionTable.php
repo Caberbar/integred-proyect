@@ -64,7 +64,13 @@ class FormacionTable extends Component
         return view('livewire.formacion-table', compact('formaciones'));
     }
 
-
+    /**
+     * Una función que realiza dos trabajos en uno, depende de que boton pulse en la vista viene con una variable o no,
+     * en el caso de que no venga con esta se le inicializa a null.
+     *
+     * Si esta es null, quiere decir que se va a crear un nuevo registro, en caso de que sea distinto a null es que se va a
+     * editar un registro, por lo tanto inicializamos todas nuestras variables con los datos de la BD.
+     */
     public function modal($formacion_id = null){
         if($formacion_id != null){
             $this->accion = 'Update';
@@ -77,7 +83,12 @@ class FormacionTable extends Component
         }
     }
 
-
+    /**
+     * Validamos todos los datos que introdujo el usuario por teclado y creamos el nuevo registro, en caso de editar
+     * los datos antiguos se conservan en el mismo estado y solo se actualizan los nuevos.
+     *
+     * Resetamos todas las variables con el hook de renderizado de la web y cerramos la ventana con un scrip.
+     */
     public function save(){
         $this->validate();
         $formacion = $this->formacion;
