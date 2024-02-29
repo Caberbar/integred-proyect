@@ -12,6 +12,7 @@ class RolTable extends Component
 
     use WithPagination;
     public $accion = 'Edit';
+    public $notificacion;
     public $nombre_usuario, $id_usuario, $rol;
     public User $usuario;
     public $roles;
@@ -19,6 +20,7 @@ class RolTable extends Component
     public function mount()
     {
         $this->nombre_usuario = null;
+        $this->notificacion = null;
         $this->rol = null;
         $this->usuario = new User;
         $this->roles = Role::all();
@@ -65,14 +67,15 @@ class RolTable extends Component
             })
             ->orderBy($this->sortColumn, $this->sortDirection)
             ->paginate($this->perPage);
-    
+
         $roles = Role::all();
-    
+
         return view('livewire.rol-table', compact('usuarios', 'roles'));
     }
 
     public function modal($usuario_id)
     {
+
         $this->usuario = User::findOrFail($usuario_id);
         $this->nombre_usuario = $this->usuario->name;
         $this->id_usuario = $this->usuario->id;
@@ -82,9 +85,15 @@ class RolTable extends Component
     {
         $this->validate();
 
-        $this->usuario->roles()->attach($this->rol);
+        if (!$this->usuario->roles()->where('role_id', $this->rol)->exists()) {
+            // Si no existe, asignar el rol
+            $this->usuario->roles()->attach($this->rol);
+            $this->mount();
+        }else{
+            $this->notificacion = 'This user already has that role assigned';
+        }
 
-        $this->mount();
+
         $this->dispatch('cerrar_modal');
     }
 
@@ -98,7 +107,7 @@ class RolTable extends Component
         'rol' => [
             'required',
             'integer',
-            'min:0'
+            'min:0',
         ]
     ];
 }

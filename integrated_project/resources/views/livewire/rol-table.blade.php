@@ -73,6 +73,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive dt-responsive">
+                            <p>{{$notificacion}}</p>
                             @if ($usuarios->isNotEmpty())
                             <table id="dom-jqry" class="table table-striped table-bordered nowrap">
                                 <thead>
