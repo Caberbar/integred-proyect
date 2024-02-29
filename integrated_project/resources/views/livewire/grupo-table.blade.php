@@ -8,52 +8,61 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        @error('denominacion')
-                            <p class="alert alert-danger">The denomination isn´t valid</p>
-                        @enderror
                         <label for="">Denomination</label>
-                        <input type="text" required wire:model="denominacion">
+                        <input type="text" required wire:model="denominacion" id="denominacion">
+                        <p class="error" id="error_denominacion">Denomination must be between 3 and 255 characters long.</p>
+                        @error('denominacion')
+                            <p class="error show" id="error_denominacion">Denomination must be between 3 and 255 characters long.</p>
+                        @enderror
+                        
+                        <label for="">Turn</label>
+                        <select wire:model="turno" id="turno">
+                            <option value="-1">Select any turn</option>
+                            <option value="Mañana">Morning</option>
+                            <option value="Tarde">Afternoon</option>
+                        </select>
+                        <p class="error" id="error_turno">Select a turn.</p>
                         @error('turno')
                             <p class="alert alert-danger">The turn isn´t valid</p>
                         @enderror
-                        <label for="">Turn</label>
-                        <select wire:model="turno">
-                            <option value="null">Select any turn</option>
-                            <option value="Mañana">Moring</option>
-                            <option value="Tarde">Afternoon</option>
-                        </select>
+                        
+                        <label for="">School year</label>
+                        <input type="text" required wire:model="curso_escolar" id="curso_escolar">
+                        <p class="error" id="error_curso_escolar">School year must have the format: YYYY/YYYY.</p>
                         @error('curso_escolar')
                             <p class="alert alert-danger">The school year is not valid</p>
                         @enderror
-                        <label for="">School year</label>
-                        <input type="text" required wire:model="curso_escolar">
-                        @error('curso')
-                            <p class="alert alert-danger">The course isn´t valid</p>
-                        @enderror
+
                         <label for="">Course</label>
-                        <select wire:model="curso">
-                            <option value="null">Select any course </option>
+                        <select wire:model="curso" id="curso">
+                            <option value="-1">Select any course </option>
                             <option value="1">1º</option>
                             <option value="2">2º</option>
                             <option value="3">3º</option>
                             <option value="4">4º</option>
                         </select>
-                        @error('formacion_id')
-                            <p class="alert alert-danger">The formation isn´t valid</p>
+                        <p class="error" id="error_curso">Select a course.</p>
+                        @error('curso')
+                            <p class="error show" id="error_curso">Course doesn't have a valid value.</p>
                         @enderror
+                        
                         <label for="">Formation</label>
-                        <select wire:model="formacion_id">
-                            <option value="null">Select any formation</option>
+                        <select wire:model="formacion_id" id="formacion">
+                            <option value="-1">Select any formation</option>
                             @forelse ($formaciones as $formacion)
                                 <option value="{{$formacion->id}}">{{$formacion->denominacion}}</option>
                             @empty
                                 <option value=null>No formation register yet</option>
                             @endforelse
                         </select>
+                        <p class="error" id="error_formacion">Select a formation.</p>
+                        @error('formacion_id')
+                            <p class="error show">Select a formation.</p>
+                        @enderror
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='cerrar_modal'>CLOSE</button>
-                        <button type="button" class="btn btn-primary" wire:click='save' wire:loading.attr='disable' wire:target='save'> {{ $accion }} Changes</button>
+                        <button type="button" class="btn btn-primary" id="insert-submit" disabled="true" wire:click='save' wire:loading.attr='disable' wire:target='save'> {{ $accion }} Changes</button>
                     </div>
                 </div>
             </div>
@@ -190,4 +199,5 @@
             document.getElementById('cerrar_modal').click();
         });
     </script>
+    <script type="text/javascript" src="{{asset('js/validations/grupo-validation.js')}}"></script>
 </div>

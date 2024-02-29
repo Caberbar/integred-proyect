@@ -51,7 +51,7 @@
                     <p class="error" id="error_curso2">Select a course.</p>
                     <p class="error" id="error_curso">Vocational Training can't have 3rd or 4th course.</p>
                     @error('curso')
-                        <p class="error show" id="error_curso">Course don't have a valid value.</p>
+                        <p class="error show" id="error_curso">Course doesn't have a valid value.</p>
                     @enderror
 
                     <label for="">Formation</label>
@@ -64,7 +64,7 @@
                         @endforelse
                     </select>
                     <p class="error" id="error_formacion">Select a formation.</p>
-                    @error('especialidad')
+                    @error('formacion_id')
                         <p class="error show">Select a formation.</p>
                     @enderror
                 </div>
