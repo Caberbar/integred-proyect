@@ -120,7 +120,7 @@ return [
         'denomination' => 'Denomination',
         'turn' => 'Turn',
         'course' => 'Course',
-        'school_course' => 'Course',
+        'school_course' => 'School Year',
         'formation_denomination' => 'Formation denomination',
     ],
     'groups_modal' => [
@@ -202,6 +202,35 @@ return [
         'no_roles_registered' => 'No Roles register yet...',
         'error_wrong_role' => 'The chosen role is wrong.',
         'close_btn' => 'Close',
+    ],
+
+    'index_page' => [
+        'home' => 'Home',
+        'label_show' => 'Show',
+        'label_entries' => 'entries',
+        'label_search' => 'Search:',
+        'no_results_found' => 'No results found.',
+        'teachers' => 'Teachers',
+        'acronym_formation' => 'Acronym formation',
+        'module' => 'Module',
+        'hours' => 'Hours',
+        'group' => 'Group',
+        'year' => 'Year',
+    ],
+
+    /* navigation_bar */
+    'navi_bar' => [
+        'navigation' => 'Navigation',
+        'dashboard' => 'Dashboard',
+        'tables' => 'Tables',
+        'teacher' => 'Teacher',
+        'formation' => 'Formation',
+        'modules' => 'Modules',
+        'groups' => 'Groups',
+        'lessons' => 'Lessons',
+        'roles' => 'Roles',
+        'login' => 'Login',
+        'register' => 'Register',
     ]
 
 ];

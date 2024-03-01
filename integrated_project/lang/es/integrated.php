@@ -119,7 +119,7 @@ return [
         'denomination' => 'Denominación',
         'turn' => 'Turno',
         'course' => 'Curso',
-        'school_course' => 'Curso',
+        'school_course' => 'Curso Escolar',
         'formation_denomination' => 'Denominación de formación',
     ],
     'groups_modal' => [
@@ -201,5 +201,35 @@ return [
         'no_roles_registered' => 'Aún no hay roles registrados...',
         'error_wrong_role' => 'El rol elegido es incorrecto.',
         'close_btn' => 'Cerrar',
+    ],
+
+
+    'index_page' => [
+        'home' => 'Inicio',
+        'label_show' => 'Mostrar',
+        'label_entries' => 'entradas',
+        'label_search' => 'Buscar:',
+        'no_results_found' => 'No se encontraron resultados.',
+        'teachers' => 'Profesores',
+        'acronym_formation' => 'Acrónimo de formación',
+        'module' => 'Módulo',
+        'hours' => 'Horas',
+        'group' => 'Grupo',
+        'year' => 'Año',
+    ],
+
+    /* Barra de navegación */
+    'navi_bar' => [
+        'navigation' => 'Navegación',
+        'dashboard' => 'Tablero',
+        'tables' => 'Tablas',
+        'teacher' => 'Profesor',
+        'formation' => 'Formación',
+        'modules' => 'Módulos',
+        'groups' => 'Grupos',
+        'lessons' => 'Lecciones',
+        'roles' => 'Roles',
+        'login' => 'Iniciar sesión',
+        'register' => 'Registrarse',
     ],
 ];

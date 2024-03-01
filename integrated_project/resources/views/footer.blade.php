@@ -78,6 +78,65 @@
 
       });
 
+      const cTablesEl= $('thead .column-tables');
+
+      $.each(cTablesEl, function (index, cTable) { 
+         
+         cTable.addEventListener('click', function () { 
+ 
+           setTimeout(() => {
+             // [ Configuration Option ]
+             $('#res-config').DataTable({
+               responsive: true
+             });
+ 
+             // [ New Constructor ]
+             var newcs = $('#new-cons').DataTable();
+ 
+             new $.fn.dataTable.Responsive(newcs);
+ 
+             // [ Immediately Show Hidden Details ]
+             $('#show-hide-res').DataTable({
+               responsive: {
+                 details: {
+                   display: $.fn.dataTable.Responsive.display.childRowImmediate,
+                   type: ''
+                 }
+               }
+             });
+           }, 1000);
+ 
+          });
+
+       });
+
+
+       $(document).ready(function() {
+  $('#dom-jqry_length').change(function() {
+    setTimeout(() => {
+             // [ Configuration Option ]
+             $('#res-config').DataTable({
+               responsive: true,
+             });
+ 
+             // [ New Constructor ]
+             var newcs = $('#new-cons').DataTable();
+ 
+             new $.fn.dataTable.Responsive(newcs);
+ 
+             // [ Immediately Show Hidden Details ]
+             $('#show-hide-res').DataTable({
+               responsive: {
+                 details: {
+                   display: $.fn.dataTable.Responsive.display.childRowImmediate,
+                   type: ''
+                 }
+               }
+             });
+           }, 1000);
+  });
+});
+
 </script>
 
 

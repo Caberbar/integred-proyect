@@ -121,7 +121,7 @@ return [
         'denomination' => 'Bezeichnung',
         'turn' => 'Umdrehung',
         'course' => 'Kurs',
-        'school_course' => 'Schulkurs',
+        'school_course' => 'Schuljahr',
         'formation_denomination' => 'Bezeichnung der Bildung',
     ],
     'groups_modal' => [
@@ -205,5 +205,33 @@ return [
         'close_btn' => 'Schließen',
     ],
 
+    'index_page' => [
+        'home' => 'Startseite',
+        'label_show' => 'Anzeigen',
+        'label_entries' => 'Einträge',
+        'label_search' => 'Suche:',
+        'no_results_found' => 'Keine Ergebnisse gefunden.',
+        'teachers' => 'Lehrer',
+        'acronym_formation' => 'Ausbildungsakronym',
+        'module' => 'Modul',
+        'hours' => 'Stunden',
+        'group' => 'Gruppe',
+        'year' => 'Jahr',
+    ],
+
+    /* Navigationsleiste */
+    'navi_bar' => [
+        'navigation' => 'Navigation',
+        'dashboard' => 'Dashboard',
+        'tables' => 'Tabellen',
+        'teacher' => 'Lehrer',
+        'formation' => 'Ausbildung',
+        'modules' => 'Module',
+        'groups' => 'Gruppen',
+        'lessons' => 'Lektionen',
+        'roles' => 'Rollen',
+        'login' => 'Anmelden',
+        'register' => 'Registrieren',
+    ],
 
 ];
