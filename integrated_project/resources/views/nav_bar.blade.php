@@ -120,7 +120,9 @@
         </li>
 
         <!-- Aqui va la barra de busqueda global -->
-        @livewire('busqueda-general')
+        @auth
+            @livewire('busqueda-general')
+        @endauth
 
         <li class="pc-h-item pc-sidebar-popup">
           <a href="#" class="pc-head-link ms-0" id="mobile-collapse">
