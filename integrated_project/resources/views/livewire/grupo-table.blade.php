@@ -133,7 +133,7 @@
                                     </th>
                                     <th wire:click="doSort('turno')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="turno" columnName="{!! trans('integrated.groups_page.turn') !!}" /></th>
                                     <th wire:click="doSort('curso_escolar')" class="column-tables">
-                                        <x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="curso_escolar" columnName="{{!! trans('integrated.groups_page.school_course') !!}}" />
+                                        <x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="curso_escolar" columnName="{!! trans('integrated.groups_page.school_course') !!}" />
                                     </th>
                                     <th wire:click="doSort('curso')" class="column-tables"><x-datatable-item :sortColumn="$sortColumn" :sortDirection="$sortDirection" columnNameVar="curso" columnName="{!! trans('integrated.groups_page.course') !!}" /></th>
                                     <th wire:click="doSort('formacion_denominacion')" class="column-tables">

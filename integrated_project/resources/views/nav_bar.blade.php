@@ -17,7 +17,7 @@
     <div class="navbar-content">
       <ul class="pc-navbar">
         <li class="pc-item pc-caption">
-          <label>Navigation</label>
+          <label>{{ trans('integrated.navi_bar.navigation') }}</label>
           <i class="ti ti-dashboard"></i>
         </li>
         <li class="pc-item pc-hasmenu">
@@ -28,7 +28,7 @@
                 <use xlink:href="#custom-status-up"></use>
               </svg>
             </span>
-            <span class="pc-mtext">Dashboard</span>
+            <span class="pc-mtext">{{ trans('integrated.navi_bar.dashboard') }}</span>
           </a>
         </li>
         </li>
@@ -37,7 +37,7 @@
         @auth
         @if(auth()->user()->roles->contains('id', 1) || auth()->user()->roles->contains('id', 2))
         <li class="pc-item pc-caption">
-          <label>Tables</label>
+          <label>{{ trans('integrated.navi_bar.tables') }}</label>
           <i class="ti ti-chart-arcs"></i>
         </li>
         <li class="pc-item">
@@ -47,7 +47,7 @@
                 <use xlink:href="#custom-user-square"></use>
               </svg>
             </span>
-            <span class="pc-mtext">Teacher</span>
+            <span class="pc-mtext">{{ trans('integrated.navi_bar.teacher') }}</span>
           </a>
         </li>
         <li class="pc-item">
@@ -57,7 +57,7 @@
                 <use xlink:href="#custom-shopping-bag"></use>
               </svg>
             </span>
-            <span class="pc-mtext">Formation</span>
+            <span class="pc-mtext">{{ trans('integrated.navi_bar.formation') }}</span>
           </a>
         </li>
         <li class="pc-item">
@@ -67,7 +67,7 @@
                 <use xlink:href="#custom-sort-outline"></use>
               </svg>
             </span>
-            <span class="pc-mtext">Modules</span></a>
+            <span class="pc-mtext">{{ trans('integrated.navi_bar.modules') }}</span></a>
         </li>
         <li class="pc-item">
           <a href="{{ route('grupos') }}" class="pc-link {{ Route::currentRouteName() == 'grupos' ? 'active' : '' }}">
@@ -76,7 +76,7 @@
                 <use xlink:href="#custom-profile-2user-outline"></use>
               </svg>
             </span>
-            <span class="pc-mtext">Groups</span></a>
+            <span class="pc-mtext">{{ trans('integrated.navi_bar.groups') }}</span></a>
         </li>
         <li class="pc-item">
           <a href="{{ route('lecciones') }}" class="pc-link {{ Route::currentRouteName() == 'lecciones' ? 'active' : '' }}">
@@ -85,7 +85,7 @@
                 <use xlink:href="#custom-presentation-chart"></use>
               </svg>
             </span>
-            <span class="pc-mtext">Lessons</span></a>
+            <span class="pc-mtext">{{ trans('integrated.navi_bar.lessons') }}</span></a>
         </li>
         @auth
         @if(auth()->user()->roles->contains('id', 1))
@@ -96,7 +96,7 @@
                 <use xlink:href="#custom-shield"></use>
               </svg>
             </span>
-            <span class="pc-mtext">Roles</span></a>
+            <span class="pc-mtext">{{ trans('integrated.navi_bar.roles') }}</span></a>
         </li>
         @endif
         @endauth
