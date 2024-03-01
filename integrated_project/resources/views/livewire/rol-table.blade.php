@@ -103,6 +103,11 @@
                                                     <i class="ti ti-edit-circle f-18"></i>
                                                 </a>
                                             </li>
+                                            <li class="list-inline-item align-bottom" data-bs-toggle="tooltip" data-bs-original-title="Delete">
+                                                <a href="#"  class="avtar avtar-xs btn-link-danger btn-pc-default" wire:click="delete({{$usuario->id}})" wire:loading.attr='disable' wire:target='delete' onclick="confirm('¿Are you sure?') || event.stopImmediatePropagation()">
+                                                    <i class="ti ti-trash f-18"></i>
+                                                </a>
+                                            </li>
                                         </td>
                                     </tr>
                                     @endforeach

@@ -159,7 +159,7 @@
                                             </li>
 
                                             <li class="list-inline-item align-bottom" data-bs-toggle="tooltip" data-bs-original-title="Delete">
-                                                <a href="#" onclick="return false;" class="avtar avtar-xs btn-link-danger btn-pc-default" wire:click="delete({{ $leccion->id }})" wire:loading.attr='disable' wire:target='delete'>
+                                                <a href="#" onclick="confirm('¿Are you sure?') || event.stopImmediatePropagation()" class="avtar avtar-xs btn-link-danger btn-pc-default" wire:click="delete({{ $leccion->id }})" wire:loading.attr='disable' wire:target='delete'>
                                                     <i class="ti ti-trash f-18"></i>
                                                 </a>
                                             </li>

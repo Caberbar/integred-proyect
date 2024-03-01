@@ -109,6 +109,16 @@ class RolTable extends Component
         $this->dispatch('cerrar_modal');
     }
 
+    public function delete($usuario_id){
+
+        $usuario = User::findOrFail($usuario_id);
+
+        if ($usuario->roles()->where('role_id', 1)->exists()) {
+
+            $usuario->roles()->detach(1);
+        }
+    }
+
     /**
      * Variable de validación que usa el metodo validate()
      */
