@@ -54,7 +54,7 @@ class UserController extends Controller
             $request->session()->regenerate();
             return redirect()->intended(route('home'));
         }else{
-            return  redirect()->route('login.confirm')->with('error', 'Invalid credentials');
+            return redirect()->route('login')->with('error', 'Invalid credentials');
         }
     }
 
