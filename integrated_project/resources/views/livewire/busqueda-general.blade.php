@@ -9,7 +9,7 @@
         <form class="px-3 py-2" style="max-height: 600px; overflow-y: auto;">
             
             @if(!empty($searchG))
-                @if($searchResults['profesores']->isEmpty() && $searchResults['modulos']->isEmpty() && $searchResults['grupos']->isEmpty())
+                @if($searchResults['profesores']->isEmpty() && $searchResults['formaciones']->isEmpty() && $searchResults['modulos']->isEmpty() && $searchResults['grupos']->isEmpty() && $searchResults['lecciones']->isEmpty())
                     <p><br>No se encontraron resultados</p>
                 @else
                     
