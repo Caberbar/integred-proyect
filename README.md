@@ -1,2 +1,2 @@
 # integred-proyect
-Realiced for: Aleksander Trujillo, Heriberto Amezcua, Carlos Bernal, Mario, Rúben, Raúl Flores, Marío
+Realiced for: Aleksander Trujillo, Heriberto Amezcua, Carlos Bernal, Mario, Rúben
