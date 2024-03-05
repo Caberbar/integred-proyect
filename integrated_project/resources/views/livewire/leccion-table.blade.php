@@ -21,15 +21,15 @@
 
                     <div class="form-group">
                         <label for="profesor_id" class="col-form-label">{{ trans('integrated.lessons_modal.teacher_label') }}</label>
-                        <select class="form-control" wire:model="profesor_id" id="profesor_id" required="" aria-describedby="bouncer-error_select" aria-invalid="true">
-                            <option value="null">{{ trans('integrated.lessons_modal.select_any_teacher') }}</option>
+                        <select class="form-control" wire:model="profesor_id" id="profesor" required="" aria-describedby="bouncer-error_select" aria-invalid="true">
+                            <option value="-1">{{ trans('integrated.lessons_modal.select_any_teacher') }}</option>
                             @forelse ($profesores as $profesor)
                             <option value={{$profesor->id}}>{{$profesor->nombre}}&nbsp;{{$profesor->apellido1}}&nbsp;{{$profesor->apellido2}}</option>
                             @empty
                             <option value="null">{{ trans('integrated.lessons_modal.no_teacher_registered') }}</option>
                             @endforelse
                         </select>
-                        <p class="error" id="error_profesor_id">{{ trans('integrated.lessons_modal.error_profesor_id_message') }}</p>
+                        <p class="error" id="error_profesor">{{ trans('integrated.lessons_modal.error_profesor_id_message') }}</p>
                         @error('profesor_id')
                         <p class="alert alert-danger">{{ trans('integrated.lessons_modal.error_teacher_message') }}</p>
                         @enderror
@@ -38,15 +38,15 @@
 
                     <div class="form-group">
                         <label for="modulo_id" class="col-form-label">{{ trans('integrated.lessons_modal.module_label') }}</label>
-                        <select class="form-control" wire:model="modulo_id" id="modulo_id" required="" aria-describedby="bouncer-error_select" aria-invalid="true">
-                            <option value="null">{{ trans('integrated.lessons_modal.select_any_module') }}</option>
+                        <select class="form-control" wire:model="modulo_id" id="modulo" required="" aria-describedby="bouncer-error_select" aria-invalid="true">
+                            <option value="-1">{{ trans('integrated.lessons_modal.select_any_module') }}</option>
                             @forelse ($modulos as $modulo)
                             <option value={{$modulo->id}}>{{$modulo->denominacion}}</option>
                             @empty
                             <option value="null">{{ trans('integrated.lessons_modal.no_modules_registered') }}</option>
                             @endforelse
                         </select>
-                        <p class="error" id="error_modulo_id">{{ trans('integrated.lessons_modal.select_any_module') }}</p>
+                        <p class="error" id="error_modulo">{{ trans('integrated.lessons_modal.select_any_module') }}</p>
                         @error('modulo_id')
                         <p class="alert alert-danger">{{ trans('integrated.lessons_modal.error_module_message') }}</p>
                         @enderror
@@ -55,15 +55,15 @@
 
                     <div class="form-group">
                         <label for="grupo_id" class="col-form-label">{{ trans('integrated.lessons_modal.group_label') }}</label>
-                        <select class="form-control" wire:model="grupo_id" id="grupo_id" required="" aria-describedby="bouncer-error_select" aria-invalid="true">
-                            <option value="null">{{ trans('integrated.lessons_modal.select_any_group') }}</option>
+                        <select class="form-control" wire:model="grupo_id" id="grupo" required="" aria-describedby="bouncer-error_select" aria-invalid="true">
+                            <option value="-1">{{ trans('integrated.lessons_modal.select_any_group') }}</option>
                             @forelse ($grupos as $grupo)
                             <option value={{$grupo->id}}>{{$grupo->denominacion}}</option>
                             @empty
                             <option value="null">{{ trans('integrated.lessons_modal.no_groups_registered') }}</option>
                             @endforelse
                         </select>
-                        <p class="error" id="error_grupo_id">{{ trans('integrated.lessons_modal.error_grupo_id_message') }}</p>
+                        <p class="error" id="error_grupo">{{ trans('integrated.lessons_modal.error_grupo_id_message') }}</p>
                         @error('grupo_id')
                         <p class="alert alert-danger">{{ trans('integrated.lessons_modal.error_group_message') }}</p>
                         @enderror
@@ -71,7 +71,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='cerrar_modal'>{{ trans('integrated.lessons_modal.close_btn') }}</button>
-                    <button type="button" class="btn btn-primary" wire:click='save' wire:loading.attr='disable' wire:target='save'> {{ $accion }}</button>
+                    <button type="button" class="btn btn-primary" disabled="true" id="insert-submit" wire:click='save' wire:loading.attr='disable' wire:target='save'> {{ $accion }}</button>
                 </div>
             </div>
         </div>

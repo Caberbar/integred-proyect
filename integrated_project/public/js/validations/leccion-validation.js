@@ -69,7 +69,6 @@ document.addEventListener('DOMContentLoaded', function() {
         for(var key in errors){
             if(errors[key]){
                 haveErrors = true;
-                console.log(key);
             }
         }
 
