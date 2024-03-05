@@ -253,6 +253,10 @@ body {
   justify-content: center;
 }
 
+.img-forms{
+  width: 15%;
+}
+
 .column-table-flex{
   display: flex;
   flex-direction: row;

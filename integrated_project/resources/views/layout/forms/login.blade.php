@@ -10,7 +10,7 @@
                 <div class="card my-5">
                     <div class="card-body">
                         <div class="text-center">
-                            <a href="#"><img src="{{ asset('images/logo-dark.svg') }}" alt="img"></a> <!-- LOGO -->
+                            <a href="#"><img class="img-forms" src="{{ asset('images/logo.png') }}" alt="img"></a> <!-- LOGO -->
 
                             <div class="d-grid my-3">
                             </div>

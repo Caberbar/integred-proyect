@@ -13,13 +13,14 @@ class FormacionTable extends Component
 
     public Formacion $formacion;
     public $accion = 'Crear';
-    public $formacion_id,$siglas, $denominacion;
+    public $formacion_id, $siglas, $denominacion;
     public $error;
 
     /**
      * Es un hook de iniciación de la página web con todos los atributos a null, para evitar problemas de iniciación.
      */
-    public function mount(){
+    public function mount()
+    {
         $this->formacion_id = null;
         $this->siglas = null;
         $this->denominacion = null;
@@ -34,33 +35,55 @@ class FormacionTable extends Component
     public  $sortColumn = 'siglas'; /*Valor por defecto de la dirección de la tabla*/
 
 
-    public function doSort($column){
-        if($this->sortColumn === $column){
-            $this->sortDirection =($this->sortDirection == 'ASC') ? 'DESC' : 'ASC';
+    /**
+     * Realiza la ordenación de la tabla según la columna especificada.
+     *
+     * @param string $column Columna por la cual se realizará la ordenación.
+     */
+    public function doSort($column)
+    {
+        // Verifica si la columna de ordenación actual es la misma que la nueva
+        if ($this->sortColumn === $column) {
+            // Cambia la dirección de la ordenación si la dirección actual es 'ASC', de lo contrario, la establece en 'ASC'
+            $this->sortDirection = ($this->sortDirection == 'ASC') ? 'DESC' : 'ASC';
             return;
         }
+        // Establece la nueva columna de ordenación y la dirección como 'ASC'
         $this->sortColumn = $column;
-        $this -> sortDirection = 'ASC';
+        $this->sortDirection = 'ASC';
     }
 
-    // Life cycle hooks
-    public function updatedPerPage(){
-        $this->resetPage();
-    }
-
-    public function updatedSearch(){
+    /**
+     * Hook del ciclo de vida: Se ejecuta cuando se actualiza el número de elementos por página.
+     * Reinicia la página a la primera cuando se modifica el número de elementos por página.
+     */
+    public function updatedPerPage()
+    {
         $this->resetPage();
     }
 
     /**
-     * Renderizamos la página con todos los datos
+     * Hook del ciclo de vida: Se ejecuta cuando se actualiza el término de búsqueda.
+     * Reinicia la página a la primera cuando se realiza una nueva búsqueda.
+     */
+    public function updatedSearch()
+    {
+        $this->resetPage();
+    }
+
+    /**
+     * Renderiza la página con todos los datos de formación ordenados y paginados.
+     *
+     * @return \Illuminate\View\View
      */
     public function render()
     {
+        // Obtiene los datos de formación con la búsqueda y ordenación aplicadas, y los paginan según el número especificado por página.
         $formaciones = Formacion::search($this->search)
-        ->orderBy($this->sortColumn, $this->sortDirection)
-        ->paginate($this->perPage);
+            ->orderBy($this->sortColumn, $this->sortDirection)
+            ->paginate($this->perPage);
 
+        // Retorna la vista 'livewire.formacion-table' con los datos de formación paginados.
         return view('livewire.formacion-table', compact('formaciones'));
     }
 
@@ -71,13 +94,14 @@ class FormacionTable extends Component
      * Si esta es null, quiere decir que se va a crear un nuevo registro, en caso de que sea distinto a null es que se va a
      * editar un registro, por lo tanto inicializamos todas nuestras variables con los datos de la BD.
      */
-    public function modal($formacion_id = null){
-        if($formacion_id != null){
+    public function modal($formacion_id = null)
+    {
+        if ($formacion_id != null) {
             $this->accion = 'Update';
             $this->formacion = Formacion::findOrFail($formacion_id);
             $this->denominacion = $this->formacion->denominacion;
             $this->siglas = $this->formacion->siglas;
-        }else{
+        } else {
             $this->accion = 'Create';
             $this->mount();
         }
@@ -89,7 +113,8 @@ class FormacionTable extends Component
      *
      * Resetamos todas las variables con el hook de renderizado de la web y cerramos la ventana con un scrip.
      */
-    public function save(){
+    public function save()
+    {
         $this->validate();
         $formacion = $this->formacion;
         $formacion->siglas = $this->siglas;
@@ -114,22 +139,23 @@ class FormacionTable extends Component
      * Por ulitmo borramos la formacion cuando todo esta eliminado, en caso de que no haya grupos o modulos esto no realizan ninguna
      * operación sobre la base de datos.
      */
-    public function delete($formacion_id){
+    public function delete($formacion_id)
+    {
         $formacion = Formacion::find($formacion_id);
         $modulos = $formacion->modulos;
 
-        if($modulos != null){
-            foreach($modulos as $modulo){
+        if ($modulos != null) {
+            foreach ($modulos as $modulo) {
                 $lecciones = $modulo->lecciones;
-                foreach($lecciones as $leccion){
+                foreach ($lecciones as $leccion) {
                     $leccion->delete();
                 }
                 $modulo->delete();
             }
         }
         $grupos = $formacion->grupos;
-        if($grupos != null){
-            foreach($grupos as $grupo){
+        if ($grupos != null) {
+            foreach ($grupos as $grupo) {
                 $grupo->delete();
             }
         }
@@ -145,11 +171,11 @@ class FormacionTable extends Component
     public function rules(): array
     {
         return [
-            'siglas'=>[
+            'siglas' => [
                 'required',
                 'min:3',
             ],
-            'denominacion'=>[
+            'denominacion' => [
                 'required',
                 'max:255',
                 'min:3'
