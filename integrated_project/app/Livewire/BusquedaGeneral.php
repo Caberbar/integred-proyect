@@ -17,11 +17,35 @@ class BusquedaGeneral extends Component
         $searchResults = [];
 
         if (!empty($this->searchG)) {
-            $profesores = Profesor::where('nombre', 'like', "%$this->searchG%")
-                ->orWhere('apellido1', 'like', "%$this->searchG%")
-                ->orWhere('apellido2', 'like', "%$this->searchG%")
-                ->orWhere('especialidad', 'like', "%$this->searchG%")
-                ->get();
+            $terminoBusqueda = $this->searchG;
+            $nombres = explode(" ", $terminoBusqueda);
+            $numPalabras = count($nombres);
+
+            $profesores = Profesor::where(function($query) use ($terminoBusqueda, $nombres, $numPalabras) {
+                if ($numPalabras === 1) {
+                    $query->where('nombre', 'like', "%$terminoBusqueda%")
+                        ->orWhere('apellido1', 'like', "%$terminoBusqueda%")
+                        ->orWhere('apellido2', 'like', "%$terminoBusqueda%");
+                } elseif ($numPalabras === 2) {
+                    $query->where(function($query) use ($nombres) {
+                        $query->where('nombre', 'like', "%$nombres[0]%")
+                            ->where('apellido1', 'like', "%$nombres[1]%")
+                            ->orWhere('apellido1', 'like', "%$nombres[0]%")
+                            ->where('apellido2', 'like', "%$nombres[1]%");
+                    })->orWhere(function($query) use ($nombres) {
+                        $query->where('apellido1', 'like', "%$nombres[0]%")
+                            ->where('apellido2', 'like', "%$nombres[1]%")
+                            ->orWhere('nombre', 'like', "%$nombres[0]%")
+                            ->where('apellido1', 'like', "%$nombres[1]%");
+                    });
+                } elseif ($numPalabras === 3) {
+                    $query->where('nombre', 'like', "%$nombres[0]%")
+                        ->where('apellido1', 'like', "%$nombres[1]%")
+                        ->where('apellido2', 'like', "%$nombres[2]%");
+                }
+            })
+            ->orWhere('especialidad', 'like', "%$terminoBusqueda%")
+            ->get();
 
             $formaciones = Formacion::where('siglas', 'like', "%$this->searchG%")
                 ->orWhere('denominacion', 'like', "%$this->searchG%")
@@ -39,10 +63,30 @@ class BusquedaGeneral extends Component
                 ->get();
 
             $lecciones = Leccion::where('horas', 'like', "%$this->searchG%")
-                ->orWhereHas('profesor', function ($query) {
-                    $query->where('nombre', 'like', "%$this->searchG%")
-                    ->orWhere('apellido1', 'like', "%$this->searchG%")
-                    ->orWhere('apellido2', 'like', "%$this->searchG%");
+                ->orWhereHas('profesor', function ($query) use ($terminoBusqueda, $nombres, $numPalabras) {
+                    $query->where(function($query) use ($terminoBusqueda, $nombres, $numPalabras) {
+                        if ($numPalabras === 1) {
+                            $query->where('nombre', 'like', "%$terminoBusqueda%")
+                                ->orWhere('apellido1', 'like', "%$terminoBusqueda%")
+                                ->orWhere('apellido2', 'like', "%$terminoBusqueda%");
+                        } elseif ($numPalabras === 2) {
+                            $query->where(function($query) use ($nombres) {
+                                $query->where('nombre', 'like', "%$nombres[0]%")
+                                    ->where('apellido1', 'like', "%$nombres[1]%")
+                                    ->orWhere('apellido1', 'like', "%$nombres[0]%")
+                                    ->where('apellido2', 'like', "%$nombres[1]%");
+                            })->orWhere(function($query) use ($nombres) {
+                                $query->where('apellido1', 'like', "%$nombres[0]%")
+                                    ->where('apellido2', 'like', "%$nombres[1]%")
+                                    ->orWhere('nombre', 'like', "%$nombres[0]%")
+                                    ->where('apellido1', 'like', "%$nombres[1]%");
+                            });
+                        } elseif ($numPalabras === 3) {
+                            $query->where('nombre', 'like', "%$nombres[0]%")
+                                ->where('apellido1', 'like', "%$nombres[1]%")
+                                ->where('apellido2', 'like', "%$nombres[2]%");
+                        }
+                    });
                 })
                 ->orWhereHas('modulo', function ($query) {
                     $query->where('denominacion', 'like', "%$this->searchG%")

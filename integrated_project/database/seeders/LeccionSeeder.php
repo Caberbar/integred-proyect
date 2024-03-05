@@ -5,6 +5,11 @@ namespace Database\Seeders;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Formacion;
+use App\Models\Grupo;
+use App\Models\Leccion;
+use App\Models\Modulo;
+use App\Models\Profesor;
 
 class LeccionSeeder extends Seeder
 {
@@ -13,24 +18,27 @@ class LeccionSeeder extends Seeder
      */
     public function run(): void
     {
-        $lecciones = [
-            [
-                'horas' => 30,
-                'profesor_id' => 1,
-                'modulo_id' => 1,
-                'grupo_id' => 1,   
-            ]
-        ];
+        $modulos = Modulo::all();
 
-        foreach ($lecciones as $leccion) {
-            DB::table('leccions')->insert([
-                'horas' => $leccion['horas'],
-                'profesor_id' => $leccion['profesor_id'],
-                'modulo_id' => $leccion['modulo_id'],
-                'grupo_id' => $leccion['grupo_id'],
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+        foreach ($modulos as $modulo) {
+            $profesor = Profesor::inRandomOrder()->first();
+            $formacion = Formacion::find($modulo->formacion_id);
+
+            $grupo = Grupo::where('denominacion', 'like', "%$formacion->siglas%")
+                        ->where('curso', $modulo->curso)
+                        ->inRandomOrder()
+                        ->first();
+
+            if ($grupo) {
+                DB::table('leccions')->insert([
+                    'horas' => $modulo->horas,
+                    'profesor_id' => $profesor->id,
+                    'modulo_id' => $modulo->id,
+                    'grupo_id' => $grupo->id,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
         }
     }
 }
