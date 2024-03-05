@@ -12,7 +12,7 @@
                     <div class="form-group">
                         <label for="denominacion" class="col-form-label">{{trans('integrated.modules_modal.label_denomination')}}</label>
                         <input type="text" class="form-control" required wire:model="denominacion" id="denominacion">
-                        <!-- <p class="error" id="error_denominacion">The Denomination does not have a valid format.</p> -->
+                        <p class="error" id="error_denominacion">{{trans('integrated.modules_modal.invalid_denomination')}}</p>
                         @error('denominacion')
                         <p class="error show">{{trans('integrated.modules_modal.invalid_denomination')}}</p>
                         @enderror
@@ -25,7 +25,7 @@
                             <option value="secundaria">{{trans('integrated.modules_modal.high_school')}}</option>
                             <option value="formacion profesional">{{trans('integrated.modules_modal.vocational_training')}}</option>
                         </select>
-                        <!-- <p class="error" id="error_especialidad">The speciality formad isn´t valid.</p> -->
+                        <p class="error" id="error_especialidad">{{trans('integrated.modules_modal.error_speciality')}}</p>
                         @error('especialidad')
                         <p class="error show">{{trans('integrated.modules_modal.error_speciality')}}</p>
                         @enderror
@@ -34,7 +34,7 @@
                     <div class="form-group">
                         <label for="siglas" class="col-form-label">{{trans('integrated.modules_modal.label_acronym')}}</label>
                         <input type="text" class="form-control" required wire:model="siglas" id="siglas">
-                        <!-- <p class="error" id="error_siglas">The acronyms do not have a valid format.</p> -->
+                        <p class="error" id="error_siglas">{{trans('integrated.modules_modal.invalid_acronym')}}</p>
                         @error('siglas')
                         <p class="error show">{{trans('integrated.modules_modal.invalid_acronym')}}</p>
                         @enderror
@@ -44,13 +44,13 @@
                     <div class="form-group">
                         <label for="curso" class="col-form-label">{{trans('integrated.modules_modal.label_course')}}</label>
                         <select class="form-control" wire:model="curso" id="curso" required="" aria-describedby="bouncer-error_select" aria-invalid="true">
-                            <option value="null">{{trans('integrated.modules_modal.select_course')}}</option>
+                            <option value="-1">{{trans('integrated.modules_modal.select_course')}}</option>
                             <option value='1'>1º</option>
                             <option value='2'>2º</option>
                             <option value='3'>3º</option>
                             <option value='4'>4º</option>
                         </select>
-                        <!-- <p class="error" id="error_curso">The course isn´t valid.</p> -->
+                        <p class="error" id="error_curso">{{trans('integrated.modules_modal.error_course')}}</p>
                         @error('curso')
                         <p class="error show">{{trans('integrated.modules_modal.error_course')}}</p>
                         @enderror
@@ -59,7 +59,7 @@
                     <div class="form-group">
                         <label for="horas" class="col-form-label">{{trans('integrated.modules_modal.label_hours')}}</label>
                         <input type="number" class="form-control" required wire:model="horas" id="horas">
-                        <!-- <p class="error" id="error_horas">The hours entered are not valid.</p> -->
+                        <p class="error" id="error_horas">{{trans('integrated.modules_modal.invalid_hours')}}</p>
                         @error('horas')
                         <p class="error show">{{trans('integrated.modules_modal.invalid_hours')}}</p>
                         @enderror
@@ -67,16 +67,16 @@
 
 
                     <div class="form-group">
-                        <label for="formacion_id" class="col-form-label">{{trans('integrated.modules_modal.label_course')}}</label>
-                        <select class="form-control" wire:model="formacion_id" id="formacion_id" required="" aria-describedby="bouncer-error_select" aria-invalid="true">
-                            <option value="null">{{trans('integrated.modules_modal.select_formation')}}</option>
+                        <label for="formacion_id" class="col-form-label">{{ trans('integrated.groups_modal.label_formation') }}</label>
+                        <select class="form-control" wire:model="formacion_id" id="formacion" required="" aria-describedby="bouncer-error_select" aria-invalid="true">
+                            <option value="-1">{{trans('integrated.modules_modal.select_formation')}}</option>
                             @forelse ($formaciones as $formacion)
                             <option value='{{ $formacion->id }}'>{{$formacion->denominacion}}</option>
                             @empty
-                            <option>{{trans('integrated.modules_modal.no_formation_registered')}}</option>
+                            <option value="-1">{{trans('integrated.modules_modal.no_formation_registered')}}</option>
                             @endforelse
                         </select>
-                        <!-- <p class="error" id="error_formacion_id">The formation isn´t valid.</p> -->
+                        <p class="error" id="error_formacion">{{trans('integrated.modules_modal.error_formation')}}</p>
                         @error('formacion_id')
                         <p class="error show">{{trans('integrated.modules_modal.error_formation')}}</p>
                         @enderror
@@ -84,7 +84,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='cerrar_modal'>{{trans('integrated.modules_modal.close_btn')}}</button>
-                    <button type="button" class="btn btn-primary" wire:click='save' wire:loading.attr='disable' wire:target='save'> {{ $accion }}</button>
+                    <button type="button" class="btn btn-primary" id="insert-submit" disabled="true" wire:click='save' wire:loading.attr='disable' wire:target='save'> {{ $accion }}</button>
                 </div>
             </div>
         </div>

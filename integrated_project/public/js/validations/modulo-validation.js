@@ -53,17 +53,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Curso Validation
     document.getElementById('curso').addEventListener('focusout', function() {
-        if(!validarCurso()){ 
+        if(!validarCurso() || document.getElementById('curso').value == -1){ 
             // Si hay errores mostramos el mensaje de error
             document.getElementById('error_curso').classList.add('show');
-            errors['curso'] = true;
-        }else if(document.getElementById('curso').value == -1){
-            document.getElementById('error_curso2').classList.add('show');
             errors['curso'] = true;
         }else{ 
             // Si no hay errores escondemos el mensaje de error
             document.getElementById('error_curso').classList.remove('show');
-            document.getElementById('error_curso2').classList.remove('show');
             errors['curso'] = false;
         }
         actualizarBoton();
@@ -74,11 +70,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if(!validar('especialidad', '^(secundaria|formacion profesional)$') || 
             document.getElementById('especialidad').value == -1){ 
             // Si hay errores mostramos el mensaje de error
-            document.getElementById('error_speciality').classList.add('show');
+            document.getElementById('error_especialidad').classList.add('show');
             errors['especialidad'] = true;
         }else{ 
             // Si no hay errores escondemos el mensaje de error
-            document.getElementById('error_speciality').classList.remove('show');
+            document.getElementById('error_especialidad').classList.remove('show');
             errors['especialidad'] = false;
         }
         actualizarBoton();
