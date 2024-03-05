@@ -22,7 +22,7 @@
                     <div class="form-group">
                         <label for="turno" class="col-form-label">{{ trans('integrated.groups_modal.label_turn') }}</label>
                         <select class="form-control" wire:model="turno" id="turno" required="" aria-describedby="bouncer-error_select" aria-invalid="true">
-                            <option value="null">{{ trans('integrated.groups_modal.select_any_turn') }}</option>
+                            <option value="-1">{{ trans('integrated.groups_modal.select_any_turn') }}</option>
                             <option value="Mañana">{{ trans('integrated.groups_modal.morning') }}</option>
                             <option value="Tarde">{{ trans('integrated.groups_modal.afternoon') }}</option>
                         </select>
@@ -45,7 +45,7 @@
                     <div class="form-group">
                         <label for="curso" class="col-form-label">{{ trans('integrated.groups_modal.label_course') }}</label>
                         <select class="form-control" wire:model="curso" id="curso" required="" aria-describedby="bouncer-error_select" aria-invalid="true">
-                            <option value="null">{{ trans('integrated.groups_modal.select_any_course') }}</option>
+                            <option value="-1">{{ trans('integrated.groups_modal.select_any_course') }}</option>
                             <option value="1">1º</option>
                             <option value="2">2º</option>
                             <option value="3">3º</option>
@@ -60,15 +60,15 @@
 
                     <div class="form-group">
                         <label for="formacion_id" class="col-form-label">{{ trans('integrated.groups_modal.label_formation') }}</label>
-                        <select class="form-control" wire:model="formacion_id" id="formacion_id" required="" aria-describedby="bouncer-error_select" aria-invalid="true">
-                            <option value="null">{{ trans('integrated.groups_modal.select_any_formation') }}</option>
+                        <select class="form-control" wire:model="formacion_id" id="formacion" required="" aria-describedby="bouncer-error_select" aria-invalid="true">
+                            <option value="-1">{{ trans('integrated.groups_modal.select_any_formation') }}</option>
                             @forelse ($formaciones as $formacion)
                             <option value="{{$formacion->id}}">{{$formacion->denominacion}}</option>
                             @empty
-                            <option value=null>{{ trans('integrated.groups_modal.no_formation_register') }}</option>
+                            <option value=-1>{{ trans('integrated.groups_modal.no_formation_register') }}</option>
                             @endforelse
                         </select>
-                        <p class="error" id="error_formacion_id">{{ trans('integrated.groups_modal.invalid_formation') }}</p>
+                        <p class="error" id="error_formacion">{{ trans('integrated.groups_modal.invalid_formation') }}</p>
                         @error('formacion_id')
                         <p class="alert alert-danger">{{ trans('integrated.groups_modal.invalid_formation') }}</p>
                         @enderror
@@ -76,7 +76,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='cerrar_modal'>{{ trans('integrated.groups_modal.close_btn') }}</button>
-                    <button type="button" class="btn btn-primary" wire:click='save' wire:loading.attr='disable' wire:target='save'> {{ $accion }}</button>
+                    <button type="button" class="btn btn-primary" id="insert-submit" disabled="true" wire:click='save' wire:loading.attr='disable' wire:target='save'> {{ $accion }}</button>
                 </div>
             </div>
         </div>
